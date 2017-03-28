@@ -1,0 +1,20 @@
+<div class="page header">
+  <h1>Order Review</h1>
+  <p class="lead">This will be the order review page</p>
+  </div>
+  <form>
+Cart:
+<div *ngFor="let item of cart; let i = index">
+<ul>
+  <div *ngIf="!(i %2) ">
+  <label>{{item}}</label>
+  
+  </div>
+  <div  *ngIf="(i %2) ">
+   Quantity:  {{item}}
+  </div>
+</ul>  
+</div>
+
+<input type="submit" value="Send Invoice" (click)="upDateInventory()">
+  </form>
