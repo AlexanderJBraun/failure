@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
     recentItem ="None";
     public cart =[];
     quant:any=[];
+    selectedProduct: ProductClass;
+    displayDialog: boolean;
+
     
 
 
@@ -44,6 +47,15 @@ export class HomeComponent implements OnInit {
   
     
     
+  }
+
+  selectProduct(product: ProductClass){
+    this.selectedProduct = product;
+    this.displayDialog = true;
+  }
+
+  onDialogHide(){
+    this.selectedProduct=null;
   }
 
   
