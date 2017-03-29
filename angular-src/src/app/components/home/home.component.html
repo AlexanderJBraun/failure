@@ -34,11 +34,11 @@
         <h2>List of Products</h2>
     </p-header>
 
-    <template let-product pTemplate="item">
+    <template let-product pTemplate="item" let-i="index"ssss>
         <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom: 1px solid #D5D5D5;">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3" style="text-align: center">                   
-                    <img src="https://s3.amazonaws.com/ctres2428.com/images/{{product.name}}.jpg" height="100px" width="150px">
+                    {{i}}<img src="https://s3.amazonaws.com/ctres2428.com/images/{{product.name}}.jpg" height="100px" width="150px">
                 </div>
                 <div class="ui-grid-col-9">
                     <div class="ui-grid ui-grid-responsive ui-fluid">

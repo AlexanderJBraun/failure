@@ -9,8 +9,15 @@
   </div>
 
   <div *ngIf="role === 'Admin'">
-     <ul class="nav navbar-nav navbar-right" >
+    <div class="panel panel-default">
+      <div class="panel-heading"> Management Tools     </div>
+        <div class="panel-body">
+     <ul class="nav navbar-nav navbar-left" >
             <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Product Managment</a></li>
+            <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']">Customer Managment</a></li>
      </ul>
+     </div>
+
+     </div>
   </div>
 
