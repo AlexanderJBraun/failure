@@ -19,9 +19,11 @@ import { UsersComponent } from './components/users/users.component';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
+import {CartService} from './services/cart.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
 import {AdminGuard} from './guards/admin.guard';
+import { SumPipe } from './components/cart/sum.pipe';
 
 
 const appRoutes: Routes =  [
@@ -44,7 +46,8 @@ const appRoutes: Routes =  [
     DashboardComponent,
     ProfileComponent,
     CartComponent,
-    UsersComponent
+    UsersComponent,
+    SumPipe
 
   ],
   imports: [
@@ -64,7 +67,7 @@ const appRoutes: Routes =  [
     PanelModule,
     SharedModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard,AdminGuard],
+  providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
