@@ -69,6 +69,7 @@ import {LocalStorageService} from 'angular-2-local-storage';
 import {CartService } from '../../services/cart.service';
 import {CartEntity} from './../../../app/cart.entity';
 import {Router} from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-home',
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit {
     
 
 
-  constructor(private authService:AuthService, private localStorageService : LocalStorageService, private cartservice: CartService, private router:Router ) 
+  constructor(private authService:AuthService, private flashMessage:FlashMessagesService, private localStorageService : LocalStorageService, private cartservice: CartService, private router:Router ) 
   {
    
   
@@ -106,7 +107,10 @@ export class HomeComponent implements OnInit {
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){
         
         this.cartservice.addProductToCart(product);
-         this.router.navigate(['cart']);
+          this.flashMessage.show(product.name + ' '+'added to your cart', {
+          cssClass: 'alert-success',
+          timeout: 2000});
+         //this.router.navigate(['cart']);
 
     }.bind(this));
     

@@ -98,6 +98,8 @@ export class CartComponent implements OnInit {
     {
          console.log(this.cartEntities[product].product.name);
     }
+
+    localStorage.clear();
  
   }
 
