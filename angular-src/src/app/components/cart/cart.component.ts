@@ -91,4 +91,14 @@ export class CartComponent implements OnInit {
     //console.log(this.cart[1]);
   }
 
+
+  sendInvoice()
+  {
+    for (var product in this.cartEntities)
+    {
+         console.log(this.cartEntities[product].product.name);
+    }
+ 
+  }
+
 }

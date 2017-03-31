@@ -30,7 +30,7 @@
                           <span  (click)=changeQuantity(cartEntity.product._id,-1) class="glyphicon glyphicon-minus pointer"></span> {{cartEntity.quantity}} <span (click)=changeQuantity(cartEntity.product._id,1)  class="glyphicon glyphicon-plus pointer"></span>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center hidden-xs"><strong>{{cartEntity.product.price}}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center "><strong>{{cartEntity.product.price | sum: cartEntity.quantity}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center "><strong>{{cartEntity.product.price * cartEntity.quantity}}</strong></td>
                         <td class="col-sm-1 col-md-1">
                         <button type="button" (click)=removeByProductId(cartEntity.product._id) class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
@@ -56,7 +56,7 @@
                         <td>   </td>
                         <td>
 
-                        <a [routerLink]="['Shop']">
+                        <a [routerLink]="['']">
                             <button type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                             </button>
@@ -64,8 +64,8 @@
                         </td>
 
                         <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        <button type="button" (click)="sendInvoice()"class="btn btn-success">
+                            Send Invoice <span class="glyphicon glyphicon-play"></span>
                         </button></td>
                     </tr>
                 </tbody>
