@@ -6,6 +6,8 @@ border: 1px solid #fff !important;
 }
 
 button{
-    background-color: dimgrey !important;
+    background-color: dodgerblue !important;
     border: whitesmoke !important;
+    bottom: 0px;
+    left: 10px;
 }

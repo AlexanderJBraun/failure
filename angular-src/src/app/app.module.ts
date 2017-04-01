@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule,SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule} from "../../node_modules/primeng/primeng";
+import {DataTableModule,SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SpinnerModule} from "../../node_modules/primeng/primeng";
 
 
 import { AppComponent } from './app.component';
@@ -65,6 +65,7 @@ const appRoutes: Routes =  [
     DialogModule,
     DataListModule,
     PanelModule,
+    SpinnerModule,
     SharedModule
   ],
   providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],

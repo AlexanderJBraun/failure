@@ -1,5 +1,5 @@
 <div class="page header">
-  <h1>MEAN Authentication App</h1>
+  <h1>Products page title</h1>
   <p class="lead">This will be the product page</p>
 </div>
 
@@ -29,12 +29,14 @@
      
 </div>-->
 
+
+
 <p-dataList [value]="products" [paginator]="true" [rows]="5">
     <p-header>
         <h2>List of Products</h2>
     </p-header>
 
-    <template let-product pTemplate="item" let-i="index"ssss>
+    <template let-product pTemplate="item" let-i="index">
         <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom: 1px solid #D5D5D5;">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3" style="text-align: center">                   
@@ -56,7 +58,7 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">Quantity: </div>
-                            <div class="ui-grid-col-2"><input type="text"  [(ngModel)]="quant[i]" min="0" style="width: 100px;" name="quant" ></div>
+                            <div class="ui-grid-col-2"><p-spinner size="10" [(ngModel)]="quant[i]" [min]="0" [max]="product.inStock"  style="width: 100px;" name="quant" ></p-spinner></div>
                             <div class="ui-grid-col-offset-8"><button type="button" pButton icon="fa-plus" style="float:left" (click)="addCart(product)" class="btn btn-success" label="Add"></button></div>
                         </div>                
                     </div>
@@ -66,8 +68,10 @@
     </template>
 </p-dataList>
 
-<hr/>
+<!--<input type="text" [(ngModel)]="quant[i]" min="0" style="width: 100px;" name="quant" >-->
+<!--<p-spinner size="10" [(ngModel)]="quant[i]" [min]="0" [max]="product.inStock"  style="width: 100px;" name="quant" ></p-spinner>-->
+<!--<hr/>
      <a [routerLink]="['/cart']"> Cart </a>
     <ul>
         <li *ngFor="let item of cart">{{item}}</li>
-        </ul>
+        </ul>-->

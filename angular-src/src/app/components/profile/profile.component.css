@@ -1,0 +1,10 @@
+.page-header{
+    text-transform: uppercase;
+    font-family: 'PT Sans Narrow', Arial, sans-serif;
+}
+
+.list-group-item{
+    font-family: 'PT Sans Narrow', Arial, sans-serif;
+    font-size: 15px;
+}
+
