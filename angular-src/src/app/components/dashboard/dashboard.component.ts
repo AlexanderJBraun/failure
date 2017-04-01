@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit {
 
     save(){
       var products = products;
+      
       if(this.plusProduct)
         this.authService.addProduct(this.product)
             .subscribe(product => {
