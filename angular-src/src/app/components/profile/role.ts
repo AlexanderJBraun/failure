@@ -9,7 +9,7 @@ export var roleType= function(role)
 
 export var showNav= function()
 {
-    if (role1 === "Admin")
+    if (role1 === "Admin" || role1 === "admin" )
     {
         return true;
     }else

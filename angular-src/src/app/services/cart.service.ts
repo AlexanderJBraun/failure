@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {ProductClass} from '../../../../models/product';
 import {CartEntity} from './../../app/cart.entity';
+import {Http, Headers} from '@angular/http';
 @Injectable()
 export class CartService {
 
   private _storage = localStorage;
 
-  constructor() {
+  constructor(private http:Http) {
     this.initCart();
    }
 
@@ -93,6 +94,14 @@ private getCart() {
       this._storage.setItem('cart',JSON.stringify(cartMap));
 
   }
+
+sendInvoice(product)
+{
+let headers = new Headers();
+headers.append('Content-Type','application/json');
+return this.http.post('http://localhost:3000/carts/invoice',product,{headers:headers})
+}
+  
 
 }
 

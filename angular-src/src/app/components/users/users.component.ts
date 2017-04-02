@@ -64,15 +64,16 @@ export class UsersComponent implements OnInit {
     save(){
       //var users = users;
       if(this.plusUser)
-        this.authService.addUser(this.user)
-            .subscribe(user => {
-                this.users.push(user);
-                this.username = '';
-                this.firstName = '';
-                this.lastName = '';
-                this.businessName = '';
-                this.password = '';
-                this.email = '';
+        this.authService.addUser(this.user).subscribe(data => {
+
+          if(data.success){
+        this.flashMessage.show('User registered ', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/users']);
+      } else {
+        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
+      
+      }
+             
             });
       else 
         this.authService.save(this.user);
@@ -127,6 +128,7 @@ class PrimeUser implements UserClass {
   businessName: String;
   password: String;
   email: String;
+  role:String;
 
 
 }

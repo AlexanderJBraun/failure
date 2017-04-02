@@ -60,6 +60,7 @@ export class AuthService {
   }
 
   getProduct(){
+    console.log("in getProduct");
       return this.http.get('http://localhost:3000/products/products')
           .map(res => res.json());
   }
@@ -103,7 +104,6 @@ export class AuthService {
       return this.http.put('http://localhost:3000/products/products', product)
       .map(res => res.json());
   }
-
 
   
 }

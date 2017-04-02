@@ -5,5 +5,6 @@ export interface UserClass{
   businessName:  String
   email: String
   username: String
-  password: String 
+  password: String ,
+  role:String
 }

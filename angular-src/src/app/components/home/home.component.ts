@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
    
   }
 
-  addCart(product:ProductClass)
+  addCart(product)
   {
     console.log(product._id);
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){

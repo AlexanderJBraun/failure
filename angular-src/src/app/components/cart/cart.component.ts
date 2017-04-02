@@ -4,6 +4,8 @@ import {SumPipe} from './sum.pipe';
 import {CartEntity} from './../../../app/cart.entity';
 import {CartService } from '../../services/cart.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {Http, Headers} from '@angular/http';
 
 
 
@@ -21,7 +23,7 @@ export class CartComponent implements OnInit {
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
 
-  constructor(private router:Router, private cartService: CartService) { }
+  constructor(private http:Http,private authService:AuthService,private router:Router, private cartService: CartService) { }
 
 
       getProducts() {
@@ -94,12 +96,18 @@ export class CartComponent implements OnInit {
 
   sendInvoice()
   {
-    for (var product in this.cartEntities)
-    {
-         console.log(this.cartEntities[product].product.name);
-    }
 
-    localStorage.clear();
+    console.log(this.cartEntities);
+    console.log("sendInvoice");
+    this.cartService.sendInvoice(this.cartEntities).subscribe(data => {
+      console.log(data);
+    });
+    // for (var product in this.cartEntities)
+    // {
+    //      console.log(this.cartEntities[product].product.name);
+    // }
+
+    //localStorage.clear();
  
   }
 
