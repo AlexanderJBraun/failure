@@ -13,16 +13,16 @@ router.post('/invoice', function(req, res, next){
 console.log(req.body);
      for (var product in req.body)
      {
-          console.log(req.body[product].product.name);
+           
      }
 
     var subjectTime = new Date();
 
     var mailOptions = {
-        from: 'villanovaDev@gmail.com',
+        from: 'kirkwoodsite21@gmail.com',
         to: 'mlnp3@mail.umsl.edu',
         subject: 'Testing Shit - ' + subjectTime,
-        html: '<!DOCTYPE html><html><head>'+name
+        html: '<!DOCTYPE html><html><head>'
        
     };
 
@@ -37,8 +37,8 @@ function sendMail(mailOptions) {
     var transporter = nodeMailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'villanovaDev@gmail.com',
-            pass: 'bombDiggity'
+            user: 'kirkwoodsite21@gmail.com',
+            pass: '123456789test'
         }
     });
     
