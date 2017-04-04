@@ -99,6 +99,7 @@ export class CartComponent implements OnInit {
 
     console.log(this.cartEntities);
     console.log("sendInvoice");
+    
     this.cartService.sendInvoice(this.cartEntities).subscribe(data => {
       console.log(data);
     });

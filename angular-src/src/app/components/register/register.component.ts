@@ -10,7 +10,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  name: String;
+  fName: String;
+  lName: String;
+  bName:String;
   username: String;
   email: String;
   password: String;
@@ -20,7 +22,7 @@ export class RegisterComponent implements OnInit {
     private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
-    private router: Router
+    private router: Router 
   ) { }
 
   ngOnInit() {
@@ -28,12 +30,15 @@ export class RegisterComponent implements OnInit {
 
   onRegisterSubmit(){
     const user = {
-      name: this.name,
+      fName: this.fName,
+      lName:this.lName,
+      bName:this.bName,
       email: this.email,
       username: this.username,
       password: this.password,
       role:this.role
-    }
+      
+    } 
 
     // Required Fields
     if(!this.validateService.validateRegister(user)){
@@ -53,6 +58,7 @@ export class RegisterComponent implements OnInit {
         this.flashMessage.show('You are now registered and can log in', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/login']);
       } else {
+       
         this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['/register']);
       }

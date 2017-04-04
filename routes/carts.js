@@ -21,8 +21,8 @@ console.log(req.body);
     var mailOptions = {
         from: 'kirkwoodsite21@gmail.com',
         to: 'mlnp3@mail.umsl.edu',
-        subject: 'Testing Shit - ' + subjectTime,
-        html: '<!DOCTYPE html><html><head>'
+        subject: 'Testing ' + subjectTime,
+        html: '<!DOCTYPE html><html>TESTING EMAIL<head>'
        
     };
 

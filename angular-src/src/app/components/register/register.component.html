@@ -1,8 +1,16 @@
 <h2 class="page-header">Register</h2>
 <form (submit)="onRegisterSubmit()">
   <div class="form-group">
-    <label>Name</label>
-    <input type="text" [(ngModel)]="name" name="name" class="form-control">
+    <label>First Name</label>
+    <input type="text" [(ngModel)]="fName" name="fName" class="form-control">
+  </div>
+   <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" [(ngModel)]="lName" name="lName" class="form-control" >
+  </div>
+   <div class="form-group">
+    <label>Business Name</label>
+    <input type="text" [(ngModel)]="bName" name="bName" class="form-control" >
   </div>
   <div class="form-group">
     <label>Username</label>
