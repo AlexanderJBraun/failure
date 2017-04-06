@@ -64,6 +64,7 @@ export class UsersComponent implements OnInit {
     save(){
       //var users = users;
       if(this.plusUser)
+      {
         this.authService.addUser(this.user).subscribe(data => {
 
           if(data.success){
@@ -73,10 +74,56 @@ export class UsersComponent implements OnInit {
         this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
       
       }
+      this.ngOnInit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
              
             });
-      else 
+      }
+      else{
         this.authService.save(this.user);
+      }
         
       this.user=null;
       this.displayDialog=false;

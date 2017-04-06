@@ -76,6 +76,7 @@ export class DashboardComponent implements OnInit {
       var products = products;
       
       if(this.plusProduct)
+      {
         this.authService.addProduct(this.product)
             .subscribe(product => {
                 this.products.push(product);
@@ -83,12 +84,21 @@ export class DashboardComponent implements OnInit {
                 this.itemDescription = '';
                 this.price = null;
                 this.inStock = null;
-            });
-      else 
+                this.ngOnInit();
+            }); 
+
+            
+          
+      }
+      else {
         this.authService.save(this.product);
+        
+      }
         
       this.product=null;
       this.displayDialog=false;
+
+      
     }
 
     delete(id){

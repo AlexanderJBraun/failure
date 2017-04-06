@@ -18,7 +18,7 @@ import {Http, Headers} from '@angular/http';
 export class CartComponent implements OnInit {
 
   cartEntities : CartEntity[];
-  totalSum:number;
+  totalSum: string;
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
@@ -82,8 +82,12 @@ export class CartComponent implements OnInit {
           totalSum += entity.quantity * entity.product.price;
       });
 
+      this.cartEntities.forEach(function(entity){
+        entity.subTotal = (entity.quantity * entity.product.price).toFixed(2); 
+      });
+
       console.log(this.totalSum);
-      this.totalSum = totalSum;
+      this.totalSum = totalSum.toFixed(2);
 
     }
 
@@ -102,7 +106,9 @@ export class CartComponent implements OnInit {
     
     this.cartService.sendInvoice(this.cartEntities).subscribe(data => {
       console.log(data);
+      
     });
+     this.router.navigate(['profile']);
     // for (var product in this.cartEntities)
     // {
     //      console.log(this.cartEntities[product].product.name);
