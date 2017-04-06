@@ -18,6 +18,14 @@ export class UsersComponent implements OnInit {
     firstName: String;
     lastName: String;
     businessName: String;
+    phoneNum: Number;
+    mobileNum: Number;
+    faxNum: Number;
+    region: String;
+    address: String;
+    city: String;
+    state: String;
+    zip: Number;
     password: String;
     email: String;
     displayDialog: boolean;
@@ -75,50 +83,6 @@ export class UsersComponent implements OnInit {
       
       }
       this.ngOnInit();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-             
             });
       }
       else{
@@ -167,15 +131,23 @@ export class UsersComponent implements OnInit {
 
 }
 
-class PrimeUser implements UserClass {
-  _id: string;
-  username: String;
-  firstName: String;
-  lastName: String;
-  businessName: String;
-  password: String;
-  email: String;
-  role:String;
+class PrimeUser implements UserClass {  
+_id: string;
+  firstName: string;
+  lastName: string;
+  businessName: string;
+  phoneNum: number;
+  mobileNum: number;
+  faxNum: number;
+  region: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: number;
+  email: string;
+  username: string;
+  password: string;
+  role: string;
 
 
 }

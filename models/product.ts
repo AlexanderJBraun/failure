@@ -1,6 +1,6 @@
 export interface ProductClass{
   _id: string
-  name: string
+  itemCode: string
   itemDescription: string
   price: number
   inStock: number
