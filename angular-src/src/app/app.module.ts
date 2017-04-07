@@ -69,6 +69,6 @@ const appRoutes: Routes =  [
     SharedModule
   ],
   providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, ],
 })
 export class AppModule { }
