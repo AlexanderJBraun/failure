@@ -53,32 +53,46 @@
 </div>-->
 
 
-<p-dataTable [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true">
-    <p-header>Products List</p-header>
-    <p-column field="name" header="Name" [sortable]="true"></p-column>
-    <p-column field="description" header="Description" [sortable]="true"></p-column>
-    <p-column field="price" header="Price" [sortable]="true"></p-column>
-    <p-column field="inStock" header="Quantity" [sortable]="true"></p-column>
+<p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="products">
+    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
+        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="prodDT.exportCSV()" style="float:left"></button>
+    </p-header>
+    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="description" header="DESCRIPTION" ></p-column>
+    <p-column field="price" header="PRICE" >
+        <template let-col let-product="rowData" pTemplate="body">
+            <span>{{product[col.field] | currency:'USD':true:'.0-0'}}</span>
+        </template>
+    </p-column>
+    <p-column field="inStock" header="QTY_ON_HAND ({{qtyFilter}})" [filter]="true" filterMatchMode="equals">
+        <template pTemplate="filter" let-col>
+            <i class="fa fa-close" (click)="qtyFilter=null;prodDT.filter(null, col.field, col.filterMatchMode)"></i>
+            <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="qtyFilter" [min]="0" (onSlideEnd)="prodDT.filter($event.value,col.field,col.filterMatchMode)"></p-slider>
+        </template>
+    </p-column>
     <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
 </p-dataTable>
 
-<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" showEffect="fade"  [width]="400">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="name">NAME</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="product.name" /></div>
+            <div class="ui-grid-col-4"><label for="itemCode">ITEM CODE</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" /></div>
         </div>
+        <br>   
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="description" [(ngModel)]="product.description" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" /></div>
         </div>
+        <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="price" [(ngModel)]="product.price" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" /></div>
         </div>
+        <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="inStock" [(ngModel)]="product.inStock" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock" /></div>
         </div>
     </div>
     <p-footer>

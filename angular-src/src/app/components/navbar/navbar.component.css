@@ -12,3 +12,9 @@ border: 1px solid #fff !important;
     font-family: 'PT Sans Narrow', Arial, sans-serif;
     font-weight: 700;
 }
+
+
+ul#nav li:hover a{
+    background-color: transparent;
+    color: dodgerblue;
+}
