@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {ProductClass} from '../../../../models/product';
 import {CartEntity} from './../../app/cart.entity';
 import {Http, Headers} from '@angular/http';
+import {UserClass} from '../../../../models/user';
 @Injectable()
 export class CartService {
 
   roles = require('../components/profile/role');
-
+ 
   private _storage = localStorage;
 
   constructor(private http:Http) {
@@ -97,10 +98,12 @@ private getCart() {
 
   }
 
-sendInvoice(product)
+sendInvoice(product, user, totalSum)
 {
-
-let data= {"product": product, "email":this.roles.email1};
+console.log(user)
+let data= {product, user, totalSum};
+console.log("Inside of sendInvoice");
+console.log(data);
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');

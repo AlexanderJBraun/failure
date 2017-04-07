@@ -6,7 +6,7 @@ import {CartService } from '../../services/cart.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {Http, Headers} from '@angular/http';
-
+import {UserClass} from '../../../../../models/user';
 
 
 @Component({
@@ -18,11 +18,11 @@ import {Http, Headers} from '@angular/http';
 export class CartComponent implements OnInit {
 
   cartEntities : CartEntity[];
-<<<<<<< HEAD
   totalSum: string;
-=======
-  totalSum: String;
->>>>>>> master
+  user:Object;
+  email:String;
+
+
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
           }.bind(this), function(err) {
               alert("something went wrong while fetching the products");
           });
+
 
     }
 
@@ -106,6 +107,13 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.getProducts();
     //console.log(this.cart[1]);
+    this.authService.getProfile().subscribe(profile => {
+      this.user = profile.user;
+      this.email= profile.user.email;
+
+      
+    });
+
   }
 
 
@@ -114,8 +122,9 @@ export class CartComponent implements OnInit {
 
     console.log(this.cartEntities);
     console.log("sendInvoice");
+    console.log(this.email)
     
-    this.cartService.sendInvoice(this.cartEntities).subscribe(data => {
+    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe(data => {
       console.log(data);
       
     });

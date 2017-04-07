@@ -13,20 +13,19 @@ const UserSchema = mongoose.Schema({
     required: true
   },
   bName: {
-    type: String,
-    required: true
+    type: String
+    
   },
   pNum: {
-    type: Number,
-    required: true
+    type: String
+    
   },
   mNum: {
-    type: Number,
-    required: true
+    type: String
+    
   },
   fNum: {
-    type: Number,
-    required: true
+    type: String
   },
   region: {
     type: String,
