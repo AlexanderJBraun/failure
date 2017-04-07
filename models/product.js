@@ -28,20 +28,25 @@ const ProductSchema = mongoose.Schema({
 
 
 
-module.exports.getProductById = function(id, callback){
+module.exports.getProductById = function(id, callback)
+{
   Product.findById(id, callback);
 }
 
 const Product = module.exports = mongoose.model('Product', ProductSchema);
 
 
-module.exports.addProduct = function(newProduct, callback){
+module.exports.addProduct = function(newProduct, callback)
+{
 
   newProduct.save(callback);
 
 }
 
-module.exports.getProductByProductname = function(itemCode, callback){
+module.exports.getProductByProductname = function(itemCode, callback)
+{
   const query = {itemCode: itemCode}
   Product.find(query, callback);
 }
+
+module.exports.updateInventory()

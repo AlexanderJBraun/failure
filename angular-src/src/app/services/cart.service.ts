@@ -100,16 +100,19 @@ private getCart() {
 
 sendInvoice(product, user, totalSum)
 {
-console.log(user)
+
 let data= {product, user, totalSum};
-console.log("Inside of sendInvoice");
-console.log(data);
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
 return this.http.post('http://localhost:3000/carts/invoice',body,{headers:headers})
 }
   
+
+  updateInventory(product)
+  {
+    
+  }
 
 }
 

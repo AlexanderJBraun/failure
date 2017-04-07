@@ -106,7 +106,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    //console.log(this.cart[1]);
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.email= profile.user.email;
@@ -120,22 +119,15 @@ export class CartComponent implements OnInit {
   sendInvoice()
   {
 
-    console.log(this.cartEntities);
-    console.log("sendInvoice");
-    console.log(this.email)
-    
-    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe(data => {
-      console.log(data);
-      
-    });
+    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
      this.router.navigate(['profile']);
-    // for (var product in this.cartEntities)
-    // {
-    //      console.log(this.cartEntities[product].product.name);
-    // }
+     this.updateInventory();
+    
+  }
 
-    //localStorage.clear();
- 
+  updateInventory()
+  {
+    //this.cartService.u
   }
 
 }
