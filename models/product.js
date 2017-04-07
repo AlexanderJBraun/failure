@@ -4,11 +4,10 @@ const config = require('../config/database');
 
 // User Schema
 const ProductSchema = mongoose.Schema({
-  name: {
+  itemCode: {
     type: String,
     required: true,
     unique: true
-
   },
   description: {
     type: String,
@@ -42,7 +41,7 @@ module.exports.addProduct = function(newProduct, callback){
 
 }
 
-module.exports.getProductByProductname = function(name, callback){
-  const query = {name: name}
+module.exports.getProductByProductname = function(itemCode, callback){
+  const query = {itemCode: itemCode}
   Product.find(query, callback);
 }

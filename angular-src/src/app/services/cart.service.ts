@@ -5,6 +5,8 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class CartService {
 
+  roles = require('../components/profile/role');
+
   private _storage = localStorage;
 
   constructor(private http:Http) {
@@ -97,9 +99,12 @@ private getCart() {
 
 sendInvoice(product)
 {
+
+let data= {"product": product, "email":this.roles.email1};
+let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
-return this.http.post('http://localhost:3000/carts/invoice',product,{headers:headers})
+return this.http.post('http://localhost:3000/carts/invoice',body,{headers:headers})
 }
   
 

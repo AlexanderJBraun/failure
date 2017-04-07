@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){
         
         this.cartservice.addProductToCart(product);
-          this.flashMessage.show(product.name + ' '+'added to your cart', {
+          this.flashMessage.show(product.itemCode + ' '+'added to your cart', {
           cssClass: 'alert-success',
           timeout: 2000});
          //this.router.navigate(['cart']);

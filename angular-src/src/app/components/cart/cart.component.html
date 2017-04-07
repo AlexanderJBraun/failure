@@ -21,7 +21,11 @@
                         <span id="number">${{cartEntity.product.price}}</span>
                     </div>
                     <div class="ui-g-2" style="text-align: center">
+<<<<<<< HEAD
+                        <span id="number">${{cartEntity.subTotal}}</span>
+=======
                         <span id="number" decimals=".01"> ${{cartEntity.subTotal}}</span>
+>>>>>>> master
                     </div>
                     <div class="ui-g-2" style="text-align: center">
                         <button type="button" pButton icon="fa-remove" style="float:left" (click)="removeByProductId(cartEntity.product._id)" class="btn btn-danger" label="Remove"></button>

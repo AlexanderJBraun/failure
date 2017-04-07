@@ -11,7 +11,7 @@ import {ProductClass} from '../../../../../models/Product';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {    
-    name: string;
+    itemCode: string;
     itemDescription: String;
     price: Number;
     inStock: Number;
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
       addProduct(){
         var newProduct = {
-          name: this.name,
+          itemCode: this.itemCode,
           description: this.itemDescription,
           price: this.price,
           inStock: this.inStock
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
         this.authService.addProduct(newProduct)
             .subscribe(product => {
                 this.products.push(product);
-                this.name = '';
+                this.itemCode = '';
                 this.itemDescription = '';
                 this.price = null;
                 this.inStock = null;
@@ -76,19 +76,28 @@ export class DashboardComponent implements OnInit {
       var products = products;
       
       if(this.plusProduct)
+      {
         this.authService.addProduct(this.product)
-            .subscribe(product => {
-                this.products.push(product);
-                this.name = '';
-                this.itemDescription = '';
-                this.price = null;
-                this.inStock = null;
-            });
-      else 
+            .subscribe(data => {
+
+              if(data.success){
+                this.flashMessage.show('Product added ', {cssClass: 'alert-success', timeout: 3000});
+                this.router.navigate(['/products']);
+              } else {
+                this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
+              }
+        this.ngOnInit();
+          });  
+      }
+      else {
         this.authService.save(this.product);
+        
+      }
         
       this.product=null;
       this.displayDialog=false;
+
+      
     }
 
     delete(id){
@@ -131,11 +140,9 @@ export class DashboardComponent implements OnInit {
 }
 
 class PrimeProduct implements ProductClass {
-  _id: string
-  name: string
-  itemDescription: string
-  price: number
-  inStock: number
-
-
+  _id: string;
+  itemCode: string;
+  itemDescription: string;
+  price: number;
+  inStock: number;
 }

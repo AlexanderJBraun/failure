@@ -2,7 +2,7 @@ import { Component, OnInit,Input} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
-const roles = require('./role');
+var roles = require('./role');
 
 
 @Component({
@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   user:Object;
   role:String;
+  email:String;
 
 
   constructor(private authService:AuthService, private router:Router) { }
@@ -23,8 +24,12 @@ export class ProfileComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.role= profile.user.role;
+      this.email= profile.user.email;
       roles.roleType(this.role);
-      //console.log(roles.role1);
+      roles.setEmail(this.email);
+      console.log(roles.role1);
+      console.log(roles.email1);
+
       //console.log(roles.showNav());
       
     },
