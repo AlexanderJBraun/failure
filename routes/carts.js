@@ -15,26 +15,33 @@ var hostname = os.hostname();
 
 var originalFile = '../kirkwoodsite/angular-src/src/app/components/cart/cart.component.html';
 var baseDir='../kirkwoodsite/';
-var recipient = 'mlnp3@mail.umsl.edu';
+var recipient = '';
 
 var options = {noCSS: true};
 var styliner = new Styliner(baseDir, options);
 
 
 router.post('/invoice', function(req, res, next){
-    var htmlBody= "";
-    //req.body[product].product.name
+    var htmlBody= '<h3>' + "Thank You " + req.body.user.fName + " " + req.body.user.lName + " for your purchase!" + '</h3>' 
+        + '<h3>' + "Your order will be delivered in the next few days to " + req.body.user.address + '</h3>';
+
+    console.log(req.body)
+    
+    var recipient = req.body.user.email; 
+
 var name = String;
     console.log(req.body.product[0].product.name); 
     for (var index in req.body.product)
      {
          console.log(index);
          
-            htmlBody += '<h4>' +req.body.product[index].product.name +req.body.product[index].product.description+ req.body.product[index].product.price +  req.body.product[index].quantity + '</h4>';
+            htmlBody += '<h4>' + req.body.product[index].product.name + " " + req.body.product[index].product.description + " " + req.body.product[index].product.price + " " 
+            +  req.body.product[index].quantity + ": $" + (req.body.product[index].subTotal) + '</h4>';
            
-    
            
      }
+     htmlBody += '<h4>'+ "" + '</h4>' + '<h2>' + "Your total payment is: $" + req.body.totalSum + '</h2>';
+
     var fs=require('fs')
 
 fs.readFile(originalFile, 'utf8', function(err,data){
