@@ -23,7 +23,7 @@ var styliner = new Styliner(baseDir, options);
 router.post('/invoice', function(req, res, next){
     
   var fs=require('fs');
-  var recipient = 'mlnp3@mail.umsl.edu'; 
+  var recipient =  req.body.user.email;
 
     console.log(req.body);
 

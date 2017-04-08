@@ -49,4 +49,7 @@ module.exports.getProductByProductname = function(itemCode, callback)
   Product.find(query, callback);
 }
 
-module.exports.updateInventory()
+module.exports.updateInventory= function()
+{
+  
+}
