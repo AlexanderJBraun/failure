@@ -109,9 +109,11 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
 }
   
 
-  updateInventory(product)
+  updateInventory(deduct,pID)
   {
-    
+    console.log("in update Inv");
+    let data = {pID,deduct}
+    return this.http.put('http://localhost:3000/products/updateinventory',data);
   }
 
 }

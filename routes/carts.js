@@ -25,7 +25,7 @@ router.post('/invoice', function(req, res, next){
   var fs=require('fs');
   var recipient =  req.body.user.email;
 
-    console.log(req.body);
+    
 
     var htmlBody= 
         '<h3>' + "Thank You " + req.body.user.fName + " " 
@@ -93,7 +93,10 @@ function sendMail(source)
 
    });
 }
-
 });
+
+
+
+
 
 module.exports = router;

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('../config/database');
+const mongojs = require('mongojs');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 // User Schema
 const ProductSchema = mongoose.Schema({
@@ -49,7 +51,13 @@ module.exports.getProductByProductname = function(itemCode, callback)
   Product.find(query, callback);
 }
 
-module.exports.updateInventory= function()
+module.exports.updateInventory= function(deduct,pID)
 {
-  
+  const query = {itemCode:pID};
+  const update = {inStock:deduct}
+db.products.update({_id: mongojs.ObjectId(pID)},{inStock:19});
+
+
 }
+
+

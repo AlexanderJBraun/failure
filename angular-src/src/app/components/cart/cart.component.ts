@@ -109,6 +109,7 @@ export class CartComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.email= profile.user.email;
+   this.updateInventory();
 
       
     });
@@ -120,14 +121,23 @@ export class CartComponent implements OnInit {
   {
 
     this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
+    this.updateInventory();    
      this.router.navigate(['profile']);
-     this.updateInventory();
+     
     
   }
 
   updateInventory()
   {
-    //this.cartService.u
+    for(var index in this.cartEntities)
+    {
+      var pID = this.cartEntities[index].product._id;
+      var temp = this.cartEntities[index].product.inStock;
+      var deduct = temp - this.cartEntities[index].quantity;
+      console.log(deduct)
+    this.cartService.updateInventory(deduct,pID).subscribe();
+    //console.log(deduct)
+    }
   }
 
 }
