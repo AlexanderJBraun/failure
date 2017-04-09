@@ -109,8 +109,7 @@ export class CartComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.email= profile.user.email;
-   this.updateInventory();
-
+  
       
     });
 
@@ -123,7 +122,7 @@ export class CartComponent implements OnInit {
     this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
     this.updateInventory();    
      this.router.navigate(['profile']);
-     
+     localStorage.removeItem('cart');
     
   }
 
