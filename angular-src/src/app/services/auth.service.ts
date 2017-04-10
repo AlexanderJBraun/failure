@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
+import {ProductClass} from '../../../../models/product';
 
 @Injectable()
 export class AuthService {
@@ -75,8 +76,11 @@ export class AuthService {
 
   addProduct(product){
     let headers = new Headers();
+    console.log(product);
+    console.log("in add product 0");
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/products/newProduct',  product,{headers: headers})
+    console.log("in add product 01");
+    return this.http.post('http://localhost:3000/products/newProduct', product,{headers: headers})
       .map(res => res.json());
   }
 
@@ -107,5 +111,21 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  
+    getVendor(){
+    console.log("in getVendor");
+      return this.http.get('http://localhost:3000/vendors/vendors')
+          .map(res => res.json());
+  }
+
+  deleteVendor(id){
+    return this.http.delete('http://localhost:3000/vendors/vendor/'+id)
+      .map(res => res.json());
+  }
+
+  addVendor(vendor){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/vendors/newVendor',  vendor,{headers: headers})
+      .map(res => res.json());
+  }
 }

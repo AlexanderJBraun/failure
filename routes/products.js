@@ -25,11 +25,13 @@ router.post('/newProduct', (req, res, next) => {
 
   Product.addProduct(newProduct, (err, product) => {
     if(err){
+      console.log(err);
       res.json({success: false, msg:'Failed to add product'});
     } else {
       res.json({success: true, msg:'Product Added'});
     }
   });
+
 });
 
 

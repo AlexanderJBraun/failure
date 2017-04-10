@@ -11,10 +11,10 @@ import {ProductClass} from '../../../../../models/Product';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {    
-    itemCode: string;
-    itemDescription: String;
-    price: Number;
-    inStock: Number;
+   // itemCode: string;
+   // itemDescription: string;
+  //  price: number;
+  //  inStock: number;
     displayDialog: boolean;
     product: ProductClass = new PrimeProduct();
     selectedProduct: ProductClass;
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
       this.products = products;
     });
   }
-
+/*
       addProduct(){
         var newProduct = {
           itemCode: this.itemCode,
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
                 this.inStock = null;
             });
 
-    }
+    } */
 
     deleteProduct(id){
       var products = this.products;
@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     }
 
     save(){
-      var products = products;
+      //var products = products;
       
       if(this.plusProduct)
       {

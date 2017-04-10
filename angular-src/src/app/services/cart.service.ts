@@ -47,21 +47,28 @@ export class CartService {
 
   }
 
-  addProductToCart(product: ProductClass)
+  addProductToCart(product: ProductClass, itemQuant: number)
   {
+   
+   if(itemQuant === undefined)
+   {itemQuant = 1;}
+
+    
       let cartMap = this.getCart();
 
       if(cartMap[product._id ]!= undefined) {
 
         let cartInstance = cartMap[product._id];
-            cartInstance.quantity++;
+
+            cartInstance.quantity = cartInstance.quantity + itemQuant;
+        
             cartMap[product._id] = cartInstance;
       }
       else {
           // if not, set default value
           cartMap[product._id] = {
             'product':product,
-            'quantity':1
+            'quantity':itemQuant
           }
         }
 

@@ -70,6 +70,7 @@ import {CartService } from '../../services/cart.service';
 import {CartEntity} from './../../../app/cart.entity';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import {SpinnerModule} from 'primeng/components/spinner/spinner';
 
 @Component({
   selector: 'app-home',
@@ -101,12 +102,12 @@ export class HomeComponent implements OnInit {
    
   }
 
-  addCart(product)
+  addCart(product, quant)
   {
     console.log(product._id);
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){
         
-        this.cartservice.addProductToCart(product);
+        this.cartservice.addProductToCart(product, quant);
           this.flashMessage.show(product.itemCode + ' '+'added to your cart', {
           cssClass: 'alert-success',
           timeout: 2000});

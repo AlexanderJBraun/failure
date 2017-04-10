@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule,SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SliderModule} from "../../node_modules/primeng/primeng";
+import {DataTableModule, SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SliderModule, SpinnerModule} from "../../node_modules/primeng/primeng";
 
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CartComponent } from "./components/cart/cart.component";
 import { UsersComponent } from './components/users/users.component';
+import { VendorComponent} from './components/vendor/vendor.component';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -33,7 +34,8 @@ const appRoutes: Routes =  [
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard,AdminGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
-  {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]}
+  {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]},
+  {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]}
 ]
 
 @NgModule({
@@ -47,9 +49,14 @@ const appRoutes: Routes =  [
     ProfileComponent,
     CartComponent,
     UsersComponent,
-    SumPipe
+    SumPipe,
+    VendorComponent
 
   ],
+  exports: [
+    HomeComponent
+  ],
+
   imports: [
     LocalStorageModule.withConfig({
       prefix: 'my-app',
@@ -66,7 +73,8 @@ const appRoutes: Routes =  [
     DataListModule,
     PanelModule,
     SliderModule,
-    SharedModule
+    SharedModule,
+    SpinnerModule
   ],
   providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],
   bootstrap: [AppComponent, ],
