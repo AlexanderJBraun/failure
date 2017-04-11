@@ -55,7 +55,7 @@ module.exports.updateInventory= function(deduct,pID)
 {
   const query = {itemCode:pID};
   const update = {inStock:deduct}
-db.products.update({_id: mongojs.ObjectId(pID)},{inStock:19});
+//db.products.update({_id: mongojs.ObjectId(pID)},{inStock:19},{d});
 
 
 }

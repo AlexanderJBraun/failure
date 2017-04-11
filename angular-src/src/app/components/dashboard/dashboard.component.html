@@ -77,7 +77,7 @@
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="itemCode">ITEM CODE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" (change)="editProduct('itemCode',product.itemCode,product._id)" [(ngModel)]="product.itemCode" /></div>
         </div>
         <br>   
         <div class="ui-grid-row">
@@ -103,7 +103,7 @@
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="delete(product._id)" label="Delete"></button>
-            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            <button type="button" pButton icon="fa-check" (click)="save(product._id)" label="Save"></button>
         </div>
     </p-footer>
 </p-dialog>
