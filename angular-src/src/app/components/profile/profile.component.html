@@ -12,13 +12,17 @@
     <div class="panel panel-default">
       <div class="panel-heading"> Management Tools     </div>
         <div class="panel-body">
-     <ul class="nav navbar-nav navbar-left" >
-            <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a routerLink='/dashboard'>Product Managment</a></li>
-            <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']">Customer Managment</a></li>
-            <li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/vendor']">Vendor Managment</a></li>
+     <ul class="nav navbar-nav" >
+       <div class="ui-g">
+            <div class="ui-col-6"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Product Management</a></li></div>
+            <div class="ui-col-6" style="position: absolute; right: 300px;" ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']">Customer Management</a></li></div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-col-6"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/#']">Vendor Orders Management here</a></li></div>
+            <div class="ui-col-6" style="position: absolute; right: 280px;" ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/#']">Invoices Management here</a></li></div>
+        </div>
      </ul>
      </div>
 
      </div>
   </div>
-

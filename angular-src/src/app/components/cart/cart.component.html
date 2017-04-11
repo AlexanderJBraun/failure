@@ -1,48 +1,48 @@
-<h2> Cart </h2>
+<h2> Cart Review</h2>
 
             <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">... is empty</p>
 
 
                 <div class="ui-g" id="cartHeader">
-                    <div class="ui-g-4" >Product</div>
-                    <div class="ui-g-2" style="text-align: center">Quantity</div>
-                    <div class="ui-g-2" style="text-align: center">Price</div>
-                    <div class="ui-g-2" style="text-align: center">Total</div>
+                    <div class="ui-lg-4 ui-sm-4" >Item Name</div>
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Qty</div>
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Unit Price</div>
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Sub-Total</div>
                 </div>
             <hr>
                 <div class="ui-g" id="cartBody" *ngFor="let cartEntity of cartEntities">
-                    <div class="ui-g-4" ><h4><p>{{cartEntity.product.description}}</p>
+                    <div class="ui-lg-4 ui-sm-4" ><h4><p>{{cartEntity.product.description}}</p>
                     <span>Status: </span><span class="text-success">In Stock</span>
                     </h4></div>
-                    <div class="ui-g-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
                         <span (click)=changeQuantity(cartEntity.product._id,-1) class="fa fa-minus" style="cursor:pointer"></span>&nbsp; &nbsp;<span id="number">{{cartEntity.quantity}}</span>&nbsp; &nbsp;<span (click)=changeQuantity(cartEntity.product._id,1) class="fa fa-plus pointer" style="cursor:pointer"></span>
                     </div>
-                    <div class="ui-g-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
                         <span id="number">${{cartEntity.product.price}}</span>
                     </div>
-                    <div class="ui-g-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
 
                         <span id="number" decimals=".01"> ${{cartEntity.subTotal}}</span>
 
                     </div>
-                    <div class="ui-g-2" style="text-align: center">
+                    <div class="ui-g-2 ui-sm-2" style="text-align: center">
                         <button type="button" pButton icon="fa-remove" style="float:left" (click)="removeByProductId(cartEntity.product._id)" class="btn btn-danger" label="Remove"></button>
                     </div>          
                 </div>
             <hr>
             <div class="ui-g" id="cartSum">
                 <div class="ui-g-8"><br></div>
-                <div class="ui-g-2">Estimated shipping: </div>
-                <div class="ui-g-2">$0</div>
+                <div class="ui-g-2 ui-sm-6" style="font-weight: bold;">Estimated shipping: </div>
+                <div class="ui-g-2 ui-sm-6">$0</div>
                 <div class="ui-g-8"><br></div>
-                <div class="ui-g-2">Total: </div>
-                <div class="ui-g-2">${{totalSum}}</div>
+                <div class="ui-g-2 ui-sm-6" style="font-weight: bold;">Total: </div>
+                <div class="ui-g-2 ui-sm-6">${{totalSum}}</div>
             </div>
             <hr>
             <div class="ui-g">
                 <div class="ui-g-8"><br></div>
-                <div class="ui-g-2"><a [routerLink]="['']"><button type="button" class="btn btn-default"><span class="fa fa-shopping-cart"></span> Continue Shopping</button></a></div>
-                <div class="ui-g-2"><button type="button" (click)="sendInvoice()"class="btn btn-success">Send Invoice <span class="fa fa-play"></span></button></div>
+                <div class="ui-g-2 ui-sm-6"><a [routerLink]="['']"><button pButton type="button" class="ui-button-secondary" icon="fa-shopping-cart" label="CONTINUE SHOPPING"></button></a></div>
+                <div class="ui-g-2 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="ui-button-secondary" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
             </div>
 
 
@@ -116,5 +116,3 @@
                 </tbody>
             </table>
           </div>-->
-
-
