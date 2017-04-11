@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule, SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SliderModule, SpinnerModule} from "../../node_modules/primeng/primeng";
-
+import {DataTableModule, SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SliderModule, SpinnerModule, FileUploadModule} from "../../node_modules/primeng/primeng";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CartComponent } from "./components/cart/cart.component";
 import { UsersComponent } from './components/users/users.component';
 import { VendorComponent} from './components/vendor/vendor.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -51,6 +51,7 @@ const appRoutes: Routes =  [
     UsersComponent,
     SumPipe,
     VendorComponent
+    
 
   ],
   exports: [
@@ -74,7 +75,9 @@ const appRoutes: Routes =  [
     PanelModule,
     SliderModule,
     SharedModule,
-    SpinnerModule
+    SpinnerModule,
+    FileUploadModule,
+    BrowserAnimationsModule
   ],
   providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],
   bootstrap: [AppComponent, ],

@@ -5,12 +5,20 @@
   "main": "app.js",
   "dependencies": {
     "angular-2-local-storage": "^1.0.1",
+    "angular2-image-upload": "^0.5.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
+    "cors": "^2.8.3",
     "ejs": "^2.5.6",
     "express": "^4.14.1",
+    "jsonwebtoken": "^7.3.0",
     "mongojs": "^2.4.0",
+    "mongoose": "^4.9.4",
     "nodemailer": "^3.1.8",
-    "primeng": "2.0.5"
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "primeng": "2.0.5",
+    "styliner": "^1.0.3"
   },
   "devDependencies": {},
   "scripts": {

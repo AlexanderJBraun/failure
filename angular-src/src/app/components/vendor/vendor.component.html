@@ -36,6 +36,10 @@
     </template>
 </p-dataList>
 
+<button (click)="show= !show">{{show? 'Hide Add Product':'Add Product'}}</button>
+<button (click)="showVendor= !showVendor">{{showVendor? 'Hide Vender Invoice':'Show Vendor Invoice'}}</button>
+
+<div *ngIf="show">
 
 <p-dataTable #prodDT [value]="vendors" selectionMode="single" [(selection)]="selectedVendor" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="vendors">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Vendor List
@@ -74,3 +78,9 @@
         </div>
     </p-footer>
 </p-dialog>
+
+</div>
+
+<div *ngIf="showVendor">
+This will be the vendor invoice
+    </div>

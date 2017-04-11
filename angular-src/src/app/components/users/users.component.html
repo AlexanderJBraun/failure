@@ -138,10 +138,14 @@
             <div class="ui-grid-col-8"><input pInputText id="fNum" size="30" [(ngModel)]="user.fNum" /></div>
         </div>
         <hr>
-        <div class="ui-grid-row">
+       <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="role">Role</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="role" size="30" [(ngModel)]="user.role" /></div>
+            <div class="ui-grid-col-8"><select id="role" [(ngModel)]="user.role">
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select></div>
         </div>
+        
         <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
             <div class="ui-grid-col-8"><input pInputText id="inStock" [(ngModel)]="product.inStock" /></div>

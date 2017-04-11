@@ -4,4 +4,5 @@ export interface ProductClass{
   itemDescription: string
   price: number
   inStock: number
+  img: File
 }

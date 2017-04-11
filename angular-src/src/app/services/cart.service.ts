@@ -59,9 +59,7 @@ export class CartService {
       if(cartMap[product._id ]!= undefined) {
 
         let cartInstance = cartMap[product._id];
-
             cartInstance.quantity = cartInstance.quantity + itemQuant;
-        
             cartMap[product._id] = cartInstance;
       }
       else {

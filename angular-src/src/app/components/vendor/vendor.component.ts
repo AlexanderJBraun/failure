@@ -24,6 +24,8 @@ export class VendorComponent implements OnInit {
     plusVendor: boolean;
     vendors: VendorClass[];
     quant:any=[];
+    show:boolean = false;
+    showVendor:boolean = false;
 
   constructor(    
     private validateService: ValidateService,
