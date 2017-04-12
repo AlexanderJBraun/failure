@@ -29,6 +29,10 @@ router.post('/invoice', function(req, res, next){
     var d = n.getDate();
     // document.getElementById("date").innerHTML=m + "/" + d + "/" + y;
 
+    
+    
+
+
     var htmlBody= '<h3>' + "Thank You "  + " for your purchase!" + '</h3>' 
         + '<h3>' + "Your order will be delivered in the next few days"  + '</h3>'
         + '<h3>' + "Following is your invoice: " + '</h3>'

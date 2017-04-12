@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     selectedProduct: ProductClass;
     plusProduct: boolean;
     products: ProductClass[];
+    uploadField = document.getElementById("file");
 
   constructor(    
     private validateService: ValidateService,
@@ -32,26 +33,32 @@ export class DashboardComponent implements OnInit {
       this.products = products;
     });
   }
-/*
-      addProduct(){
-        var newProduct = {
-          itemCode: this.itemCode,
-          description: this.itemDescription,
-          price: this.price,
-          inStock: this.inStock
-        }
-        
-        this.authService.addProduct(newProduct)
-            .subscribe(product => {
-                this.products.push(product);
-                this.itemCode = '';
-                this.itemDescription = '';
-                this.price = null;
-                this.inStock = null;
-            });
 
-    } */
 
+     onChange($event) : void{
+
+
+    if($event.target.files[0].size < 100000){
+      this.readThis($event.target);
+    };
+
+       if($event.target.files[0].size > 100000){
+       alert("File is too big!");
+       $event.target.files[0] = null;
+    };
+     }
+      
+      readThis(inputValue: any): void {
+      var file:File = inputValue.files[0];
+      var myReader:FileReader = new FileReader();
+
+      myReader.onloadend = (e) => {
+        this.product.image = myReader.result;
+      }
+      myReader.readAsDataURL(file);
+    }
+
+     
     deleteProduct(id){
       var products = this.products;
 
@@ -65,6 +72,7 @@ export class DashboardComponent implements OnInit {
         }
       });
     }
+    
 
     showDialogToAdd(){
       this.plusProduct = true;
@@ -145,5 +153,5 @@ class PrimeProduct implements ProductClass {
   itemDescription: string;
   price: number;
   inStock: number;
-  img: File;
+  image: any;
 }

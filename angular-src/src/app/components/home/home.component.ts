@@ -86,12 +86,10 @@ export class HomeComponent implements OnInit {
     selectedProduct: ProductClass;
     displayDialog: boolean;
 
-    
 
 
   constructor(private authService:AuthService, private flashMessage:FlashMessagesService, private localStorageService : LocalStorageService, private cartservice: CartService, private router:Router ) 
   {
-   
   
     this.authService.getProduct().subscribe(products => {
       this.products = products;

@@ -5,7 +5,7 @@
         <h2>List of Vendor Items</h2>
     </p-header>
 
-    <template let-vendor pTemplate="item" let-i="index">
+    <ng-template let-vendor pTemplate="item" let-i="index">
         <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom: 1px solid #D5D5D5;">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3" style="text-align: center">                   
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-    </template>
+    </ng-template>
 </p-dataList>
 
 <button (click)="show= !show">{{show? 'Hide Add Product':'Add Product'}}</button>

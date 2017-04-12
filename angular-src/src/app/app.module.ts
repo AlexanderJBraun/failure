@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CartComponent } from "./components/cart/cart.component";
 import { UsersComponent } from './components/users/users.component';
 import { VendorComponent} from './components/vendor/vendor.component';
+import { OrdersComponent} from './components/orders/orders.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ValidateService} from './services/validate.service';
@@ -35,7 +36,8 @@ const appRoutes: Routes =  [
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
   {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]},
-  {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]}
+  {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]},
+  {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]}
 ]
 
 @NgModule({
@@ -50,7 +52,8 @@ const appRoutes: Routes =  [
     CartComponent,
     UsersComponent,
     SumPipe,
-    VendorComponent
+    VendorComponent,
+    OrdersComponent
     
 
   ],

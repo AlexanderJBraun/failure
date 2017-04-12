@@ -22,7 +22,7 @@ router.get('/products', function(req, res, next){
 // add product
 router.post('/newProduct', (req, res, next) => {
   let newProduct = new Product(req.body);
-
+  
   Product.addProduct(newProduct, (err, product) => {
     if(err){
       console.log(err);
@@ -59,13 +59,9 @@ router.put('/updateinventory', function(req, res, next)
 {
    console.log(req.body.pID);
   db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{inStock:req.body.deduct}});
-  
- 
-  
-  
-
 
 });
+
 
 
 module.exports = router;

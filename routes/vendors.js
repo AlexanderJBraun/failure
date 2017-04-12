@@ -53,17 +53,6 @@ router.delete('/vendor/:id', function(req, res, next){
     });
 });
 
-router.put('/updateinventory', function(req, res, next)
-{
-   console.log(req.body.pID);
-  db.vendors.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{inStock:req.body.deduct}});
-  
- 
-  
-  
-
-
-});
 
 
 module.exports = router;

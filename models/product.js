@@ -4,6 +4,7 @@ const config = require('../config/database');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
+
 // User Schema
 const ProductSchema = mongoose.Schema({
   itemCode: {
@@ -22,9 +23,12 @@ const ProductSchema = mongoose.Schema({
   inStock: {
     type: Number,
     required: true
+  },
+  image: {
+    type: String
   }
+   
 });
-
 
 
 

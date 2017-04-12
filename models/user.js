@@ -6,11 +6,11 @@ const config = require('../config/database');
 const UserSchema = mongoose.Schema({
   fName: {
     type: String,
-    required: true
+   
   },
   lName: {
     type: String,
-    required: true
+    
   },
   bName: {
     type: String
@@ -29,23 +29,23 @@ const UserSchema = mongoose.Schema({
   },
   region: {
     type: String,
-    required: true
+   
   },
   address: {
     type: String,
-    required: true
+    
   },
   city: {
     type: String,
-    required: true
+    
   },
   state: {
     type: String,
-    required: true
+    
   },
   zip: {
     type: String,
-    required: true
+    
   },
   email: {
     type: String,
