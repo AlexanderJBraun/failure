@@ -1,41 +1,55 @@
-<h2 class="page-header">Users Management</h2>
+<h2 class="page-header">Customer Management</h2>
 
-<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="users" expandableRows="true">
+<p-growl [value]="msgs" [style]="{'position':'fixed', 'top':'24%', 'left':'52%'}"></p-growl>
+<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users" expandableRows="true" [contextMenu]="cm">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Customers List</p-header>
     <p-column field="fName" header="FIRST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="lName" header="LAST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="username" header="USERNAME" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="bName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search"></p-column>
-    <p-column field="address" expander="true" styleClass="col-icon" header="ADDRESS"></p-column>
     <p-column field="zip" header="ZIPCODE" [sortable]="true"></p-column>
     <p-column field="pNum" header="PHONE_NUM"></p-column>
-    <p-column field="email" header="EMAIL"  ></p-column>
-    <p-column field="role" header="ROLE" [sortable]="true" ></p-column>
+    <p-column expander="true" styleClass="col-icon" header="DETAILS"></p-column>
         <ng-template let-user pTemplate="rowexpansion">
                     <div class="ui-g">
-                        <div class="ui-g-2">Address Details</div>
+                        <div class="ui-g-2">Email:</div>
+                        <div class="ui-g-10">{{user.email}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-2">Address:</div>
                         <div class="ui-g-10">{{user.address}}, {{user.city}}, {{user.state}} {{user.zip}}</div>
                     </div>
+                    <div class="ui-g">
+                        <div class="ui-g-2">Region: </div>
+                        <div class="ui-g-10">{{user.region}}</div>
+                    </div>
         </ng-template>
+    <p-column field="email" header="EMAIL" styleClass="hidden"></p-column>
+    
     <!--<p-column field="" header="Quantity" [sortable]="true"></p-column>-->
     <p-footer></p-footer>
 </p-dataTable>
+<p-contextMenu #cm [model]="items"></p-contextMenu>
+<p-dialog [(visible)]="detailDialog">
+{{selectUserEmail}}
+</p-dialog>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new customer"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="userDT.exportCSV()"></button>
 
-<p-dialog header="Customer Details" [(visible)]="displayDialog" responsive="true" modal="modal" width="700" dismissableMask="true">
+<p-dialog header="Customer Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [width]="700">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="user">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="email">Email</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="email" size="20" [(ngModel)]="user.email" placeholder="Email: abc@xyz.com"/></div>
+            <!--<div class="ui-grid-col-4"><p-inputMask type ="email" size="20"  [(ngModel)]="user.email" placeholder="Email: abc@xyz.com"></p-inputMask></div>-->
+            <div class="ui-grid-col-4"><input pInputText id="email" type="email" size="20" [(ngModel)]="user.email" placeholder="Email: abc@xyz.com" (ngModelChange)="checkEmpty()"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="username">Username</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="username" size="20" [(ngModel)]="user.username" placeholder="Username used to log in"/></div>
+            <div class="ui-grid-col-4"><input pInputText id="username" size="20" [(ngModel)]="user.username" placeholder="Username used to log in" (ngModelChange)="checkEmpty()"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="password">Password</label></div>
-            <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" /></div>
+            <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" (ngModelChange)="checkEmpty()"/></div>
         </div>
         <hr>
         <div class="ui-grid-row">
@@ -58,15 +72,14 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="state">State</label></div>
-            <div class="ui-grid-col-4"><p-dropdown [options]="states" [(ngModel)]="user.state" placeholder="Select a state" [style]="{'width':'120px'}" filter="true"></p-dropdown></div>
-        </div>
-        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><p-dropdown [options]="states" [(ngModel)]="user.state" placeholder="Pick a state" [style]="{'width':'120px'}" filter="true"></p-dropdown></div>
             <div class="ui-grid-col-2"><label for="zip">Zip</label></div>
             <div class="ui-grid-col-4"><p-inputMask id="zip" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.zip" mask="99999" placeholder="99999"></p-inputMask></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="region">Region</label></div>
-            <div class="ui-grid-col-4"><p-inputMask id="region" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.region" mask="aa" placeholder="MO"></p-inputMask></div>
+            <div class="ui-grid-col-4"><p-dropdown id="region" size="20" [options]="regions" [(ngModel)]="user.region" [style]="{'width':'120px'}" placeholder="Pick a region"></p-dropdown></div>
+            <!--<div class="ui-grid-col-4"><p-inputMask id="region" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.region" mask="aa" placeholder="MO"></p-inputMask></div>-->
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="pNum">Phone Number</label></div>
@@ -82,7 +95,7 @@
         </div>-->
        <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="role">Role</label></div>
-            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Select a role" [style]="{'width':'120px'}"></p-dropdown></div>
+            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Pick a role" [style]="{'width':'120px'}" (ngModelChange)="checkEmpty()"></p-dropdown></div>
         </div>
         <br>
         <br> 
@@ -96,8 +109,8 @@
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-            <button type="button" class="btn btn-danger" (click)="delete(user._id)"><span class="fa fa-close"></span> Delete</button>
-            <button type="button" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
+            <button type="button" class="btn btn-danger" (click)="deleteUser(user._id)"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" id="saveUser" class="btn btn-success" (click)="save()" disabled="disabled"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
 </p-dialog>

@@ -30,7 +30,8 @@
     border: 1px solid #9ea8a0;
 }
 
-.btn-success:hover{
+
+.btn-success:hover:enabled{
     background-color: limegreen !important;
     color: black;
     border: 1px solid limegreen;
@@ -50,14 +51,20 @@ border: 1px solid red !important;
 
 }
 
-button{
+/*button{
     background-color: dimgrey !important;
     border: whitesmoke !important;
     bottom: 5px;
-}
+}*/
+
+
 .ui-inputtext#fName{
     width: 150px;
 }
 .ui-inputtext#lName{
     width: 150px;
+}
+
+.hidden{
+    visibility: hidden;
 }

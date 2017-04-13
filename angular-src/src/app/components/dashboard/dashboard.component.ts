@@ -38,11 +38,11 @@ export class DashboardComponent implements OnInit {
      onChange($event) : void{
 
 
-    if($event.target.files[0].size < 100000){
+    if($event.target.files[0].size < 1048576){
       this.readThis($event.target);
     };
 
-       if($event.target.files[0].size > 100000){
+       if($event.target.files[0].size > 1048576){
        alert("File is too big!");
        $event.target.files[0] = null;
     };

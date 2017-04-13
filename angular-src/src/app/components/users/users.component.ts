@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import {UserClass} from '../../../../../models/User';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
 import {MenuItem} from 'primeng/primeng';            //api
-import {DataTableModule,SharedModule, SelectItem} from 'primeng/primeng';
+import {DataTableModule,SharedModule, SelectItem, Message} from 'primeng/primeng';
 
 @Component({
   selector: 'app-users',
@@ -29,12 +29,17 @@ export class UsersComponent implements OnInit {
     password: String;
     email: String;
     displayDialog: boolean;
+    detailDialog: boolean;
     user: UserClass = new PrimeUser();
     selectedUser: UserClass;
     plusUser: boolean;
     users: UserClass[];
     roles: SelectItem[];
     states: SelectItem[];
+    regions: SelectItem[];
+    msgs: Message[]=[];
+    items: MenuItem[];
+    selectUserEmail:string;
 
   constructor(    
     private validateService: ValidateService,
@@ -98,14 +103,23 @@ export class UsersComponent implements OnInit {
         this.states.push({label:'Wyoming',value:'WY'});
         this.states.push({label:'District of Columbia',value:'DC'});
 
-
+        this.regions = [];
+        this.regions.push({label: 'South-East', value:'SE'});
+        this.regions.push({label: 'Mid-West', value:'MO'});
      }
 
   ngOnInit() {
         this.authService.getUser().subscribe(users => {
       this.users = users;
     });
-  }
+
+    this.items=[
+      {label: 'View details', command: (event) => this.viewUser(this.selectedUser)}
+     
+    ];
+ console.log(this.selectedUser); 
+ }
+
 
     
 
@@ -124,9 +138,11 @@ export class UsersComponent implements OnInit {
     }
 
     showDialogToAdd(){
+      document.getElementById("saveUser").setAttribute("disabled", "disabled");
       this.plusUser = true;
       this.user = new PrimeUser();
       this.displayDialog = true;
+      
     }
 
 
@@ -134,24 +150,38 @@ export class UsersComponent implements OnInit {
       //var users = users;
       if(this.plusUser)
       {
-        this.authService.addUser(this.user).subscribe(data => {
+        
+        var emailChecker=this.checkEmail(this.user.email);
 
-          if(data.success){
-        this.flashMessage.show('User registered ', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/users']);
-      } else {
-        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
-      
-      }
-      this.ngOnInit();
-            });
+              if(emailChecker === true){
+        
+                                this.authService.addUser(this.user).subscribe(data => {
+
+                                  if(data.success){
+                                this.flashMessage.show('User registered ', {cssClass: 'alert-success', timeout: 3000});
+                                this.router.navigate(['/users']);
+                                   this.user=null;
+                                   this.displayDialog=false;
+                              } else {
+                                  
+                              
+                              }
+                              this.ngOnInit();
+                                    });
+                              
+              } else  {
+                  this.msgs = [];
+                  this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Invalid email'});
+                  
+              }             
+          
+          
       }
       else{
         this.authService.save(this.user);
       }
         
-      this.user=null;
-      this.displayDialog=false;
+   
     }
 
     deleteUser(id){
@@ -174,6 +204,8 @@ export class UsersComponent implements OnInit {
       this.plusUser = false;
       this.user = this.cloneUser(event.data);
       this.displayDialog=true;
+      document.getElementById("saveUser").removeAttribute("disabled");
+      
     }
 
     cloneUser(u: UserClass): UserClass{
@@ -188,6 +220,32 @@ export class UsersComponent implements OnInit {
       return this.users.indexOf(this.selectedUser);
     }
 
+    checkEmail(email)
+    {
+
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+
+    }
+  
+    checkEmpty(){
+      if(this.user.email && this.user.username && this.user.password && this.user.role){
+        document.getElementById("saveUser").removeAttribute("disabled");
+        
+      }
+      // console.log(this.user.email);
+      //   console.log(this.user.username);
+      //   console.log(this.user.password);
+      //   console.log(this.user.role);
+    }
+
+    viewUser(user: UserClass){
+      console.log(user.email);
+      this.selectUserEmail = user.email; 
+      this.detailDialog = true;
+
+    }
+    
 
 
 }

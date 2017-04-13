@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule, InputTextModule, DropdownModule, DataGridModule , InputMaskModule, SharedModule, DialogModule, ButtonModule, DataListModule, PanelModule, SliderModule, SpinnerModule, FileUploadModule} from "../../node_modules/primeng/primeng";
+import {DataTableModule,GrowlModule, InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, FileUploadModule, ContextMenuModule, MenuItem} from "../../node_modules/primeng/primeng";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +17,7 @@ import { CartComponent } from "./components/cart/cart.component";
 import { UsersComponent } from './components/users/users.component';
 import { VendorComponent} from './components/vendor/vendor.component';
 import { OrdersComponent} from './components/orders/orders.component';
+import { LandingComponent} from './components/landing/landing.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {ValidateService} from './services/validate.service';
@@ -29,7 +30,8 @@ import { SumPipe } from './components/cart/sum.pipe';
 
 
 const appRoutes: Routes =  [
-  {path:'', component: HomeComponent},
+  {path:'home', component: HomeComponent},
+  {path:'', component: LandingComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard,AdminGuard]},
@@ -51,6 +53,7 @@ const appRoutes: Routes =  [
     ProfileComponent,
     CartComponent,
     UsersComponent,
+    LandingComponent,
     SumPipe,
     VendorComponent,
     OrdersComponent
@@ -75,13 +78,15 @@ const appRoutes: Routes =  [
     ButtonModule,
     InputTextModule,
     DialogModule,
-    DataListModule,
     PanelModule,
     SliderModule,
     SharedModule,
+    DataListModule,
     SpinnerModule,
+    ContextMenuModule,
     DropdownModule,
     InputMaskModule,
+    GrowlModule,
     DataGridModule,
     FileUploadModule,
     BrowserAnimationsModule
