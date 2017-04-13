@@ -57,7 +57,7 @@ router.delete('/product/:id', function(req, res, next){
 
 router.put('/updateinventory', function(req, res, next)
 {
-   console.log(req.body.pID);
+  
   db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{inStock:req.body.deduct}});
 
 });

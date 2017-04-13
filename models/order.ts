@@ -5,6 +5,6 @@ export interface OrderClass{
         name:string,
         quantity:number,
         price:number,
-        subtotal:number
+        subTotal:number
     }
 }
