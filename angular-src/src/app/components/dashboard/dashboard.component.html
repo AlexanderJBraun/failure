@@ -53,31 +53,34 @@
 </div>-->
 
 
-<p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="products">
+<p-dataTable #prodDT [value]="products" [paginator]="true" rows="15" [responsive]="true" exportFilename="products" [editable]="true" expandableRows="true">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
-        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="prodDT.exportCSV()" style="float:left"></button>
     </p-header>
-    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search"></p-column>
-    <p-column field="description" header="DESCRIPTION" ></p-column>
-    <p-column field="price" header="PRICE" >
+    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search" [editable]="true"></p-column>
+    <p-column field="description" header="DESCRIPTION" [editable]="true"></p-column>
+    <p-column field="price" header="PRICE" [editable]="true" >
         <ng-template let-col let-product="rowData" pTemplate="body">
-            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+            <span>{{product[col.field] | currency:'USD':true:'.0-0'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="inStock" header="QTY_ON_HAND ({{qtyFilter}})" [filter]="true" filterMatchMode="equals">
-        <ng-template pTemplate="filter" let-col>
-            <i class="fa fa-close" (click)="qtyFilter=null;prodDT.filter(null, col.field, col.filterMatchMode)"></i>
+    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true" [editable]="true">
+        <!--<template pTemplate="filter" let-col>
+            <i class="fa fa-close" (click)="qtyFilter=null;prodDT.filter(null, col.field, col.filterMatchMode)" style="cursor: pointer;"></i>
             <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="qtyFilter" [min]="0" (onSlideEnd)="prodDT.filter($event.value,col.field,col.filterMatchMode)"></p-slider>
+        </template>-->
+    </p-column>
+    <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
+        <ng-template let-product pTemplate="rowexpansion">
+            <div class="ui-g">
+                <div class="ui-lg-4 ui-md-4"></div>
+                <div class="ui-lg-4 ui-md-4 ui-sm-12"><img src="{{product.image}}" align="middle"></div>
+                <div class="ui-lg-4 ui-md-4"></div>
+            </div>
         </ng-template>
-    </p-column>
-    <p-column >
-         <ng-template let-product="rowData" pTemplate="body">
-        <img src="{{product.image}}" height="40px" width="40px" >
-    </ng-template>
-    
-    </p-column>
-    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+    <p-footer></p-footer>
 </p-dataTable>
+<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new product"></button>
+<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="prodDT.exportCSV()"></button>
 
 <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" showEffect="fade"  [width]="400">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
@@ -99,19 +102,21 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
             <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock" /></div>
-        </div> 
-        <br>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="image">image</label></div>
-            <div class="ui-grid-col-8"><input type="file" id="file" accept="image/*" (change)="onChange($event)" /></div>
         </div>
         <br>
-        
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="image">IMAGE</label></div>
+            <div class="ui-grid-col-8"><input type="file" id="file" accept="image/*" (change)="onChange($event)" /></div>
+        </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="delete(product._id)" label="Delete"></button>
-            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+            <button type="button" class="btn btn-danger" (click)="delete(product._id)"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
 </p-dialog>
+
+
+

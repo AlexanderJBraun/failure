@@ -4,45 +4,45 @@
 
 
                 <div class="ui-g" id="cartHeader">
-                    <div class="ui-lg-4 ui-sm-4" >Item Name</div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Qty</div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Unit Price</div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">Sub-Total</div>
+                    <div class="ui-lg-4 ui-md-4 ui-sm-4" >Item Name</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Qty</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Unit Price</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Sub-Total</div>
                 </div>
             <hr>
                 <div class="ui-g" id="cartBody" *ngFor="let cartEntity of cartEntities">
-                    <div class="ui-lg-4 ui-sm-4" ><h4><p>{{cartEntity.product.description}}</p>
+                    <div class="ui-lg-4 ui-md-4 ui-sm-4" ><h4><p>{{cartEntity.product.description}}</p>
                     <span>Status: </span><span class="text-success">In Stock</span>
                     </h4></div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
                         <span (click)=changeQuantity(cartEntity.product._id,-1) class="fa fa-minus" style="cursor:pointer"></span>&nbsp; &nbsp;<span id="number">{{cartEntity.quantity}}</span>&nbsp; &nbsp;<span (click)=changeQuantity(cartEntity.product._id,1) class="fa fa-plus pointer" style="cursor:pointer"></span>
                     </div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
                         <span id="number">${{cartEntity.product.price}}</span>
                     </div>
-                    <div class="ui-lg-2 ui-sm-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
 
                         <span id="number" decimals=".01"> ${{cartEntity.subTotal}}</span>
 
                     </div>
-                    <div class="ui-g-2 ui-sm-2" style="text-align: center">
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
                         <button type="button" pButton icon="fa-remove" style="float:left" (click)="removeByProductId(cartEntity.product._id)" class="btn btn-danger" label="Remove"></button>
                     </div>          
                 </div>
             <hr>
             <div class="ui-g" id="cartSum">
-                <div class="ui-g-8"><br></div>
-                <div class="ui-g-2 ui-sm-6" style="font-weight: bold;">Estimated shipping: </div>
-                <div class="ui-g-2 ui-sm-6">$0</div>
-                <div class="ui-g-8"><br></div>
-                <div class="ui-g-2 ui-sm-6" style="font-weight: bold;">Total: </div>
-                <div class="ui-g-2 ui-sm-6">${{totalSum}}</div>
+                <div class="ui-lg-8"><br></div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Estimated shipping: </div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">$0</div>
+                <div class="ui-lg-8"><br></div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Total: </div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">${{totalSum}}</div>
             </div>
             <hr>
             <div class="ui-g">
-                <div class="ui-g-8"><br></div>
-                <div class="ui-g-2 ui-sm-6"><a [routerLink]="['']"><button pButton type="button" class="ui-button-secondary" icon="fa-shopping-cart" label="CONTINUE SHOPPING"></button></a></div>
-                <div class="ui-g-2 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="ui-button-secondary" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
+                <div class="ui-lg-3 ui-md-6 ui-sm-6"><a [routerLink]="['']"><button pButton type="button" class="btn btn-primary" icon="fa-shopping-cart" label="CONTINUE SHOPPING"></button></a></div>
+                <div class="ui-lg-6"><br></div>
+                <div class="ui-lg-3 ui-md-6 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="btn btn-success" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
             </div>
 
 
@@ -57,7 +57,7 @@
                         <th class="hidden-xs">Quantity</th>
                         <th class="text-center hidden-xs">Price</th>
                         <th class="text-center">Total</th>
-                        <th> </th>
+                        <th> </th>
                     </tr>
                 </thead>
 
@@ -82,23 +82,23 @@
                         </button></td>
                     </tr>
                     <tr>
-                        <td class="hidden-xs">   </td>
-                        <td class="hidden-xs">   </td>
-                        <td>   </td>
+                        <td class="hidden-xs">   </td>
+                        <td class="hidden-xs">   </td>
+                        <td>   </td>
                         <td><h5>Estimated shipping</h5></td>
                         <td class="text-right"><h5><strong>0:-</strong></h5></td>
                     </tr>
                     <tr>
-                        <td class="hidden-xs">   </td>
-                        <td class="hidden-xs">   </td>
-                        <td>   </td>
+                        <td class="hidden-xs">   </td>
+                        <td class="hidden-xs">   </td>
+                        <td>   </td>
                         <td><h3>Total</h3></td>
                         <td class="text-right"><h3><strong>{{ totalSum }}:-</strong></h3></td>
                     </tr>
                     <tr>
-                        <td class="hidden-xs">   </td>
-                        <td class="hidden-xs">   </td>
-                        <td>   </td>
+                        <td class="hidden-xs">   </td>
+                        <td class="hidden-xs">   </td>
+                        <td>   </td>
                         <td>
 
                         <a [routerLink]="['']">

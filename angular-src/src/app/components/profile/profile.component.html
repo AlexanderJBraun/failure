@@ -10,15 +10,15 @@
 
   <div *ngIf="role === 'Admin' || role === 'admin'  ">
     <div class="panel panel-default">
-      <div class="panel-heading"> Management Tools     </div>
+      <div class="panel-heading" style="font-weight: bold;"> Management Tools     </div>
         <div class="panel-body">
        <div class="ui-g">
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Product Management</a></li></div>
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"  ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']">Customer Management</a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']"><button type="button" pButton class="btn btn-primary" label="Product Management"></button></a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']"><button type="button" pButton class="btn btn-primary" label="User Management"></button></a></li></div>
         </div>
         <div class="ui-g">
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/vendor']">Vendor Orders Management here</a></li></div>
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"  ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/orders']">Invoices Management here</a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/vendor']"><button type="button" pButton class="btn btn-primary" label="Vendor Management here"></button></a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/orders']"><button type="button" pButton class="btn btn-primary" label="Invoice Management here"></button></a></li></div>
         </div>
      </div>
 
@@ -30,8 +30,8 @@
       <div class="panel-heading"> Customer Tools     </div>
         <div class="panel-body">
           <div class="ui-g">
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']">Order History here</a></li></div>
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"  ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']">Change Password here</a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']"><button type="button" pButton class="btn btn-primary" label="Order History here"></button></a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"  ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']"><button type="button" pButton class="btn btn-primary" label="Change password here"></button></a></li></div>
         </div>
       </div>
 

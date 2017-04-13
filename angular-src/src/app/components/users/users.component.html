@@ -1,150 +1,92 @@
 <h2 class="page-header">Users Management</h2>
 
-<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="users">
-    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">User List
-        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="userDT.exportCSV()" style="float:left"></button>
-    </p-header>
-    <p-column field="fName" header="FIRST_NAME" [sortable]="true"></p-column>
-    <p-column field="lName" header="LAST_NAME" [sortable]="true"></p-column>
-    <p-column field="username" header="USERNAME" [sortable]="true"></p-column>
-    <p-column field="bName" header="BUSINESS_NAME" [sortable]="true"></p-column>
-    <p-column field="email" header="EMAIL" [sortable]="true"></p-column>
-    <p-column field="role" header="ROLE" [sortable]="true"></p-column>
+<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="users" expandableRows="true">
+    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Customers List</p-header>
+    <p-column field="fName" header="FIRST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="lName" header="LAST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="username" header="USERNAME" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="bName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="address" expander="true" styleClass="col-icon" header="ADDRESS"></p-column>
+    <p-column field="zip" header="ZIPCODE" [sortable]="true"></p-column>
+    <p-column field="pNum" header="PHONE_NUM"></p-column>
+    <p-column field="email" header="EMAIL"  ></p-column>
+    <p-column field="role" header="ROLE" [sortable]="true" ></p-column>
+        <ng-template let-user pTemplate="rowexpansion">
+                    <div class="ui-g">
+                        <div class="ui-g-2">Address Details</div>
+                        <div class="ui-g-10">{{user.address}}, {{user.city}}, {{user.state}} {{user.zip}}</div>
+                    </div>
+        </ng-template>
     <!--<p-column field="" header="Quantity" [sortable]="true"></p-column>-->
-    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+    <p-footer></p-footer>
 </p-dataTable>
+<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new customer"></button>
+<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="userDT.exportCSV()"></button>
 
-<p-dialog header="Customer Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="500" >
+<p-dialog header="Customer Details" [(visible)]="displayDialog" responsive="true" modal="modal" width="700" dismissableMask="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="user">
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="email">Email</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="email" size="30" [(ngModel)]="user.email" /></div>
+            <div class="ui-grid-col-2"><label for="email">Email</label></div>
+            <div class="ui-grid-col-4"><input pInputText id="email" size="20" [(ngModel)]="user.email" placeholder="Email: abc@xyz.com"/></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="username">Username</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="username" size="30" [(ngModel)]="user.username" /></div>
+            <div class="ui-grid-col-2"><label for="username">Username</label></div>
+            <div class="ui-grid-col-4"><input pInputText id="username" size="20" [(ngModel)]="user.username" placeholder="Username used to log in"/></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="password">Password</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="password" size="30" [(ngModel)]="user.password" /></div>
+            <div class="ui-grid-col-2"><label for="password">Password</label></div>
+            <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" /></div>
         </div>
         <hr>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="fName">First Name</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="fName" size="30" [(ngModel)]="user.fName" /></div>
+            <div class="ui-grid-col-2"><label for="fName">First Name</label></div>
+            <div class="ui-grid-col-3"><input pInputText id="fName" size="20" [(ngModel)]="user.fName" /></div>
+            <div class="ui-grid-col-2"><label for="lName">Last Name</label></div>
+            <div class="ui-grid-col-3"><input pInputText id="lName" size="20" [(ngModel)]="user.lName" /></div>
         </div>
-       <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="lName">Last Name</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="lName" size="30" [(ngModel)]="user.lName" /></div>
+            <div class="ui-grid-col-2"><label for="bName">Business Name</label></div>
+            <div class="ui-grid-col-4"><input pInputText id="bName" size="20" [(ngModel)]="user.bName" /></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="bName">Business Name</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="bName" size="30" [(ngModel)]="user.bName" /></div>
+            <div class="ui-grid-col-2"><label for="address">Address</label></div>
+            <div class="ui-grid-col-4"><input pInputText id="address" size="20" [(ngModel)]="user.address" placeholder="Street number, Street name"/></div>
         </div>
-        <hr>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="address">Address</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="address" size="30" [(ngModel)]="user.address" /></div>
+            <div class="ui-grid-col-2"><label for="city">City</label></div>
+            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city" /></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="city">City</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="city" size="30" [(ngModel)]="user.city" /></div>
+            <div class="ui-grid-col-2"><label for="state">State</label></div>
+            <div class="ui-grid-col-4"><p-dropdown [options]="states" [(ngModel)]="user.state" placeholder="Select a state" [style]="{'width':'120px'}" filter="true"></p-dropdown></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="state">State</label></div>
-            <div class="ui-grid-col-8"><select id="state" [(ngModel)]="user.state">
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="DC">District Of Columbia</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-</select></div>
+            <div class="ui-grid-col-2"><label for="zip">Zip</label></div>
+            <div class="ui-grid-col-4"><p-inputMask id="zip" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.zip" mask="99999" placeholder="99999"></p-inputMask></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="zip">Zip</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="zip" size="15" [(ngModel)]="user.zip" /></div>
+            <div class="ui-grid-col-2"><label for="region">Region</label></div>
+            <div class="ui-grid-col-4"><p-inputMask id="region" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.region" mask="aa" placeholder="MO"></p-inputMask></div>
         </div>
-        <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="region">Region</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="region" size="30" [(ngModel)]="user.region" /></div>
+            <div class="ui-grid-col-2"><label for="pNum">Phone Number</label></div>
+            <div class="ui-grid-col-3"><p-inputMask id="pNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.pNum" mask="(999)-999-9999" placeholder="Enter phone number"></p-inputMask></div>
+            <!--<div class="ui-grid-col-3"><input pInputText id="pNum" size="20" [(ngModel)]="user.pNum" /></div>-->
+            <div class="ui-grid-col-2"><label for="mNum">Mobile Number</label></div>
+            <div class="ui-grid-col-3"><p-inputMask id="mNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.mNum" mask="(999)-999-9999" placeholder="Enter phone number"></p-inputMask></div>
+            <!--<div class="ui-grid-col-3"><input pInputText id="mNum" size="20" [(ngModel)]="user.mNum" /></div>-->
         </div>
-        <hr>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="pNum">Phone Number</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="pNum" size="30" [(ngModel)]="user.pNum" /></div>
-        </div>
-        <br>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="mNum">Mobile Number</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="mNum" size="30" [(ngModel)]="user.mNum" /></div>
-        </div>
-        <br>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="fNum">Fax Number</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="fNum" size="30" [(ngModel)]="user.fNum" /></div>
-        </div>
-        <hr>
+        <!--<div class="ui-grid-row">
+            <div class="ui-grid-col-2"><label for="fNum">Fax Number</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="fNum" size="20" [(ngModel)]="user.fNum" /></div>
+        </div>-->
        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="role">Role</label></div>
-            <div class="ui-grid-col-8"><select id="role" [(ngModel)]="user.role">
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-            </select></div>
+            <div class="ui-grid-col-2"><label for="role">Role</label></div>
+            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Select a role" [style]="{'width':'120px'}"></p-dropdown></div>
         </div>
+        <br>
+        <br> 
+        <br>   
         
         <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
@@ -153,8 +95,9 @@
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="deleteUser(user._id)" label="Delete"></button>
-            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+            <button type="button" class="btn btn-danger" (click)="delete(user._id)"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
 </p-dialog>
