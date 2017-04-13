@@ -1,6 +1,8 @@
 <div class="page header">
+    <div class="container-fluid">
  <h1>Products page title</h1>
  <p class="lead">This will be the product page</p>
+ </div>
 </div>
 
 <!--<div class="product-list">
@@ -28,7 +30,7 @@
    </form>
    
 </div>-->
-
+<div class="container-fluid">
 <div class="row carousel-holder">
 
                     <div class="col-md-12">
@@ -58,7 +60,8 @@
                         </div>
                     </div>
                 </div>
-
+                </div>
+<div class="container-fluid">
 <p-dataGrid [value]="products" [paginator]="true" [rows]="8">
    <p-header>
        <h2>List of Products</h2>
@@ -76,9 +79,10 @@
             </p-panel>
         </div>
    </ng-template>
+   <p-footer></p-footer>
 </p-dataGrid>
 
-
+</div>
 
 <!--<p-dataList [value]="products" [paginator]="true" [rows]="5">
    <p-header>
