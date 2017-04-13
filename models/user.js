@@ -64,12 +64,13 @@ const UserSchema = mongoose.Schema({
     required: true
   }
 });
+const User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.getUserById = function(id, callback){
   User.findById(id, callback);
 }
 
-const User = module.exports = mongoose.model('User', UserSchema);
+
 
 module.exports.getUserById = function(id, callback){
   User.findById(id, callback);

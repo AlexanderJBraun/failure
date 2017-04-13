@@ -17,4 +17,4 @@ const OrderSchema = mongoose.Schema({
       product:{name:String,quantity:Number, price:Number, subTotal:Number}
   
   }
-});
+}); 

@@ -3,10 +3,12 @@ import {ProductClass} from '../../../../../models/Product';
 import {SumPipe} from './sum.pipe';
 import {CartEntity} from './../../../app/cart.entity';
 import {CartService } from '../../services/cart.service';
+import {OrderService} from '../../services/order.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../../models/user';
+
 
 
 @Component({
@@ -27,7 +29,11 @@ export class CartComponent implements OnInit {
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
 
-  constructor(private http:Http,private authService:AuthService,private router:Router, private cartService: CartService) { }
+  constructor(private http:Http,
+  private authService:AuthService,
+  private router:Router, 
+  private cartService: CartService,
+  private orderService : OrderService) { }
 
 
       getProducts() {
@@ -119,8 +125,9 @@ export class CartComponent implements OnInit {
   sendInvoice()
   {
 
-    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
-    this.updateInventory();    
+    //this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
+    this.updateInventory();  
+    this.storeOrder();  
      this.router.navigate(['profile']);
      localStorage.removeItem('cart');
     
@@ -137,6 +144,12 @@ export class CartComponent implements OnInit {
     this.cartService.updateInventory(deduct,pID).subscribe();
     //console.log(deduct)
     }
+  }
+
+  storeOrder()
+  {
+    console.log(this.cartEntities);
+    this.orderService.saveOrder(this.cartEntities,this.user,101).subscribe();
   }
 
 }

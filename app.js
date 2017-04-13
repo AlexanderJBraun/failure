@@ -25,6 +25,7 @@ const users = require('./routes/users');
 const products = require('./routes/products');
 const carts = require('./routes/carts');
 const vendors = require('./routes/vendors');
+const orders = require ('./routes/orders')
 
 // Port Number
 const port = 3000;
@@ -48,6 +49,7 @@ app.use('/users', users);
 app.use('/products', products)
 app.use('/carts',carts);
 app.use('/vendors', vendors);
+app.use('/orders', orders);
 
 // Index Route
 app.get('/', (req, res) => {
