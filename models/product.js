@@ -11,17 +11,17 @@ const ProductSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  description: {
+  itemDescription: {
     type: String,
-    required: true
+   
   },
   price: {
     type: Number,
-    required: true
+   
   },
   inStock: {
     type: Number,
-    required: true
+   
   }
 });
 

@@ -151,27 +151,27 @@ var name = String;
             + '</table>'
             + '</div>'
             ;
+sendMail();
+//     var fs=require('fs')
 
-    var fs=require('fs')
+// fs.readFile(originalFile, 'utf8', function(err,data){
+//     if(err) {
+//         return console.log(err);
+//     }
 
-fs.readFile(originalFile, 'utf8', function(err,data){
-    if(err) {
-        return console.log(err);
-    }
+//    styliner.processHTML(data).then(function(source)
+//     {
+//         sendMail(source);
 
-   styliner.processHTML(data).then(function(source)
-    {
-        sendMail(source);
+//     //    fs.writeFile("newIndex.html", source, function(err){
+//     //         if(err){
+//     //             return console.log(err);
+//     //         }
 
-    //    fs.writeFile("newIndex.html", source, function(err){
-    //         if(err){
-    //             return console.log(err);
-    //         }
-
-    //        console.log("the file was saved");
-    //     })
-    })
-})
+//     //        console.log("the file was saved");
+//     //     })
+//     })
+// })
 
 
 // console.log(req.body);
@@ -191,7 +191,7 @@ fs.readFile(originalFile, 'utf8', function(err,data){
     // };
 
 //sendMail(mailOptions);
-function sendMail(source) {
+function sendMail() {
     var transporter = nodeMailer.createTransport({
         service: 'Gmail',
         auth: {

@@ -13,7 +13,7 @@ export class OrderService {
 {
 console.log("in order service");
   let data = {order,userID,orderNumber};
-
+console.log(data);
 
 return this.http.post('http://localhost:3000/orders/saverorder',data).map(res => res.json());
 }
@@ -22,7 +22,7 @@ getOrders()
 { 
 
   return this.http.get('http://localhost:3000/orders/order').map(res => res.json());
-
+ 
 
 
 }

@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../../models/user';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 
 
@@ -33,7 +34,8 @@ export class CartComponent implements OnInit {
   private authService:AuthService,
   private router:Router, 
   private cartService: CartService,
-  private orderService : OrderService) { }
+  private orderService : OrderService,
+  private flashMessage: FlashMessagesService) { }
 
 
       getProducts() {
@@ -125,7 +127,7 @@ export class CartComponent implements OnInit {
   sendInvoice()
   {
 
-    //this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
+    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
     this.updateInventory();  
     this.storeOrder();  
      this.router.navigate(['profile']);
@@ -141,15 +143,40 @@ export class CartComponent implements OnInit {
       var temp = this.cartEntities[index].product.inStock;
       var deduct = temp - this.cartEntities[index].quantity;
       console.log(deduct)
-    this.cartService.updateInventory(deduct,pID).subscribe();
-    //console.log(deduct)
+    this.cartService.updateInventory(deduct,pID).subscribe()
+    console.log(deduct) 
     }
   }
 
   storeOrder()
   {
+   
     console.log(this.cartEntities);
-    this.orderService.saveOrder(this.cartEntities,this.user,101).subscribe();
+    var order=[];
+    
+    
+      for(var index in this.cartEntities)
+      {
+        var product ={
+         "name":this.cartEntities[index].product.itemCode,
+         "price":this.cartEntities[index].product.price,
+         "quantity":this.cartEntities[index].quantity,
+         "subTotal": this.cartEntities[index].subTotal
+        }
+
+        order.push(product);
+      }
+    
+    console.log(order);
+    
+    this.orderService.saveOrder(order,this.user,101).subscribe(data =>{
+      if (data.success == true)
+      {
+      this.flashMessage.show('ORDER STORED', {
+          cssClass: 'alert-success',
+          timeout: 5000});
+      }
+    });
   }
 
 }
