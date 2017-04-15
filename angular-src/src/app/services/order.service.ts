@@ -9,15 +9,19 @@ export class OrderService {
 
   constructor(private http:Http) { }
 
-  saveOrder(order,userID,orderNumber)
+  saveOrder(order,userID,orderNumber,totalSum)
 {
 console.log("in order service");
-  let data = {order,userID,orderNumber};
+  let data = {order,userID,orderNumber,totalSum};
 console.log(data);
 
 return this.http.post('http://localhost:3000/orders/saverorder',data).map(res => res.json());
 }
 
+getOrderNumber()
+{
+  return this.http.get('http://localhost:3000/orders/orderNumber').map(res => res.json());
+}
 getOrders()
 { 
 
@@ -26,4 +30,6 @@ getOrders()
 
 
 }
+
+
 }
