@@ -23,6 +23,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {CartService} from './services/cart.service';
+import {OrderService} from './services/order.service';
+
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
 import {AdminGuard} from './guards/admin.guard';
@@ -91,7 +93,13 @@ const appRoutes: Routes =  [
     FileUploadModule,
     BrowserAnimationsModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard,AdminGuard,CartService],
+  providers: [
+    ValidateService, 
+    AuthService, 
+    AuthGuard,
+    AdminGuard,
+    CartService,
+    OrderService],
   bootstrap: [AppComponent, ],
 })
 export class AppModule { }

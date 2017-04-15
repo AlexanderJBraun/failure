@@ -4,7 +4,6 @@ const config = require('../config/database');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
-
 // User Schema
 const ProductSchema = mongoose.Schema({
   itemCode: {
@@ -12,23 +11,20 @@ const ProductSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  description: {
+  itemDescription: {
     type: String,
-    required: true
+   
   },
   price: {
     type: Number,
-    required: true
+   
   },
   inStock: {
     type: Number,
-    required: true
-  },
-  image: {
-    type: String
-  }
    
+  }
 });
+
 
 
 
@@ -59,7 +55,7 @@ module.exports.updateInventory= function(deduct,pID)
 {
   const query = {itemCode:pID};
   const update = {inStock:deduct}
-db.products.update({_id: mongojs.ObjectId(pID)},{inStock:19});
+//db.products.update({_id: mongojs.ObjectId(pID)},{inStock:19},{d});
 
 
 }
