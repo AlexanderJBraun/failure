@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {ProductClass} from '../../../../../models/Product';
+import {CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,8 @@ export class DashboardComponent implements OnInit {
     private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
-    private router: Router) { }
+    private router: Router,
+    private cartService:CartService  ) { }
 
   ngOnInit() {
         this.authService.getProduct().subscribe(products => {
@@ -80,7 +82,7 @@ export class DashboardComponent implements OnInit {
       this.displayDialog = true;
     }
 
-    save(){
+    save(pID){
       //var products = products;
       
       if(this.plusProduct)
@@ -98,7 +100,7 @@ export class DashboardComponent implements OnInit {
           });  
       }
       else {
-        this.authService.save(this.product);
+        //this.editProduct(pID);
         
       }
         
@@ -142,6 +144,13 @@ export class DashboardComponent implements OnInit {
       return this.products.indexOf(this.selectedProduct);
     }
     
+
+    editProduct(name,updatedItem,pID)
+    {
+      this.cartService.editProduct(name,updatedItem,pID).subscribe();
+   
+
+    }
 
 
 

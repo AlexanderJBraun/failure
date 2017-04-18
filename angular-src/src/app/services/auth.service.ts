@@ -21,7 +21,7 @@ export class AuthService {
       .map(res => res.json());
       
       
-  }
+  } 
 
 
   authenticateUser(user){

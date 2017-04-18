@@ -40,6 +40,10 @@ export class UsersComponent implements OnInit {
     msgs: Message[]=[];
     items: MenuItem[];
     selectUserEmail:string;
+    selectUserAddr:string;
+    selectUserCity:string;
+    selectUserState:string;
+    selectUserZip:string;
 
   constructor(    
     private validateService: ValidateService,
@@ -104,8 +108,9 @@ export class UsersComponent implements OnInit {
         this.states.push({label:'District of Columbia',value:'DC'});
 
         this.regions = [];
+        this.regions.push({label: 'All regions', value: null});
         this.regions.push({label: 'South-East', value:'SE'});
-        this.regions.push({label: 'Mid-West', value:'MO'});
+        this.regions.push({label: 'Mid-West', value:'MW'});
      }
 
   ngOnInit() {
@@ -117,10 +122,12 @@ export class UsersComponent implements OnInit {
       {label: 'View details', command: (event) => this.viewUser(this.selectedUser)}
      
     ];
- console.log(this.selectedUser); 
+
+    this.detailDialog=false;
+    
  }
 
-
+ 
     
 
     delete(id){
@@ -240,13 +247,20 @@ export class UsersComponent implements OnInit {
     }
 
     viewUser(user: UserClass){
-      console.log(user.email);
-      this.selectUserEmail = user.email; 
-      this.detailDialog = true;
-
+      if(!this.detailDialog){
+        this.detailDialog = true;
+        console.log(user.email);
+        this.selectUserEmail = user.email; 
+        this.selectUserAddr = user.address;
+        this.selectUserCity = user.city;
+        this.selectUserState = user.state;
+        this.selectUserZip = user.zip.toString();
+      }else {
+        this.detailDialog=false;
+      }
     }
     
-
+    
 
 }
 
