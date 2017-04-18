@@ -45,7 +45,7 @@ export class VendorComponent implements OnInit {
         this.authService.getProduct().subscribe(products => {
       this.products = products;
     });
-this.getProducts();
+    this.getProducts();
 
 
     this.authService.getProfile().subscribe(profile => {

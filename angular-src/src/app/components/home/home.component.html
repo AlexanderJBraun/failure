@@ -17,7 +17,7 @@
                 <div class="prod-detail">{{product.description}}</div>
                 <div class="prod-detail">${{product.price}}</div>
                 <hr class="ui-widget-content" style="border-top:0">
-                <p-spinner size="10" [(ngModel)]="quant[i]" [min]="1" [max]="product.inStock"  style="width: 100px;" name="quant" ></p-spinner>
+                <p-spinner size="10" [(ngModel)]="quant[i]" [min]="1" style="width: 100px;" name="quant" ></p-spinner>
                 <button type="button" class="btn btn-primary" style="float:right" (click)="addCart(product, quant[i])">Add </button>
             </p-panel>
         </div>

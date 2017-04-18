@@ -27,7 +27,6 @@ export class CartComponent implements OnInit {
   order:any;
 
 
-
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
 
@@ -76,13 +75,19 @@ export class CartComponent implements OnInit {
 
           console.log(newValue,cartEntry.product.inStock);
         // just verify that the user wont do a action that is not permited. ie reduce to 0 or over max
-        if(newValue > 0 && newValue <= cartEntry.product.inStock) {
+        if(newValue > 0) {
           // set the new value
           cartEntry.quantity = newValue;
           // calculate a new max value
           this.calcMax();
           // save to localStorage
           this.cartService.saveListOfCartEntities(this.cartEntities);
+
+          if(cartEntry.quantity > cartEntry.product.inStock)
+          {cartEntry.backorder = true;}
+
+          else
+          cartEntry.backorder = false;
         }
 
     }
@@ -135,7 +140,8 @@ export class CartComponent implements OnInit {
     this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
      localStorage.removeItem('cart');
-    
+     
+    this.cartService.initCart();
   }
 
   updateInventory()
