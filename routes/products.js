@@ -69,6 +69,13 @@ router.put('/addinventory', function(req, res, next)
 
 });
 
+router.put('/editproduct',function(req, res, next)
+{
+  console.log("in the back end");
+console.log(req.body);
+var name= req.body.name;
+db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{itemCode:req.body.updatedItem}});
 
+});
 
 module.exports = router;

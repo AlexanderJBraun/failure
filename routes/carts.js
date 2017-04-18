@@ -114,7 +114,7 @@ var name = String;
 
     // htmlBody +=
     
-    console.log(req.body.product[0].product.name); 
+    
     for (var index in req.body.product)
      {
          console.log(index);
