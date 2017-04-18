@@ -42,6 +42,7 @@ const appRoutes: Routes =  [
   {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]}
+   
 ]
 
 @NgModule({

@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   user:Object;
   email:String;
   order:any;
-
+  private _storage = localStorage;
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
@@ -83,11 +83,11 @@ export class CartComponent implements OnInit {
           // save to localStorage
           this.cartService.saveListOfCartEntities(this.cartEntities);
 
-          if(cartEntry.quantity > cartEntry.product.inStock)
-          {cartEntry.backorder = true;}
+          // if(cartEntry.quantity > cartEntry.product.inStock)
+          // {cartEntry.backorder = true;}
 
-          else
-          cartEntry.backorder = false;
+          // else
+          // cartEntry.backorder = false;
         }
 
     }
@@ -135,13 +135,22 @@ export class CartComponent implements OnInit {
   {
     
     this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum, this.order.orderNumber).subscribe();
-    //this.updateInventory();  
+    this.updateInventory();  
     this.storeOrder();  
     this.orderService.updateOrderNumber().subscribe();
+    localStorage.removeItem('cart');
+
+    //  if(!this._storage.getItem('cart')) {
+
+    //       let emptyMap : { [key:string]:number; } = {};
+    //         this._storage.setItem('cart',JSON.stringify(emptyMap));
+    //   }
+
      this.router.navigate(['profile']);
-     localStorage.removeItem('cart');
-     
-    this.cartService.initCart();
+window.location.reload();
+     //this._storage.setItem('cart','');
+    // this.cartService.initCart();
+
   }
 
   updateInventory()

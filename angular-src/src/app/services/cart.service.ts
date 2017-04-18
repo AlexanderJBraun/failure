@@ -3,6 +3,7 @@ import {ProductClass} from '../../../../models/product';
 import {CartEntity} from './../../app/cart.entity';
 import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../models/user';
+
 @Injectable()
 export class CartService {
 
@@ -82,8 +83,8 @@ export class CartService {
     // convert the map to an array
     for (let key in myCartMap) {
 
-      if(myCartMap[key].quantity > myCartMap[key].product.inStock)
-      { myCartMap[key].backorder = true;}
+      // if(myCartMap[key].quantity > myCartMap[key].product.inStock)
+      // { myCartMap[key].backorder = true;}
 
       let value = myCartMap[key];
       cartEntities.push(value);

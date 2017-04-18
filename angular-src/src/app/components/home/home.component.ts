@@ -101,12 +101,15 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit() { 
-   
+    
+
+  
   }
 
   addCart(product, quant)
   {
-    console.log(product._id);
+
+   
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){
         
         this.cartservice.addProductToCart(product, quant);
