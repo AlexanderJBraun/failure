@@ -128,4 +128,6 @@ export class AuthService {
     return this.http.post('http://localhost:3000/vendors/newVendor',  vendor,{headers: headers})
       .map(res => res.json());
   }
+
+  
 }

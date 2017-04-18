@@ -1,33 +1,33 @@
 <h2 class="page-header">Vendor Management</h2>
 
-<p-dataList [value]="vendors" [paginator]="true" [rows]="5">
+<p-dataList [value]="products" [paginator]="true" [rows]="5">
     <p-header>
         <h2>List of Vendor Items</h2>
     </p-header>
 
-    <ng-template let-vendor pTemplate="item" let-i="index">
+    <ng-template let-product pTemplate="item" let-i="index">
         <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom: 1px solid #D5D5D5;">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3" style="text-align: center">                   
-                    <img src="https://s3.amazonaws.com/ctres2428.com/images/{{vendor.itemCode}}.jpg" height="100px" width="150px">
+                    <img src="{{product.image}}" height="150px" width="100px">
                 </div>
                 <div class="ui-grid-col-9">
                     <div class="ui-grid ui-grid-responsive ui-fluid">
                         <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">{{vendor.itemCode}} </div>
+                            <div class="ui-grid-col-2">{{product.itemCode}} </div>
                             
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">Description: </div>
-                            <div class="ui-grid-col-10">{{vendor.description}}</div>
+                            <div class="ui-grid-col-10">{{product.description}}</div>
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">Price: </div>
-                            <div class="ui-grid-col-10">${{vendor.price}}</div>
+                            <div class="ui-grid-col-10">${{product.vendorPrice}}</div>
                         </div>
                         <div class="ui-grid-row">
                             <p-spinner size="10" [(ngModel)]="quant[i]" [min]="1"  style="width: 100px;" name="quant" ></p-spinner>
-                            <div class="ui-grid-col-offset-8"><button type="button" pButton icon="fa-plus" style="float:left" (click)="addCart(vendor)" class="btn btn-success" label="Add"></button></div>
+                            <div class="ui-grid-col-offset-8"><button type="button" pButton icon="fa-plus" style="float:left" (click)="addCart(product, quant[i])" class="btn btn-success" label="Add"></button></div>
                         </div>                
                     </div>
                 </div>
@@ -37,50 +37,126 @@
 </p-dataList>
 
 <button (click)="show= !show">{{show? 'Hide Add Product':'Add Product'}}</button>
-<button (click)="showVendor= !showVendor">{{showVendor? 'Hide Vender Invoice':'Show Vendor Invoice'}}</button>
+<button (click)="showProduct= !showProduct">{{showProduct? 'Hide Send Vender Invoice':'Show Send Vendor Invoice'}}</button>
 
 <div *ngIf="show">
 
-<p-dataTable #prodDT [value]="vendors" selectionMode="single" [(selection)]="selectedVendor" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true" exportFilename="vendors">
-    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Vendor List
-        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="prodDT.exportCSV()" style="float:left"></button>
+<p-dataTable #prodDT [value]="products" [paginator]="true" rows="15" [responsive]="true" exportFilename="products" [editable]="true" expandableRows="true">
+    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
     </p-header>
-    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search"></p-column>
-    <p-column field="description" header="DESCRIPTION" ></p-column>
-    <p-column field="price" header="PRICE" >
-
+    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search" [editable]="true"></p-column>
+    <p-column field="description" header="DESCRIPTION" [editable]="true"></p-column>
+    <p-column field="price" header="PRICE" [editable]="true" >
+        <ng-template let-col let-product="rowData" pTemplate="body">
+            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+        </ng-template>
     </p-column>
-    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+        <p-column field="vendorPrice" header="VENDOR_PRICE" [editable]="true" >
+        <ng-template let-col let-product="rowData" pTemplate="body">
+            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true" [editable]="true">
+    </p-column>
+    <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
+        <ng-template let-product pTemplate="rowexpansion">
+            <div class="ui-g">
+                <div class="ui-lg-4 ui-md-4"></div>
+                <div class="ui-lg-4 ui-md-4 ui-sm-12"><img src="{{product.image}}" align="middle"></div>
+                <div class="ui-lg-4 ui-md-4"></div>
+            </div>
+        </ng-template>
+    <p-footer></p-footer>
 </p-dataTable>
+<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new product"></button>
+<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="prodDT.exportCSV()"></button>
 
 <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" showEffect="fade"  [width]="400">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="vendor">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="itemCode">ITEM CODE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="vendor.itemCode" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" /></div>
         </div>
         <br>   
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="vendor.description" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" /></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="vendor.price" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" /></div>
         </div>
-
+        <br>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="vendorPrice">VENDDOR PRICE</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" /></div>
+        </div>
+        <br>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock" /></div>
+        </div>
+        <br>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="image">IMAGE</label></div>
+            <div class="ui-grid-col-8"><input type="file" id="file" accept="image/*" (change)="onChange($event)" /></div>
+        </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="delete(vendor._id)" label="Delete"></button>
-            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+            <button type="button" class="btn btn-danger" (click)="delete(product._id)"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
 </p-dialog>
 
 </div>
 
-<div *ngIf="showVendor">
-This will be the vendor invoice
+<div *ngIf="showProduct">
+
+        <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">... is empty</p>
+
+
+                <div class="ui-g" id="cartHeader">
+                    <div class="ui-lg-4 ui-md-4 ui-sm-4" >Item Name</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Qty</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Unit Price</div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">Sub-Total</div>
+                </div>
+            <hr>
+                <div class="ui-g" id="cartBody" *ngFor="let cartEntity of cartEntities">
+                    <div class="ui-lg-4 ui-md-4 ui-sm-4" ><h4><p>{{cartEntity.product.description}}</p>
+                    <span>Status: </span><span class="text-success">In Stock</span>
+                    </h4></div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
+                        <span (click)=changeQuantity(cartEntity.product._id,-1) class="fa fa-minus" style="cursor:pointer"></span>&nbsp; &nbsp;<span id="number">{{cartEntity.quantity}}</span>&nbsp; &nbsp;<span (click)=changeQuantity(cartEntity.product._id,1) class="fa fa-plus pointer" style="cursor:pointer"></span>
+                    </div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
+                        <span id="number">${{cartEntity.product.vendorPrice}}</span>
+                    </div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
+
+                        <span id="number" decimals=".01"> ${{cartEntity.product.vendorPrice * cartEntity.quantity}}</span>
+
+                    </div>
+                    <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
+                        <button type="button" pButton icon="fa-remove" style="float:left" (click)="removeByProductId(cartEntity.product._id)" class="btn btn-danger" label="Remove"></button>
+                    </div>          
+                </div>
+            <hr>
+            <div class="ui-g" id="cartSum">
+                <div class="ui-lg-8"><br></div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Estimated shipping: </div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">$0</div>
+                <div class="ui-lg-8"><br></div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Total: </div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">${{totalSum}}</div>
+            </div>
+            <hr>
+            <div class="ui-g">
+                <div class="ui-lg-6"><br></div>
+                <div class="ui-lg-3 ui-md-6 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="btn btn-success" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
+            </div>
     </div>

@@ -62,6 +62,13 @@ router.put('/updateinventory', function(req, res, next)
 
 });
 
+router.put('/addinventory', function(req, res, next)
+{
+   console.log(req.body.pID);
+  db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{inStock:req.body.add}});
+
+});
+
 
 
 module.exports = router;

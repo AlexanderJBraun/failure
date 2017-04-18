@@ -3,10 +3,13 @@ import {ProductClass} from '../../../../../models/Product';
 import {SumPipe} from './sum.pipe';
 import {CartEntity} from './../../../app/cart.entity';
 import {CartService } from '../../services/cart.service';
+import {OrderService} from '../../services/order.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../../models/user';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 
 
 @Component({
@@ -21,13 +24,19 @@ export class CartComponent implements OnInit {
   totalSum: string;
   user:Object;
   email:String;
+  order:any;
 
 
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
 
-  constructor(private http:Http,private authService:AuthService,private router:Router, private cartService: CartService) { }
+  constructor(private http:Http,
+  private authService:AuthService,
+  private router:Router, 
+  private cartService: CartService,
+  private orderService : OrderService,
+  private flashMessage: FlashMessagesService) {   }
 
 
       getProducts() {
@@ -112,15 +121,18 @@ export class CartComponent implements OnInit {
   
       
     });
+      this.getOrderNumber()
 
   }
 
 
   sendInvoice()
   {
-
-    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum).subscribe();
-    this.updateInventory();    
+    
+    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum, this.order.orderNumber).subscribe();
+    //this.updateInventory();  
+    this.storeOrder();  
+    this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
      localStorage.removeItem('cart');
     
@@ -133,10 +145,55 @@ export class CartComponent implements OnInit {
       var pID = this.cartEntities[index].product._id;
       var temp = this.cartEntities[index].product.inStock;
       var deduct = temp - this.cartEntities[index].quantity;
-      console.log(deduct)
-    this.cartService.updateInventory(deduct,pID).subscribe();
-    //console.log(deduct)
+    
+    this.cartService.updateInventory(deduct,pID).subscribe()
+    
     }
   }
 
+  storeOrder()
+  {
+ 
+ 
+    
+    console.log(this.cartEntities);
+    var order=[];
+    
+     
+      for(var index in this.cartEntities)
+      {
+        var product ={
+         "name":this.cartEntities[index].product.itemCode,
+         "price":this.cartEntities[index].product.price,
+         "quantity":this.cartEntities[index].quantity,
+         "subTotal": this.cartEntities[index].subTotal
+        }
+
+        order.push(product);
+      }
+
+      console.log(this.order);
+    
+    
+    this.orderService.saveOrder(order,this.user,this.order.orderNumber,this.totalSum).subscribe(data =>{
+      if (data.success == true)
+      {
+      this.flashMessage.show('ORDER STORED', {
+          cssClass: 'alert-success',
+          timeout: 5000});
+      } 
+    });
+  }
+
+  getOrderNumber()
+  {
+    console.log("dfasffsdafsdag")
+    this.orderService.getOrderNumber().subscribe(orderNumber=>{
+      this.order = orderNumber;
+      
+    })
+    
+  }
+
+  
 }

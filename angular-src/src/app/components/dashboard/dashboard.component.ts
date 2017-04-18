@@ -154,4 +154,5 @@ class PrimeProduct implements ProductClass {
   price: number;
   inStock: number;
   image: any;
+  vendorPrice: number;
 }

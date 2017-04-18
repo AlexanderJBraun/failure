@@ -24,7 +24,9 @@ const app = express();
 const users = require('./routes/users');
 const products = require('./routes/products');
 const carts = require('./routes/carts');
-const vendors = require('./routes/vendors');
+const vendor = require('./routes/vendor');
+const orders = require ('./routes/orders');
+const vendorOrder = require ('./routes/vendorOrder');
 
 // Port Number
 const port = 3000;
@@ -47,8 +49,9 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/products', products)
 app.use('/carts',carts);
-app.use('/vendors', vendors);
-
+app.use('/vendor', vendor);
+app.use('/orders', orders);
+app.use('/vendorOrder', vendorOrder);
 // Index Route
 app.get('/', (req, res) => {
   res.send('Invalid Endpoint');

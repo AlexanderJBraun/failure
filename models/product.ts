@@ -5,4 +5,5 @@ export interface ProductClass{
   price: number
   inStock: number
   image: any
+  vendorPrice: number
 }

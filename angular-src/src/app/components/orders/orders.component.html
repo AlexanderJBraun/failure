@@ -1,1 +1,18 @@
-This will be the orders page
+ <div *ngFor="let order of orders | slice: 1;  let i = index">
+   <p>{{order.Customer}},
+     {{order.orderNumber}},
+     {{order.date}},
+     <span *ngFor="let product of order.products;  let i = index">
+      <ul> <b> Products {{i}}</b>
+        <br>
+        <li >Product Name: {{product.name}}</li>
+        <li> Price: ${{product.price}}</li>
+        <li> Quantity: {{product.quantity}}</li>
+        <li> Subtotal: ${{product.subTotal}}</li>
+      </ul>
+     </span>
+     </p>
+
+   
+ </div>
+    

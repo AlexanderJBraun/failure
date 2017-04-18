@@ -21,11 +21,13 @@ const ProductSchema = mongoose.Schema({
     required: true
   },
   inStock: {
-    type: Number,
-    required: true
+    type: Number
   },
   image: {
     type: String
+  },
+  vendorPrice: {
+    type: Number
   }
    
 });

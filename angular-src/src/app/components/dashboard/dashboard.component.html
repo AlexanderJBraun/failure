@@ -60,14 +60,15 @@
     <p-column field="description" header="DESCRIPTION" [editable]="true"></p-column>
     <p-column field="price" header="PRICE" [editable]="true" >
         <ng-template let-col let-product="rowData" pTemplate="body">
-            <span>{{product[col.field] | currency:'USD':true:'.0-0'}}</span>
+            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+        </ng-template>
+    </p-column>
+        <p-column field="vendorPrice" header="VENDOR_PRICE" [editable]="true" >
+        <ng-template let-col let-product="rowData" pTemplate="body">
+            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
         </ng-template>
     </p-column>
     <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true" [editable]="true">
-        <!--<template pTemplate="filter" let-col>
-            <i class="fa fa-close" (click)="qtyFilter=null;prodDT.filter(null, col.field, col.filterMatchMode)" style="cursor: pointer;"></i>
-            <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="qtyFilter" [min]="0" (onSlideEnd)="prodDT.filter($event.value,col.field,col.filterMatchMode)"></p-slider>
-        </template>-->
     </p-column>
     <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
         <ng-template let-product pTemplate="rowexpansion">
@@ -97,6 +98,11 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
             <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" /></div>
+        </div>
+        <br>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="vendorPrice">VENDDOR PRICE</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" /></div>
         </div>
         <br>
         <div class="ui-grid-row">

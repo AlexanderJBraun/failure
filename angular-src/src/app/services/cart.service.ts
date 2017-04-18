@@ -103,10 +103,10 @@ private getCart() {
 
   }
 
-sendInvoice(product, user, totalSum)
+sendInvoice(product, user, totalSum, orderNumber)
 {
 
-let data= {product, user, totalSum};
+let data= {product, user, totalSum, orderNumber};
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
@@ -120,6 +120,24 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
     let data = {pID,deduct}
     return this.http.put('http://localhost:3000/products/updateinventory',data);
   }
+
+  addInventory(add,pID)
+  {
+    console.log("in update Inv");
+    let data = {pID,add}
+    return this.http.put('http://localhost:3000/products/addinventory',data);
+  }
+
+
+
+
+
+
+
+
+
+
+  
 
 }
 
