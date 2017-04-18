@@ -135,7 +135,7 @@ export class CartComponent implements OnInit {
   {
     
     this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum, this.order.orderNumber).subscribe();
-    //this.updateInventory();  
+    this.updateInventory();  
     this.storeOrder();  
     this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule,GrowlModule, InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, FileUploadModule, ContextMenuModule, MenuItem} from "../../node_modules/primeng/primeng";
+import {DataTableModule,GrowlModule, InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, ContextMenuModule, MenuItem, CheckboxModule} from "../../node_modules/primeng/primeng";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +17,7 @@ import { CartComponent } from "./components/cart/cart.component";
 import { UsersComponent } from './components/users/users.component';
 import { VendorComponent} from './components/vendor/vendor.component';
 import { OrdersComponent} from './components/orders/orders.component';
+import { CouponComponent } from "./components/coupon/coupon.component";
 import { LandingComponent} from './components/landing/landing.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -41,7 +42,8 @@ const appRoutes: Routes =  [
   {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
   {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]},
-  {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]}
+  {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]},
+  {path: 'coupon', component: CouponComponent,canActivate:[AuthGuard,AdminGuard]}
 ]
 
 @NgModule({
@@ -58,7 +60,8 @@ const appRoutes: Routes =  [
     LandingComponent,
     SumPipe,
     VendorComponent,
-    OrdersComponent
+    OrdersComponent,
+    CouponComponent
     
 
   ],
@@ -90,8 +93,8 @@ const appRoutes: Routes =  [
     InputMaskModule,
     GrowlModule,
     DataGridModule,
-    FileUploadModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CheckboxModule
   ],
   providers: 
   [ValidateService, 
