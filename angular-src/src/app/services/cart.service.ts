@@ -7,7 +7,7 @@ import {UserClass} from '../../../../models/user';
 export class CartService {
 
   roles = require('../components/profile/role');
- 
+  cartEntities : CartEntity[];
   private _storage = localStorage;
 
   constructor(private http:Http) {
@@ -81,8 +81,13 @@ export class CartService {
 
     // convert the map to an array
     for (let key in myCartMap) {
+
+      if(myCartMap[key].quantity > myCartMap[key].product.inStock)
+      { myCartMap[key].backorder = true;}
+
       let value = myCartMap[key];
       cartEntities.push(value);
+      
     }
 
     // return the array

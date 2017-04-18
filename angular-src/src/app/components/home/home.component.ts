@@ -88,7 +88,11 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private authService:AuthService, private flashMessage:FlashMessagesService, private localStorageService : LocalStorageService, private cartservice: CartService, private router:Router ) 
+  constructor(private authService:AuthService, 
+  private flashMessage:FlashMessagesService, 
+  private localStorageService : LocalStorageService, 
+  private cartservice: CartService, 
+  private router:Router ) 
   {
   
     this.authService.getProduct().subscribe(products => {
@@ -118,11 +122,7 @@ export class HomeComponent implements OnInit {
     //this.cart.push(name);
     //this.cart.push(this.quant[num]);
     //this.localStorageService.set('cartItem',this.cart);
-    //console.log(this.cart);
     
-   
-   // console.log(num);
-  
     
     
   }

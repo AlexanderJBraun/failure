@@ -1,7 +1,7 @@
 <h2> Cart Review</h2>
 
-            <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">... is empty</p>
 
+            <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">... is empty</p>
 
                 <div class="ui-g" id="cartHeader">
                     <div class="ui-lg-4 ui-md-4 ui-sm-4" >Item Name</div>
@@ -12,7 +12,8 @@
             <hr>
                 <div class="ui-g" id="cartBody" *ngFor="let cartEntity of cartEntities">
                     <div class="ui-lg-4 ui-md-4 ui-sm-4" ><h4><p>{{cartEntity.product.description}}</p>
-                    <span>Status: </span><span class="text-success">In Stock</span>
+                    <span>Status: </span> <ng-template #elseBlock><span class="text-success">In Stock </span></ng-template>
+                    <div *ngIf="cartEntity.backorder; else elseBlock"><span class="text-danger"> On Backorder for quantity selected </span></div>
                     </h4></div>
                     <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
                         <span (click)=changeQuantity(cartEntity.product._id,-1) class="fa fa-minus" style="cursor:pointer"></span>&nbsp; &nbsp;<span id="number">{{cartEntity.quantity}}</span>&nbsp; &nbsp;<span (click)=changeQuantity(cartEntity.product._id,1) class="fa fa-plus pointer" style="cursor:pointer"></span>
