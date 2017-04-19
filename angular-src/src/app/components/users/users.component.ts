@@ -159,27 +159,26 @@ export class UsersComponent implements OnInit {
       {
         
         var emailChecker=this.checkEmail(this.user.email);
-
-              if(emailChecker === true){
+        var usernameChecker=this.checkUsername(this.user.username);
+              if(emailChecker === true && usernameChecker === true){
         
                                 this.authService.addUser(this.user).subscribe(data => {
-
-                                  if(data.success){
-                                this.flashMessage.show('User registered ', {cssClass: 'alert-success', timeout: 3000});
-                                this.router.navigate(['/users']);
-                                   this.user=null;
-                                   this.displayDialog=false;
-                              } else {
-                                  
+                                if(data.success){
+                              this.flashMessage.show('User registered ', {cssClass: 'alert-success', timeout: 3000});
+                              this.router.navigate(['/users']);
+                                 this.user=null;
+                                 this.displayDialog=false;
+                              } else {             
                               
                               }
                               this.ngOnInit();
-                                    });
-                              
-              } else  {
+                                    });          
+              } else if(emailChecker === false){
                   this.msgs = [];
                   this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Invalid email'});
-                  
+              } else if(usernameChecker === false){
+                  this.msgs = [];
+                  this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Duplicate Username'});
               }             
           
           
@@ -229,21 +228,29 @@ export class UsersComponent implements OnInit {
 
     checkEmail(email)
     {
-
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
-
     }
   
     checkEmpty(){
       if(this.user.email && this.user.username && this.user.password && this.user.role){
-        document.getElementById("saveUser").removeAttribute("disabled");
-        
+        document.getElementById("saveUser").removeAttribute("disabled"); 
       }
       // console.log(this.user.email);
       //   console.log(this.user.username);
       //   console.log(this.user.password);
       //   console.log(this.user.role);
+    }
+
+    checkUsername(username){
+          for(var i = 0;i < this.users.length;i++)
+           {
+             if(this.users[i].username == username)
+             {
+                return false;
+             }
+           } 
+           return true;
     }
 
     viewUser(user: UserClass){
@@ -265,7 +272,7 @@ export class UsersComponent implements OnInit {
 }
 
 class PrimeUser implements UserClass {  
-_id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   businessName: string;

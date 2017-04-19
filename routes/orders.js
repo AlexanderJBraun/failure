@@ -31,14 +31,14 @@ router.post('/saverorder', function(req, res, next)
  router.get('/updateOrderNumber', function(req,res,next)
  {
     console.log('update order number');
-      db.order.update({_id:mongojs.ObjectId('58f5439500a48218945a9f0f')}, {$inc:{orderNumber:1}});
+      db.order.update({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')}, {$inc:{orderNumber:1}});
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
-    db.order.findOne({_id:mongojs.ObjectId('58f5439500a48218945a9f0f')},function(err,orderNumber){
+    db.order.findOne({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')},function(err,orderNumber){
         if(err){
             res.send(err)
         }
