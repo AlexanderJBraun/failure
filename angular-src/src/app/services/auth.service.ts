@@ -81,7 +81,7 @@ export class AuthService {
     headers.append('Content-Type','application/json');
     console.log("in add product 01");
     return this.http.post('http://localhost:3000/products/newProduct', product,{headers: headers})
-      .map(res => res.json());
+      .map(res => res.json()); 
   }
 
   addUser(user){

@@ -134,11 +134,10 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
     return this.http.put('http://localhost:3000/products/addinventory',data);
   }
 
-editProduct(name,updatedItem,pID)
+editProduct(data)
   {
     console.log("Inside of edit prodcut");
-    let data= {name,updatedItem,pID};
-    return this.http.put('http://localhost:3000/products/editproduct',data);
+    return this.http.post('http://localhost:3000/products/editproduct',data);
      
   }
 

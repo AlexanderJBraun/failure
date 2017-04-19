@@ -7,6 +7,7 @@ import {ProductClass} from '../../../../../models/Product';
 import {CartService } from '../../services/cart.service';
 
 @Component({
+  
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -82,7 +83,7 @@ export class DashboardComponent implements OnInit {
       this.displayDialog = true;
     }
 
-    save(pID){
+    save(product){
       //var products = products;
       
       if(this.plusProduct)
@@ -100,13 +101,14 @@ export class DashboardComponent implements OnInit {
           });  
       }
       else {
-        //this.editProduct(pID);
+      
+        this.editProduct(product);
         
       }
         
       this.product=null;
       this.displayDialog=false;
-
+     
       
     }
 
@@ -145,10 +147,12 @@ export class DashboardComponent implements OnInit {
     }
     
 
-    editProduct(name,updatedItem,pID)
+    editProduct(product)
     {
-      this.cartService.editProduct(name,updatedItem,pID).subscribe();
-   
+      console.log(product);
+      this.cartService.editProduct(product).subscribe();
+    window.location.reload();
+    
 
     }
 

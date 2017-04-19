@@ -37,13 +37,15 @@ const appRoutes: Routes =  [
   {path:'', component: LandingComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
+  {path: 'coupon', component: CouponComponent,canActivate:[AuthGuard,AdminGuard]},
   {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard,AdminGuard]},
-  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
   {path: 'users', component: UsersComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]},
-  {path: 'coupon', component: CouponComponent,canActivate:[AuthGuard,AdminGuard]}
+  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
+  {path: 'cart', component: CartComponent, canActivate:[AuthGuard]}
+
+  
 ]
 
 @NgModule({
@@ -65,9 +67,7 @@ const appRoutes: Routes =  [
     
 
   ],
-  exports: [
-    HomeComponent
-  ],
+ 
 
   imports: [
     LocalStorageModule.withConfig({
