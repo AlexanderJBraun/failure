@@ -131,8 +131,9 @@ export class CartComponent implements OnInit {
     this.storeOrder();  
     this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
+     //localStorage.setItem('cart', null);
      localStorage.removeItem('cart');
-    this.cartService.initCart();
+    //this.cartService.initCart();
     window.location.reload();
   }
 
@@ -199,13 +200,24 @@ export class CartComponent implements OnInit {
                 this.flashMessage.show('Coupon Expired', {
                 cssClass: 'alert-danger',
                 timeout: 2000});
+                break;
              }
             else if(this.coupons[i].couponCode == coupon && this.coupons[i].isActive == true)
             {
               couponDiscount = (this.coupons[i].discount / 100)
               this.couponDiscount = couponDiscount;
               this.calcMax()
+                this.flashMessage.show('Coupon Activated', {
+                cssClass: 'alert-success',
+                timeout: 2000});
+              break;
             }
+             else if((i + 1)== this.coupons.length && this.coupons[i].couponCode != coupon)
+             {
+                this.flashMessage.show('Invalid Coupon', {
+                cssClass: 'alert-danger',
+                timeout: 2000});
+             } 
           }
 
     }
