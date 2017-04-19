@@ -9,7 +9,7 @@ import {AuthService} from '../../services/auth.service';
 import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../../models/user';
 import {FlashMessagesService} from 'angular2-flash-messages';
-
+import {CouponClass} from '../../../../../models/coupon';
 
 
 @Component({
@@ -21,11 +21,14 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 export class CartComponent implements OnInit {
 
   cartEntities : CartEntity[];
+  subTotalSum: string;
   totalSum: string;
   user:Object;
   email:String;
   order:any;
-  private _storage = localStorage;
+  coupons: CouponClass[];
+  couponDiscount: number = 0;
+  couponAmount: string;
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
@@ -39,18 +42,12 @@ export class CartComponent implements OnInit {
 
 
       getProducts() {
-        
-     
         this.cartService.getAllCartEntities().then(function(result) {
-
             this.cartEntities = result;
             this.calcMax();
-
           }.bind(this), function(err) {
               alert("something went wrong while fetching the products");
           });
-
-
     }
 
       removeByProductId(productId:String) {
@@ -83,11 +80,11 @@ export class CartComponent implements OnInit {
           // save to localStorage
           this.cartService.saveListOfCartEntities(this.cartEntities);
 
-          // if(cartEntry.quantity > cartEntry.product.inStock)
-          // {cartEntry.backorder = true;}
+          if(cartEntry.quantity > cartEntry.product.inStock)
+          {cartEntry.backorder = true;}
 
-          // else
-          // cartEntry.backorder = false;
+          else
+          cartEntry.backorder = false;
         }
 
     }
@@ -96,25 +93,20 @@ export class CartComponent implements OnInit {
 
      calcMax () {
 
-      let totalSum = 0;
+      let subTotalSum = 0;
       //let subTotal;
       this.cartEntities.forEach(function(entity) {
-          totalSum += (entity.quantity * entity.product.price);
+          subTotalSum += (entity.quantity * entity.product.price);   
       });
 
       this.cartEntities.forEach(function(entity) {
-       
         entity.subTotal = (entity.product.price * entity.quantity).toFixed(2);
-
       });
 
-      this.cartEntities.forEach(function(entity){
-        entity.subTotal = (entity.quantity * entity.product.price).toFixed(2); 
-      });
-
-      console.log(this.totalSum);
-      this.totalSum = totalSum.toFixed(2);
-
+      console.log(this.subTotalSum);
+      this.subTotalSum = subTotalSum.toFixed(2);
+      this.couponAmount = ((this.couponDiscount) * subTotalSum).toFixed(2);
+      this.totalSum = (subTotalSum - parseFloat(this.couponAmount)).toFixed(2);
     }
 
 
@@ -123,34 +115,25 @@ export class CartComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.email= profile.user.email;
-  
-      
     });
-      this.getOrderNumber()
+      this.getOrderNumber();
 
+      this.authService.getCoupon().subscribe(coupons => {
+        this.coupons = coupons;
+      });
   }
 
 
   sendInvoice()
   {
-    
-    this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum, this.order.orderNumber).subscribe();
+    this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
     this.updateInventory();  
     this.storeOrder();  
     this.orderService.updateOrderNumber().subscribe();
-    localStorage.removeItem('cart');
-
-    //  if(!this._storage.getItem('cart')) {
-
-    //       let emptyMap : { [key:string]:number; } = {};
-    //         this._storage.setItem('cart',JSON.stringify(emptyMap));
-    //   }
-
      this.router.navigate(['profile']);
-window.location.reload();
-     //this._storage.setItem('cart','');
-    // this.cartService.initCart();
-
+     localStorage.removeItem('cart');
+    this.cartService.initCart();
+    window.location.reload();
   }
 
   updateInventory()
@@ -168,9 +151,6 @@ window.location.reload();
 
   storeOrder()
   {
- 
- 
-    
     console.log(this.cartEntities);
     var order=[];
     
@@ -190,7 +170,7 @@ window.location.reload();
       console.log(this.order);
     
     
-    this.orderService.saveOrder(order,this.user,this.order.orderNumber,this.totalSum).subscribe(data =>{
+    this.orderService.saveOrder(order,this.user,this.order.orderNumber,this.subTotalSum).subscribe(data =>{
       if (data.success == true)
       {
       this.flashMessage.show('ORDER STORED', {
@@ -205,10 +185,29 @@ window.location.reload();
     console.log("dfasffsdafsdag")
     this.orderService.getOrderNumber().subscribe(orderNumber=>{
       this.order = orderNumber;
-      
-    })
-    
+    });
   }
 
-  
+    useCoupon(coupon)
+    {
+      let couponDiscount;
+      
+           for(var i = 0;i < this.coupons.length;i++)
+           {
+             if(this.coupons[i].couponCode == coupon && this.coupons[i].isActive == false)
+             {
+                this.flashMessage.show('Coupon Expired', {
+                cssClass: 'alert-danger',
+                timeout: 2000});
+             }
+            else if(this.coupons[i].couponCode == coupon && this.coupons[i].isActive == true)
+            {
+              couponDiscount = (this.coupons[i].discount / 100)
+              this.couponDiscount = couponDiscount;
+              this.calcMax()
+            }
+          }
+
+    }
+    
 }

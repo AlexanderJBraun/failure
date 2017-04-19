@@ -129,5 +129,21 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  
+  getCoupon(){
+    console.log("in getProduct");
+      return this.http.get('http://localhost:3000/coupons/coupons')
+          .map(res => res.json());
+  }
+
+    addCoupon(coupon){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/coupons/newCoupon',  coupon,{headers: headers})
+      .map(res => res.json());
+  }
+
+    deleteCoupon(id){
+    return this.http.delete('http://localhost:3000/coupons/coupon/'+id)
+      .map(res => res.json());
+  }
 }
