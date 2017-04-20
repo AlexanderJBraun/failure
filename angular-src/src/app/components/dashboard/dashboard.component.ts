@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
       }
       else {
       
-        this.editProduct(product);
+        // this.editProduct(product);
         
       }
         
@@ -147,14 +147,14 @@ export class DashboardComponent implements OnInit {
     }
     
 
-    editProduct(product)
-    {
-      console.log(product);
-      this.cartService.editProduct(product).subscribe();
-    window.location.reload();
+    // editProduct(product)
+    // {
+    //   console.log(product);
+    //   this.cartService.editProduct(product).subscribe();
+    // window.location.reload();
     
 
-    }
+    // }
 
 
 

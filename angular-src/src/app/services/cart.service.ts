@@ -116,7 +116,7 @@ let data= {product, user, totalSum, orderNumber};
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
-return this.http.post('http://localhost:3000/carts/invoice',body,{headers:headers})
+return this.http.post('carts/invoice',body,{headers:headers})
 }
   
 
@@ -124,20 +124,21 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
   {
     console.log("in update Inv");
     let data = {pID,deduct}
-    return this.http.put('http://localhost:3000/products/updateinventory',data);
+    return this.http.put('products/updateinventory',data);
   }
 
   addInventory(add,pID)
   {
     console.log("in update Inv");
     let data = {pID,add}
-    return this.http.put('http://localhost:3000/products/addinventory',data);
+    return this.http.put('products/addinventory',data);
   }
 
-editProduct(data)
+editProduct(name,updatedItem,pID)
   {
     console.log("Inside of edit prodcut");
-    return this.http.post('http://localhost:3000/products/editproduct',data);
+    let data= {name,updatedItem,pID};
+    return this.http.put('products/editproduct',data);
      
   }
 

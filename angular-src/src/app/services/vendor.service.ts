@@ -110,7 +110,7 @@ let data= {user, product, totalSum, orderNumber};
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
-return this.http.post('http://localhost:3000/vendor/invoice',body,{headers:headers})
+return this.http.post('vendor/invoice',body,{headers:headers})
 }
   
 
@@ -118,7 +118,7 @@ return this.http.post('http://localhost:3000/vendor/invoice',body,{headers:heade
   {
     console.log("in update Inv");
     let data = {pID,add}
-    return this.http.put('http://localhost:3000/products/addinventory',data);
+    return this.http.put('products/addinventory',data);
   }
 
 
@@ -128,23 +128,23 @@ console.log("in order service");
   let data = {order,userID,orderNumber,totalSum};
 console.log(data);
 
-return this.http.post('http://localhost:3000/vendorOrder/saveorder',data).map(res => res.json());
+return this.http.post('vendorOrder/saveorder',data).map(res => res.json());
 }
 
 getOrderNumber()
 {
-  return this.http.get('http://localhost:3000/vendorOrder/orderNumber').map(res => res.json());
+  return this.http.get('vendorOrder/orderNumber').map(res => res.json());
 }
 getOrders()
 { 
 
-  return this.http.get('http://localhost:3000/vendorOrder/orders').map(res => res.json());
+  return this.http.get('vendorOrder/orders').map(res => res.json());
 
 }
 
 updateOrderNumber(){
   console.log("in update order number services")
-  return this.http.get('http://localhost:3000/vendorOrder/updateOrderNumber').map(res => res.json());
+  return this.http.get('vendorOrder/updateOrderNumber').map(res => res.json());
 }
 
 

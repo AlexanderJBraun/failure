@@ -29,7 +29,7 @@ const orders = require('./routes/orders');
 const vendorOrder = require('./routes/vendorOrder');
 const coupons = require('./routes/coupons');
 // Port Number
-const port = 3000;
+const port = process.env.PORT;
 
 // CORS Middleware
 app.use(cors());
@@ -54,13 +54,13 @@ app.use('/orders', orders);
 app.use('/vendorOrder', vendorOrder);
 app.use('/coupons', coupons);
 // Index Route
-app.get('/', (req, res) => {
-  res.send('Invalid Endpoint');
-});
+// app.get('/', (req, res) => {
+//   res.send('Invalid Endpoint');
+// });
 
-//app.get('*', (req, res) => {
-  //res.sendFile(path.join(__dirname, 'public/index.html'));
-//});
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // Start Server
 app.listen(port, () => {

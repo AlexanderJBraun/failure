@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const Product = require('../models/product');
 const mongojs = require('mongojs');
-const db = mongojs('mongodb://localhost:27017/liquidNitro');
+const db = mongojs('mongodb://mlangi:123456789@ds163940.mlab.com:63940/liquidnitro');
 
 
 router.get('/products', function(req, res, next){
