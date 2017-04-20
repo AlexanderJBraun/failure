@@ -39,8 +39,6 @@ export class DashboardComponent implements OnInit {
 
 
      onChange($event) : void{
-
-
     if($event.target.files[0].size < 1048576){
       this.readThis($event.target);
     };
@@ -103,7 +101,7 @@ export class DashboardComponent implements OnInit {
       else {
       
         this.editProduct(product);
-        
+       // this.ngOnInit();
       }
         
       this.product=null;
@@ -151,9 +149,8 @@ export class DashboardComponent implements OnInit {
     {
       console.log(product);
       this.cartService.editProduct(product).subscribe();
-    window.location.reload();
-    
-
+      //window.location.reload();
+      //this.ngOnInit();
     }
 
 

@@ -69,12 +69,17 @@ router.put('/addinventory', function(req, res, next)
 
 });
 
-router.put('/editproduct',function(req, res, next)
+router.post('/editproduct',function(req, res, next)
 {
   console.log("in the back end");
 console.log(req.body);
 var name= req.body.name;
-db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{itemCode:req.body.updatedItem}});
+db.products.update({_id: mongojs.ObjectId(req.body._id)},{itemCode:req.body.itemCode,
+                                                        price:req.body.price,
+                                                        description:req.body.description,
+                                                        vendorPrice:req.body.vendorPrice,
+                                                        inStock:req.body.inStock
+                                                        });
 
 });
 
