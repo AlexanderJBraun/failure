@@ -1,8 +1,8 @@
 .btn-primary{
-    background-color: #9ea8a0 !important;
-    color: white;
+    background-color: lightblue !important;
+    color: grey;
     transition: .5s ease;
-    border: 1px solid #9ea8a0;
+    border: 1px solid lightblue;
 }
 .btn-primary:hover{
     background-color: dodgerblue !important;
@@ -11,10 +11,10 @@
 }
 
 .btn-info{
-    background-color: #9ea8a0 !important;
-    color: white;
+    background-color: lightblue !important;
+    color: grey;
     transition: .5s ease;
-    border: 1px solid #9ea8a0;
+    border: 1px solid lightblue;
 }
 .btn-info:hover{
     background-color: gainsboro !important;
@@ -24,10 +24,10 @@
 
 
 .btn-success{
-    background-color: #9ea8a0 !important;
-    color: white;
+    background-color: lightblue !important;
+    color: grey;
     transition: .5s ease;
-    border: 1px solid #9ea8a0;
+    border: 1px solid lightblue;
 }
 
 .btn-success:hover{
@@ -37,10 +37,10 @@
 }
 
 .btn-danger{
-    background-color: #9ea8a0 !important;
-    color: white;
+    background-color: lightblue !important;
+    color: grey;
     transition: .5s ease;
-    border: 1px solid #9ea8a0;
+    border: 1px solid lightblue;
 }
 
 .btn-danger:hover{

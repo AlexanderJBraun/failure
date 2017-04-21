@@ -44,6 +44,7 @@ export class UsersComponent implements OnInit {
     selectUserCity:string;
     selectUserState:string;
     selectUserZip:string;
+    selectUserRole: string;
 
   constructor(    
     private validateService: ValidateService,
@@ -254,14 +255,28 @@ export class UsersComponent implements OnInit {
     }
 
     viewUser(user: UserClass){
+
+      console.log(this.detailDialog);
       if(!this.detailDialog){
         this.detailDialog = true;
         console.log(user.email);
         this.selectUserEmail = user.email; 
-        this.selectUserAddr = user.address;
-        this.selectUserCity = user.city;
-        this.selectUserState = user.state;
-        this.selectUserZip = user.zip.toString();
+        this.selectUserRole = user.role;
+        if(user.address == undefined
+        && user.city == undefined
+        && user.state == undefined
+        && user.zip == undefined){
+            this.detailDialog = false;
+            this.selectUserAddr == null;
+            this.selectUserCity == null;
+            this.selectUserState == null;
+            this.selectUserZip == null;
+        }else {
+          this.selectUserAddr = user.address;
+          this.selectUserCity = user.city;
+          this.selectUserState = user.state;
+          this.selectUserZip = user.zip.toString();
+        }
       }else {
         this.detailDialog=false;
       }

@@ -16,5 +16,8 @@ const OrderSchema = mongoose.Schema({
   products: {
       product:{name:String,quantity:Number, price:Number, subTotal:Number}
   
+  },
+  isPaid:{
+    type: Boolean
   }
 }); 

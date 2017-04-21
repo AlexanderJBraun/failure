@@ -9,5 +9,6 @@ export interface OrderClass{
         quantity:number,
         subTotal:string,
     },
-    Total:String
+    Total:String,
+    isPaid:Boolean
 }

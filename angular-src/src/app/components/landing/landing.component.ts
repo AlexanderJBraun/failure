@@ -12,7 +12,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 })
 export class LandingComponent implements OnInit {
 
-
+  images: any[];
 
 
   constructor(
@@ -26,8 +26,9 @@ export class LandingComponent implements OnInit {
      }
 
   ngOnInit() {
-    
-   
+    this.images=[]; 
+    this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/test3.jpg', alt:'Description for Image 1', title:'Title 1'});
+    this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/test3.jpg', alt:'Description for Image 2', title:'Title 2'});
    
   }
 

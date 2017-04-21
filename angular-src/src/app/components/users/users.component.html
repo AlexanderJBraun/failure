@@ -1,7 +1,7 @@
 <h2 class="page-header">Customer Management</h2>
 
 <p-growl [value]="msgs" [style]="{'position':'fixed', 'top':'24%', 'left':'52%'}"></p-growl>
-<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users" expandableRows="true" [contextMenu]="cm">
+<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users" [contextMenu]="cm">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Customers List</p-header>
     <p-column field="fName" header="FIRST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="lName" header="LAST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
@@ -32,6 +32,10 @@
                     <div class="ui-g-4">Email: </div>
                     <div class="ui-g-6">{{selectUserEmail}}</div>
                 </div>
+                <div class="ui-g">
+                    <div class="ui-g-4">Role: </div>
+                    <div class="ui-g-6">{{selectUserRole}}</div>
+                </div>
         </p-dialog>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new customer"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="userDT.exportCSV()"></button>
@@ -51,7 +55,11 @@
             <div class="ui-grid-col-2"><label for="password">Password*</label></div>
             <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" (ngModelChange)="checkEmpty()"/></div>
         </div>
-        <hr>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2"><label for="role">Role*</label></div>
+            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Pick a role" [style]="{'width':'120px'}" (ngModelChange)="checkEmpty()"></p-dropdown></div>
+        </div>
+        <hr class="hr-text" data-content="Personal Information">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="fName">First Name</label></div>
             <div class="ui-grid-col-3"><input pInputText id="fName" size="20" [(ngModel)]="user.fName" /></div>
@@ -60,7 +68,7 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="bName">Business Name</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="bName" size="20" [(ngModel)]="user.bName" /></div>
+            <div class="ui-grid-col-4"><input pInputText id="bName" size="20" [(ngModel)]="user.bName"  /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="address">Address</label></div>
@@ -68,7 +76,7 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="city">City</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city" /></div>
+            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="state">State</label></div>
@@ -85,21 +93,14 @@
             <div class="ui-grid-col-2"><label for="pNum">Phone Number</label></div>
             <div class="ui-grid-col-3"><p-inputMask id="pNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.pNum" mask="(999)-999-9999" placeholder="Enter phone number"></p-inputMask></div>
             <!--<div class="ui-grid-col-3"><input pInputText id="pNum" size="20" [(ngModel)]="user.pNum" /></div>-->
-            <div class="ui-grid-col-2"><label for="mNum">Mobile Number</label></div>
-            <div class="ui-grid-col-3"><p-inputMask id="mNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.mNum" mask="(999)-999-9999" placeholder="Enter phone number"></p-inputMask></div>
             <!--<div class="ui-grid-col-3"><input pInputText id="mNum" size="20" [(ngModel)]="user.mNum" /></div>-->
         </div>
         <!--<div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="fNum">Fax Number</label></div>
             <div class="ui-grid-col-8"><input pInputText id="fNum" size="20" [(ngModel)]="user.fNum" /></div>
         </div>-->
-       <div class="ui-grid-row">
-            <div class="ui-grid-col-2"><label for="role">Role*</label></div>
-            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Pick a role" [style]="{'width':'120px'}" (ngModelChange)="checkEmpty()"></p-dropdown></div>
-        </div>
-        <br>
-        <br> 
-        <div class="ui-grid-row" style="font-style: italic">*: Required fields</div>   
+        <br><br>
+        <div class="ui-grid-row" style="font-style: italic">*: Required fields.</div>   
         
         <!--<div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>

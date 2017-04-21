@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
-import {DataTableModule,GrowlModule, InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, ContextMenuModule, MenuItem, CheckboxModule} from "../../node_modules/primeng/primeng";
+import {DataTableModule,GrowlModule, GalleriaModule, InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, ContextMenuModule, MenuItem, CheckboxModule} from "../../node_modules/primeng/primeng";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -91,6 +91,7 @@ const appRoutes: Routes =  [
     ContextMenuModule,
     DropdownModule,
     InputMaskModule,
+    GalleriaModule,
     GrowlModule,
     DataGridModule,
     BrowserAnimationsModule,
