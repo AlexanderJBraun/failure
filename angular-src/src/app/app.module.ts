@@ -104,7 +104,6 @@ const appRoutes: Routes =  [
   CartService,
   VendorService,
   OrderService],
-
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, ],
 })
 export class AppModule { }

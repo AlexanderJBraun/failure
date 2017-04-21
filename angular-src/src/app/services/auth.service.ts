@@ -17,7 +17,7 @@ export class AuthService {
     console.log("firstLine of registeruser function");
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('users/register', user,{headers: headers})
+    return this.http.post('http://localhost:3000/users/register', user,{headers: headers})
       .map(res => res.json());
       
       
@@ -27,7 +27,7 @@ export class AuthService {
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('users/authenticate', user,{headers: headers})
+    return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('users/profile',{headers: headers})
+    return this.http.get('http://localhost:3000/users/profile',{headers: headers})
       .map(res => res.json());
   }
 
@@ -64,12 +64,12 @@ export class AuthService {
 
   getProduct(){
     console.log("in getProduct");
-      return this.http.get('products/products')
+      return this.http.get('http://localhost:3000/products/products')
           .map(res => res.json());
   }
 
  getUser(){
-      return this.http.get('users/users')
+      return this.http.get('http://localhost:3000/users/users')
           .map(res => res.json());
   }
 
@@ -80,70 +80,70 @@ export class AuthService {
     console.log("in add product 0");
     headers.append('Content-Type','application/json');
     console.log("in add product 01");
-    return this.http.post('products/newProduct', product,{headers: headers})
-      .map(res => res.json());
+    return this.http.post('http://localhost:3000/products/newProduct', product,{headers: headers})
+      .map(res => res.json()); 
   }
 
   addUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('users/newUser',  user,{headers: headers})
+    return this.http.post('http://localhost:3000/users/newUser',  user,{headers: headers})
       .map(res => res.json());
   }
   
    deleteUser(id){
-    return this.http.delete('users/user/'+id)
+    return this.http.delete('http://localhost:3000/users/user/'+id)
       .map(res => res.json());
   }
 
 
   deleteProduct(id){
-    return this.http.delete('products/product/'+id)
+    return this.http.delete('http://localhost:3000/products/product/'+id)
       .map(res => res.json());
   }
     delete(id){
-    return this.http.delete('products/product'+id)
+    return this.http.delete('http://localhost:3000/products/product'+id)
       .map(res => res.json());
   }
 
     save(product){
-      return this.http.put('products/products', product)
+      return this.http.put('http://localhost:3000/products/products', product)
       .map(res => res.json());
   }
 
     getVendor(){
     console.log("in getVendor");
-      return this.http.get('vendors/vendors')
+      return this.http.get('http://localhost:3000/vendors/vendors')
           .map(res => res.json());
   }
 
   deleteVendor(id){
-    return this.http.delete('vendors/vendor/'+id)
+    return this.http.delete('http://localhost:3000/vendors/vendor/'+id)
       .map(res => res.json());
   }
 
   addVendor(vendor){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('vendors/newVendor',  vendor,{headers: headers})
+    return this.http.post('http://localhost:3000/vendors/newVendor',  vendor,{headers: headers})
       .map(res => res.json());
   }
 
   getCoupon(){
     console.log("in getProduct");
-      return this.http.get('coupons/coupons')
+      return this.http.get('http://localhost:3000/coupons/coupons')
           .map(res => res.json());
   }
 
     addCoupon(coupon){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('coupons/newCoupon',  coupon,{headers: headers})
+    return this.http.post('http://localhost:3000/coupons/newCoupon',  coupon,{headers: headers})
       .map(res => res.json());
   }
 
     deleteCoupon(id){
-    return this.http.delete('coupons/coupon/'+id)
+    return this.http.delete('http://localhost:3000/coupons/coupon/'+id)
       .map(res => res.json());
   }
 }

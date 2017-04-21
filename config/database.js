@@ -1,4 +1,4 @@
 module.exports = {
-  database: 'mongodb://mlangi:123456789@ds163940.mlab.com:63940/liquidnitro',
+  database: 'mongodb://localhost:27017/liquidNitro',
   secret: 'yoursecret'
 }

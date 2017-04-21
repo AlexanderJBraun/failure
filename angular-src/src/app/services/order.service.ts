@@ -15,23 +15,23 @@ console.log("in order service");
   let data = {order,userID,orderNumber,totalSum};
 console.log(data);
 
-return this.http.post('orders/saverorder',data).map(res => res.json());
+return this.http.post('http://localhost:3000/orders/saverorder',data).map(res => res.json());
 }
 
 getOrderNumber()
 {
-  return this.http.get('orders/orderNumber').map(res => res.json());
+  return this.http.get('http://localhost:3000/orders/orderNumber').map(res => res.json());
 }
 getOrders()
 { 
 
-  return this.http.get('orders/orders').map(res => res.json());
+  return this.http.get('http://localhost:3000/orders/orders').map(res => res.json());
 
 }
 
 updateOrderNumber(){
   console.log("in update order number services")
-  return this.http.get('orders/updateOrderNumber').map(res => res.json());
+  return this.http.get('http://localhost:3000/orders/updateOrderNumber').map(res => res.json());
 }
 
 

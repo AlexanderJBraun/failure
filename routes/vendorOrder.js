@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const mongojs = require('mongojs');
-const db = mongojs('mongodb://mlangi:123456789@ds163940.mlab.com:63940/liquidnitro');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 
 router.post('/saveorder', function(req, res, next)
@@ -30,14 +30,14 @@ router.post('/saveorder', function(req, res, next)
  router.get('/updateOrderNumber', function(req,res,next)
  {
     console.log('update order number');
-      db.vendorOrder.update({_id:mongojs.ObjectId('58f6f082734d1d33b3276501')}, {$inc:{vendorOrderNumber:1}});
+      db.vendorOrder.update({_id:mongojs.ObjectId('58f6af4e8b96c325440054cb')}, {$inc:{vendorOrderNumber:1}});
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
-    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f6f082734d1d33b3276501')},function(err,vendorOrderNumber){
+    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f6af4e8b96c325440054cb')},function(err,vendorOrderNumber){
         if(err){
             res.send(err)
         }

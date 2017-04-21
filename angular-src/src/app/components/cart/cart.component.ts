@@ -127,9 +127,9 @@ export class CartComponent implements OnInit {
   sendInvoice()
   {
     this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
-    //this.updateInventory();  
-    //this.storeOrder();  
-    //this.orderService.updateOrderNumber().subscribe();
+    this.updateInventory();  
+    this.storeOrder();  
+    this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
      //localStorage.setItem('cart', null);
      localStorage.removeItem('cart');

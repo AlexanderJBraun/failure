@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
 const mongojs = require('mongojs');
-const db = mongojs('mongodb://mlangi:123456789@ds163940.mlab.com:63940/liquidnitro');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 // Register
 router.post('/register', (req, res, next) => {
