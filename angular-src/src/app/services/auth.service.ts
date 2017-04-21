@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from 'angular2-jwt';
 import {ProductClass} from '../../../../models/product';
@@ -146,4 +146,18 @@ export class AuthService {
     return this.http.delete('http://localhost:3000/coupons/coupon/'+id)
       .map(res => res.json());
   }
+
+  changePassword(user, password, newPass){
+
+    console.log("in auth service changePassword");
+    let data = {user,password,newPass}
+    console.log(data);
+    console.log("break here?");
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/editpassword',data,{headers: headers}).map(res => res.json());
+
+  }
+
+
 }

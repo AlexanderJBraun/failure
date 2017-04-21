@@ -129,7 +129,7 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
 
   addInventory(add,pID)
   {
-    console.log("in update Inv");
+    console.log("in add Inv");
     let data = {pID,add}
     return this.http.put('http://localhost:3000/products/addinventory',data);
   }
