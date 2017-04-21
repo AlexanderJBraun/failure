@@ -65,6 +65,8 @@ router.put('/updateinventory', function(req, res, next)
 router.put('/addinventory', function(req, res, next)
 {
    console.log(req.body.pID);
+   console.log(req.body.pID);
+   console.log(req.body.pID);
   db.products.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{inStock:req.body.add}});
 
 });
@@ -75,12 +77,11 @@ router.post('/editproduct',function(req, res, next)
 console.log(req.body);
 var name= req.body.name;
 db.products.update({_id: mongojs.ObjectId(req.body._id)},{itemCode:req.body.itemCode,
-                                                        price:req.body.price,
-                                                        description:req.body.description,
-                                                        vendorPrice:req.body.vendorPrice,
-                                                        inStock:req.body.inStock
-                                                        });
-
+                                                          price:req.body.price,
+                                                          description:req.body.description,
+                                                          vendorPrice:req.body.vendorPrice,
+                                                          inStock:req.body.inStock
+                                                          });
 });
 
 module.exports = router;

@@ -13,11 +13,6 @@ const roles = require('../profile/role');
 export class LoginComponent implements OnInit {
   username: String;
   password: String;
-  
-  
-
-
-
 
   constructor(
     private authService:AuthService,

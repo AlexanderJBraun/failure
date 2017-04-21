@@ -96,4 +96,15 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     if(err) throw err;
     callback(null, isMatch);
   });
+
+module.exports.hashPassword = function(newPassword, callback){
+    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newPassword, salt, (err, hash) => {
+      if(err) throw err;
+      newPassword = hash;
+      callback(null, newPassword)
+    });
+  });
+
+}
 }

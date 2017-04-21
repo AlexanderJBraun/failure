@@ -6,6 +6,7 @@ const config = require('../config/database');
 const User = require('../models/user');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
+const bcrypt = require('bcryptjs');
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -75,6 +76,7 @@ router.post('/authenticate', (req, res, next) => {
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+  console.log("in profile user.js");
   res.json({user: req.user});
 });
 
@@ -99,6 +101,7 @@ router.get('/user/:id', function(req, res, next){
     });
 });
 
+
 //remove customer
 router.delete('/user/:id', function(req, res, next){
     db.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
@@ -107,6 +110,46 @@ router.delete('/user/:id', function(req, res, next){
         }
         res.json(user);
     });
+});
+
+router.post('/editpassword', function(req, res, next){
+  console.log("PLEASE WORK");
+console.log(req.body);
+
+
+    User.comparePassword(req.body.password, req.body.user.password, (err, isMatch) => {
+      if(err) throw err;
+      if(isMatch){
+          
+          User.hashPassword(req.body.newPass, (err, newpassword) => {
+    if(err){
+      res.json({success: false, msg:'Failed to hash password'});
+    } else {
+      res.json({success: true, msg:'password hashed'});     
+       db.users.update({_id: mongojs.ObjectId(req.body.user._id)}, {username:req.body.user.username,
+                                                                    fname:req.body.user.fname,
+                                                                    lName: req.body.user.lName,
+                                                                    bName: req.body.user.bName,
+                                                                    pNum: req.body.user.pNum,
+                                                                    mNum: req.body.user.mNum,
+                                                                    fNum: req.body.user.fNum,
+                                                                    region: req.body.user.region,
+                                                                    city: req.body.user.city,
+                                                                    state: req.body.user.state,
+                                                                    zip: req.body.user.zip,
+                                                                    password:newpassword,
+                                                                    email:req.body.user.email,
+                                                                    role: req.body.user.role
+                                                                    });
+
+    }
+  });
+      } else {
+        return res.json({success: false, msg: 'Wrong password'});
+      }
+    });
+
+
 });
 
 module.exports = router;
