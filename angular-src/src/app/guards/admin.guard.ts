@@ -23,7 +23,7 @@ canActivate(){
 
 
 
-if(roles.role1==="Admin" || roles.role1==="admin" )
+if(roles.role1==="Admin" || roles.role1==="admin" || roles.role1 =='Agent' || roles.role1 =='agent' )
     {
       
       return true;

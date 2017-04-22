@@ -8,6 +8,8 @@ import {AccordionModule} from 'primeng/primeng';     //accordion and accordion t
 import {MenuItem} from 'primeng/primeng';            //api
 import {DataTableModule,SharedModule, SelectItem, Message} from 'primeng/primeng';
 
+var roles = require('../profile/role');
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -45,6 +47,8 @@ export class UsersComponent implements OnInit {
     selectUserState:string;
     selectUserZip:string;
     selectUserRole: string;
+    role :string;
+    text: string;
 
   constructor(    
     private validateService: ValidateService,
@@ -123,6 +127,7 @@ export class UsersComponent implements OnInit {
       {label: 'View details', command: (event) => this.viewUser(this.selectedUser)}
      
     ];
+     this.role = roles.role1;
 
     this.detailDialog=false;
     
@@ -146,6 +151,7 @@ export class UsersComponent implements OnInit {
     }
 
     showDialogToAdd(){
+       this.text = "false";
       document.getElementById("saveUser").setAttribute("disabled", "disabled");
       this.plusUser = true;
       this.user = new PrimeUser();
@@ -156,6 +162,7 @@ export class UsersComponent implements OnInit {
 
     save(){
       //var users = users;
+        this.text = "false";
       if(this.plusUser)
       {
         
@@ -192,6 +199,11 @@ export class UsersComponent implements OnInit {
     }
 
     deleteUser(id){
+          if (this.role=="agent" || this.role=="Agent")
+      {
+        window.alert("Permission Denied")
+      }
+      else{
       var users = this.users;
 
       this.authService.deleteUser(id).subscribe(data => {
@@ -205,9 +217,25 @@ export class UsersComponent implements OnInit {
       });
       this.user=null;
       this.displayDialog=false;
+      }
     }
 
     onRowSelect(event){
+
+
+           if (this.role=="agent" || this.role=="Agent")
+      {
+        this.text = "true";
+        document.getElementById('email').setAttribute("disabled","true");
+        document.getElementById('username').setAttribute("disabled","true");
+        document.getElementById('password').setAttribute("disabled","true");
+        document.getElementById('fName').setAttribute("disabled","true");
+        document.getElementById('address').setAttribute("disabled","true");
+        document.getElementById('lName').setAttribute("disabled","true");
+        document.getElementById('bName').setAttribute("disabled","true");
+        document.getElementById('city').setAttribute("disabled","true");
+      }
+
       this.plusUser = false;
       this.user = this.cloneUser(event.data);
       this.displayDialog=true;

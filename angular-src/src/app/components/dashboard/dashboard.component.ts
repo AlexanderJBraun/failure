@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {ProductClass} from '../../../../../models/Product';
 import {CartService } from '../../services/cart.service';
 
+var roles = require('../profile/role');
+
 @Component({
   
   selector: 'app-dashboard',
@@ -23,6 +25,8 @@ export class DashboardComponent implements OnInit {
     plusProduct: boolean;
     products: ProductClass[];
     uploadField = document.getElementById("file");
+     role :string;
+     text:string;
 
   constructor(    
     private validateService: ValidateService,
@@ -35,6 +39,8 @@ export class DashboardComponent implements OnInit {
         this.authService.getProduct().subscribe(products => {
       this.products = products;
     });
+
+      this.role = roles.role1;
   }
 
 
@@ -63,6 +69,11 @@ export class DashboardComponent implements OnInit {
     deleteProduct(id){
       var products = this.products;
 
+      if (this.role=="agent" || this.role=="Agent")
+      {
+         window.alert("Permission Denied")
+      }
+      else{
       this.authService.deleteProduct(id).subscribe(data => {
         if(data.n == 1){
            for(var i = 0;i < products.length;i++){
@@ -72,10 +83,13 @@ export class DashboardComponent implements OnInit {
           }
         }
       });
+      }
     }
     
 
     showDialogToAdd(){
+      this.text="false";
+
       this.plusProduct = true;
       this.product = new PrimeProduct();
       this.displayDialog = true;
@@ -111,6 +125,15 @@ export class DashboardComponent implements OnInit {
     }
 
     delete(id){
+
+
+       if (this.role=="agent" || this.role=="Agent")
+      {
+       window.alert('permission denied');
+
+      }
+      else
+      {
       var products = this.products;
 
       this.authService.deleteProduct(id).subscribe(data => {
@@ -124,9 +147,22 @@ export class DashboardComponent implements OnInit {
       });
       this.product=null;
       this.displayDialog=false;
+      }
     }
 
     onRowSelect(event){
+
+       if (this.role=="agent" || this.role=="Agent")
+      {
+        this.text="true";
+        document.getElementById('itemCode').setAttribute("disabled","true");
+        document.getElementById('description').setAttribute("disabled","true");
+        document.getElementById('vendorPrice').setAttribute("disabled","true");
+        document.getElementById('inStock').setAttribute("disabled","true");
+        document.getElementById('file').setAttribute("disabled","true");
+      
+
+      }
       this.plusProduct = false;
       this.product = this.cloneProduct(event.data);
       this.displayDialog=true;

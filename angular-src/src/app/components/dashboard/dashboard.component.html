@@ -87,27 +87,27 @@
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="itemCode">ITEM CODE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" [disabled]="text" /></div>
         </div>
         <br>   
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" [disabled]="text"/></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" [disabled]="text"/></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="vendorPrice">VENDDOR PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice"[disabled]="text" /></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock"[disabled]="text" /></div>
         </div>
         <br>
         <div class="ui-grid-row">
