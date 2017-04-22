@@ -45,53 +45,53 @@
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="email">Email*</label></div>
             <!--<div class="ui-grid-col-4"><p-inputMask type ="email" size="20"  [(ngModel)]="user.email" placeholder="Email: abc@xyz.com"></p-inputMask></div>-->
-            <div class="ui-grid-col-4"><input pInputText id="email" type="email" size="20" [(ngModel)]="user.email" placeholder="Email: abc@xyz.com" (ngModelChange)="checkEmpty()"[disabled]="text"/></div>
+            <div class="ui-grid-col-4"><input pInputText id="email" type="email" size="20" [(ngModel)]="user.email" placeholder="Email: abc@xyz.com" (ngModelChange)="checkEmpty()" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="username">Username*</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="username" size="20" [(ngModel)]="user.username" placeholder="Username used to log in" (ngModelChange)="checkEmpty()"[disabled]="text"/></div>
+            <div class="ui-grid-col-4"><input pInputText id="username" size="20" [(ngModel)]="user.username" placeholder="Username used to log in" (ngModelChange)="checkEmpty()" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="password">Password*</label></div>
-            <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" (ngModelChange)="checkEmpty()"[disabled]="text"/></div>
+            <div class="ui-grid-col-4"><input pInputText  type="password" id="password" size="20" [(ngModel)]="user.password" (ngModelChange)="checkEmpty()" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="role">Role*</label></div>
-            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Pick a role" [style]="{'width':'120px'}" (ngModelChange)="checkEmpty() " [disabled]="text"></p-dropdown></div>
+            <div class="ui-grid-col-4"><p-dropdown [options]="roles" [(ngModel)]="user.role" placeholder="Pick a role" [style]="{'width':'120px'}" (ngModelChange)="checkEmpty()" [disabled]="disabled"></p-dropdown></div>
         </div>
         <hr class="hr-text" data-content="Personal Information">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="fName">First Name</label></div>
-            <div class="ui-grid-col-3"><input pInputText id="fName" size="20" [(ngModel)]="user.fName" [disabled]="text"/></div>
+            <div class="ui-grid-col-3"><input pInputText id="fName" size="20" [(ngModel)]="user.fName" [disabled]="disabled"/></div>
             <div class="ui-grid-col-2"><label for="lName">Last Name</label></div>
-            <div class="ui-grid-col-3"><input pInputText id="lName" size="20" [(ngModel)]="user.lName" [disabled]="text"/></div>
+            <div class="ui-grid-col-3"><input pInputText id="lName" size="20" [(ngModel)]="user.lName" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="bName">Business Name</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="bName" size="20" [(ngModel)]="user.bName" [disabled]="text" /></div>
+            <div class="ui-grid-col-4"><input pInputText id="bName" size="20" [(ngModel)]="user.bName" [disabled]="disabled" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="address">Address</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="address" size="20" [(ngModel)]="user.address" placeholder="Street number, Street name" [disabled]="text" /></div>
+            <div class="ui-grid-col-4"><input pInputText id="address" size="20" [(ngModel)]="user.address" placeholder="Street number, Street name" [disabled]="disabled" /></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="city">City</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city" [disabled]="text"/></div>
+            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="state">State</label></div>
-            <div class="ui-grid-col-3"><p-dropdown [options]="states" [(ngModel)]="user.state" placeholder="Pick a state" [style]="{'width':'120px'}" filter="true" [disabled]="text"></p-dropdown></div>
+            <div class="ui-grid-col-3"><p-dropdown [options]="states" [(ngModel)]="user.state" placeholder="Pick a state" [style]="{'width':'120px'}" filter="true" [disabled]="disabled"></p-dropdown></div>
             <div class="ui-grid-col-2"><label for="zip">Zip</label></div>
-            <div class="ui-grid-col-4"><p-inputMask id="zip" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.zip" mask="99999" placeholder="99999" [disabled]="text"></p-inputMask></div>
+            <div class="ui-grid-col-4"><p-inputMask id="zip" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.zip" mask="99999" placeholder="99999" [disabled]="disabled"></p-inputMask></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="region">Region</label></div>
-            <div class="ui-grid-col-4"><p-dropdown id="region" size="20" [options]="regions" [(ngModel)]="user.region" [style]="{'width':'120px'}" placeholder="Pick a region" [disabled]="text"></p-dropdown></div>
+            <div class="ui-grid-col-4"><p-dropdown id="region" size="20" [options]="regions" [(ngModel)]="user.region" [style]="{'width':'120px'}" placeholder="Pick a region" [disabled]="disabled"></p-dropdown></div>
             <!--<div class="ui-grid-col-4"><p-inputMask id="region" size="20" [style]="{'width':'60px'}" [(ngModel)]="user.region" mask="aa" placeholder="MO"></p-inputMask></div>-->
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="pNum">Phone Number</label></div>
-            <div class="ui-grid-col-3"><p-inputMask id="pNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.pNum" mask="(999)-999-9999" placeholder="Enter phone number" [disabled]="text"></p-inputMask></div>
+            <div class="ui-grid-col-3"><p-inputMask id="pNum" size="20" [style]="{'width':'150px'}" [(ngModel)]="user.pNum" mask="(999)-999-9999" placeholder="Enter phone number" [disabled]="disabled"></p-inputMask></div>
             <!--<div class="ui-grid-col-3"><input pInputText id="pNum" size="20" [(ngModel)]="user.pNum" /></div>-->
             <!--<div class="ui-grid-col-3"><input pInputText id="mNum" size="20" [(ngModel)]="user.mNum" /></div>-->
         </div>

@@ -48,6 +48,7 @@ export class UsersComponent implements OnInit {
     selectUserZip:string;
     selectUserRole: string;
     role :string;
+    disabled: boolean=true;
     text: string;
 
   constructor(    
@@ -55,9 +56,12 @@ export class UsersComponent implements OnInit {
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
     private router: Router) {
-        this.roles=[];
-        this.roles.push({label: 'Admin', value:'Admin'});
-        this.roles.push({label: 'User', value:'User'});
+        this.roles=[
+          {label: 'User', value:'User'},
+          {label: 'Admin', value:'Admin'},
+          {label: 'Agent', value:'Agent'}
+        ];
+       
 
         this.states=[];
         this.states.push({label:'Alabama',value:'AL'});
@@ -129,7 +133,8 @@ export class UsersComponent implements OnInit {
     ];
      this.role = roles.role1;
 
-    this.detailDialog=false;
+     this.disabled = !this.disabled;
+     this.detailDialog=false;
     
  }
 
@@ -151,18 +156,17 @@ export class UsersComponent implements OnInit {
     }
 
     showDialogToAdd(){
-       this.text = "false";
+      this.disabled= false;
       document.getElementById("saveUser").setAttribute("disabled", "disabled");
       this.plusUser = true;
       this.user = new PrimeUser();
       this.displayDialog = true;
-      
+      console.log(this.disabled);
     }
 
 
     save(){
       //var users = users;
-        this.text = "false";
       if(this.plusUser)
       {
         
@@ -222,23 +226,19 @@ export class UsersComponent implements OnInit {
 
     onRowSelect(event){
 
-
-           if (this.role=="agent" || this.role=="Agent")
+      this.disabled = false;
+      if (this.role==="agent" || this.role==="Agent")
       {
-        this.text = "true";
-        document.getElementById('email').setAttribute("disabled","true");
-        document.getElementById('username').setAttribute("disabled","true");
-        document.getElementById('password').setAttribute("disabled","true");
-        document.getElementById('fName').setAttribute("disabled","true");
-        document.getElementById('address').setAttribute("disabled","true");
-        document.getElementById('lName').setAttribute("disabled","true");
-        document.getElementById('bName').setAttribute("disabled","true");
-        document.getElementById('city').setAttribute("disabled","true");
+        this.disabled= this.disabled;
+      }else{
+        this.disabled= !this.disabled;
       }
+
 
       this.plusUser = false;
       this.user = this.cloneUser(event.data);
       this.displayDialog=true;
+      this.disabled = !this.disabled;
       document.getElementById("saveUser").removeAttribute("disabled");
       
     }
