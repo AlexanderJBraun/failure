@@ -3,10 +3,8 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-//const config = require('../angular-src/src/app/components/invoice/invoice.component.html');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
-//const roles= require('../angular-src/src/app/components/profile/role');
 
 var nodeMailer = require('nodemailer');
 var Styliner = require('styliner');

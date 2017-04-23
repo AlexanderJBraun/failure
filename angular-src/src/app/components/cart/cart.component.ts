@@ -10,6 +10,7 @@ import {Http, Headers} from '@angular/http';
 import {UserClass} from '../../../../../models/user';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {CouponClass} from '../../../../../models/coupon';
+import {ProfileService} from '../../services/profile.service';
 
 
 @Component({
@@ -20,9 +21,10 @@ import {CouponClass} from '../../../../../models/coupon';
 })
 export class CartComponent implements OnInit {
 
+
   cartEntities : CartEntity[];
-  subTotalSum: string;
-  totalSum: string;
+  subTotalSum: number;
+  totalSum: number;
   user:Object;
   email:String;
   order:any;
@@ -38,7 +40,8 @@ export class CartComponent implements OnInit {
   private router:Router, 
   private cartService: CartService,
   private orderService : OrderService,
-  private flashMessage: FlashMessagesService) {   }
+  private flashMessage: FlashMessagesService,
+  private profileService:ProfileService) {   }
 
 
       getProducts() {
@@ -103,10 +106,10 @@ export class CartComponent implements OnInit {
         entity.subTotal = (entity.product.price * entity.quantity).toFixed(2);
       });
 
-      console.log(this.subTotalSum);
-      this.subTotalSum = subTotalSum.toFixed(2);
+
+      this.subTotalSum = subTotalSum
       this.couponAmount = ((this.couponDiscount) * subTotalSum).toFixed(2);
-      this.totalSum = (subTotalSum - parseFloat(this.couponAmount)).toFixed(2);
+      this.totalSum = (subTotalSum - parseFloat(this.couponAmount));
     }
 
 
@@ -126,15 +129,17 @@ export class CartComponent implements OnInit {
 
   sendInvoice()
   {
-    this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
-    this.updateInventory();  
-    this.storeOrder();  
-    this.orderService.updateOrderNumber().subscribe();
+
+   
+  // this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
+      this.profileService.updateSales(this.totalSum).subscribe();
+      this.updateInventory();  
+      this.storeOrder();  
+     this.orderService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
-     //localStorage.setItem('cart', null);
      localStorage.removeItem('cart');
     //this.cartService.initCart();
-    window.location.reload();
+   window.location.reload();
   }
 
   updateInventory()
@@ -183,10 +188,11 @@ export class CartComponent implements OnInit {
 
   getOrderNumber()
   {
-    console.log("dfasffsdafsdag")
+    
     this.orderService.getOrderNumber().subscribe(orderNumber=>{
       this.order = orderNumber;
     });
+    
   }
 
     useCoupon(coupon)

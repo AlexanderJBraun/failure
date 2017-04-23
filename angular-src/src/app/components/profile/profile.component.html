@@ -4,7 +4,7 @@
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
-    <li class="list-group-item">Role: {{role}} </li>
+    <li *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' " class="list-group-item">Sales YTD : $ {{YTDS}}</li>
    
   </ul>
   </div>
@@ -23,21 +23,37 @@
         </div>
         <div class="ui-g">
             <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/coupon']"><button type="button" pButton class="btn btn-primary" label="Coupon Management"></button></a></li></div>
+        <div class="ui-lg-6 ui-md-6 ui-sm-12" ngif ><li><button type="button"  pButton class="btn btn-primary" (click)="showForum = !showForum" label="{{showForum? 'Hide Change Password':'Change Password'}}"></button></li></div>
         </div>
      </div>
 
      </div>
   </div>
 
-  <div *ngIf="role === 'User' || role === 'user'  ">
+   <div *ngIf="role === 'User' || role === 'user'  ">
     <div class="panel panel-default">
       <div class="panel-heading"> Customer Tools     </div>
         <div class="panel-body">
           <div class="ui-g">
             <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']"><button type="button" pButton class="btn btn-primary" label="Order History here"></button></a></li></div>
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"  ><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']"><button type="button" pButton class="btn btn-primary" label="Change password here"></button></a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12" ngif ><button type="button"  pButton class="btn btn-primary" (click)="showForum = !showForum" label="{{showForum? 'Hide Change Password':'Change Password'}}"></button></div>
         </div>
       </div>
-
      </div>
-  </div>
+   </div>
+
+     <div *ngIf="showForum">
+       <div class="panel panel-default">
+      <div class="panel-heading"> Change Password</div>
+     <span> Current Password </span>
+     <input pInputText id="password1" size="30" [(ngModel)]="currentPass" />
+     <br>
+     <span> New Password </span>
+     <input pInputText id="password2" size="30" [(ngModel)]="newPass" />
+     <br>
+     <span> Confirm New Password </span>
+     <input pInputText id="password3" size="30" [(ngModel)]="confirmNewPass" />
+       <br>
+     <button type="button" pButton class="btn btn-primary" label="Submit" (click)="changePassword(currentPass, newPass, confirmNewPass)"></button>
+     </div>
+    </div>

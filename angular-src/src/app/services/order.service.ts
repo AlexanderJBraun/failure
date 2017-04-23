@@ -29,9 +29,22 @@ getOrders()
 
 }
 
-updateOrderNumber(){
+updateOrderNumber()
+{
   console.log("in update order number services")
   return this.http.get('http://localhost:3000/orders/updateOrderNumber').map(res => res.json());
+}
+
+isPaid(id)
+{
+  let data = {id};
+  return this.http.post('http://localhost:3000/orders/isPaid',data).map(res => res.json());
+}
+
+isDelivered(id)
+{
+  let data = {id};
+  return this.http.post('http://localhost:3000/orders/isDelivered',data).map(res => res.json());
 }
 
 

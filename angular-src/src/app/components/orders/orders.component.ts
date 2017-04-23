@@ -26,20 +26,8 @@ export class OrdersComponent implements OnInit {
   selectProdQuant: string[];
   selectProdSub: string[];
   items: MenuItem[];
+  value:true;
 
-  vorders: vOrderClass[];
-  vdisplayDialog: boolean;
-  vorder: vOrderClass = new PrimeOrder();
-  vselectedOrder: vOrderClass;
-  vplusOrder: boolean;
-  vdisabled: boolean = true;
-  vtype: string;
-  vdetailDialog: boolean;
-  vselectProdName: any=[{}];
-  vselectProdPrice: string[];
-  vselectProdQuant: string[];
-  vselectProdSub: string[];
-  vitems: MenuItem[];
 
   
   
@@ -55,19 +43,11 @@ export class OrdersComponent implements OnInit {
         
     });
 
-      this.vendorService.getOrders().subscribe(orders =>{
-        this.vorders = orders;
-        console.log(this.vorders);
-    });
-
     this.items=[ 
       {label: 'View details', command: (event) => this.viewProd(this.selectedOrder)}
      
     ];
-    this.vitems=[
-      {label: 'View details', command: (event) => this.vviewProd(this.selectedOrder)}
-    ]
-
+    
     this.detailDialog=false;
   }
 
@@ -77,15 +57,6 @@ export class OrdersComponent implements OnInit {
     this.plusOrder = true;
     this.order = new PrimeOrder();
     this.displayDialog = true;
-
-    this.vdisabled = false;
-    this.vtype="date";
-    this.vplusOrder = true;
-    this.vorder = new PrimeOrder();
-    this.vdisplayDialog = true;
-
- 
-
   }
 
   save(){
@@ -111,14 +82,6 @@ export class OrdersComponent implements OnInit {
     this.plusOrder = false;  
     this.order = this.cloneOrder(event.data);
     this.displayDialog = true;
-
-
-    this.vdisabled = true;
-    this.vtype="text";
-    this.vplusOrder = false;  
-    this.vorder = this.vcloneOrder(event.data);
-    this.vdisplayDialog = true;
- 
   }
 
   cloneOrder(o: OrderClass): OrderClass{
@@ -129,13 +92,7 @@ export class OrdersComponent implements OnInit {
     return order;
   }
 
-    vcloneOrder(o: vOrderClass): vOrderClass{
-    let vorder = new PrimeOrder();
-    for(let prop in o){
-      vorder[prop] = o[prop];
-    }
-    return vorder;
-  }
+ 
 
 
   findSelectedOrderIndex(): number{
@@ -143,11 +100,7 @@ export class OrdersComponent implements OnInit {
 
      
   }
-    vfindSelectedOrderIndex(): number{
-    return this.vorders.indexOf(this.vselectedOrder);
-
-     
-  }
+ 
   
   viewProd(order: OrderClass){
     this.selectProdName.splice(0,this.selectProdName.length);
@@ -157,12 +110,9 @@ export class OrdersComponent implements OnInit {
       this.detailDialog=true;
       for(var index in order.products)
       {
- 
-
        this.selectProdName.push(order.products[index].name);
-        
       }
-      //console.log(data);
+      
       console.log(this.selectProdName);
       
     }else {
@@ -170,32 +120,19 @@ export class OrdersComponent implements OnInit {
     }
   }
   
-    vviewProd(vorder: vOrderClass){
-    this.vselectProdName.splice(0,this.vselectProdName.length);
-    console.log(vorder.products);
-      var data:any = [{}];
-    if(!this.detailDialog){
-      this.detailDialog=true;
-      for(var index in vorder.products)
-      {
-  
 
-       this.vselectProdName.push(vorder.products[index].name);
-        
-      }
-      //console.log(data);
-      console.log(this.vselectProdName);
-      
-    }else {
-      this.detailDialog = false;
-    }
-  }
 
-  incrementVal(id)
+  isPaid(id)
   {
-//
     console.log(id);
+    this.orderService.isPaid(id).subscribe();
   }
+
+isDel(id)
+{
+  this.orderService.isDelivered(id).subscribe();
+
+}
 
 }
  
@@ -208,6 +145,7 @@ class PrimeOrder implements OrderClass {
   products: { name: string; price: number; quantity: number; subTotal: string; };
   Total: String;
   isPaid: boolean;
+  
 
 
 }

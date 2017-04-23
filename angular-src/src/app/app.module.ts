@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DataTableModule,GrowlModule, GalleriaModule, 
        InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, 
        SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, 
@@ -23,13 +24,15 @@ import { VendorComponent} from './components/vendor/vendor.component';
 import { OrdersComponent} from './components/orders/orders.component';
 import { CouponComponent } from "./components/coupon/coupon.component";
 import { LandingComponent} from './components/landing/landing.component';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {CartService} from './services/cart.service';
 import {OrderService} from './services/order.service';
 import {VendorService} from './services/vendor.service';
+import {ProfileService} from './services/profile.service';
+
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthGuard} from './guards/auth.guard';
 import {AdminGuard} from './guards/admin.guard';
@@ -111,7 +114,8 @@ const appRoutes: Routes =  [
   AdminGuard,
   CartService,
   VendorService,
-  OrderService],
+  OrderService,
+  ProfileService],
   bootstrap: [AppComponent, ],
 })
 export class AppModule { }

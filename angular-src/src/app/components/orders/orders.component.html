@@ -17,13 +17,18 @@
     </p-column>
     <p-column header="isDelivered" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
-            <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox>
+            
+         <input *ngIf="order.isDel == false" type="checkbox"   binary="true" (click)="isDel(order._id)"/>
+         <input *ngIf="order.isDel == true" type="checkbox" [disabled] = "true" checked binary="true" />
+            
         </ng-template>
     </p-column>
     <p-column header="isPaid" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
-            <p-checkbox  binary="true" (click)="incrementVal(order._id)"></p-checkbox>
+            <input *ngIf="order.isPaid == false" type="checkbox"   binary="true" (click)="isPaid(order._id)"/>
+             <input *ngIf="order.isPaid == true" type="checkbox" [disabled] = "true" checked binary="true" (click)="isPaid(order._id)"/>
         </ng-template>
+    
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>

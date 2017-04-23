@@ -1,5 +1,6 @@
 import { Component, OnInit,Input} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {ProfileService} from '../../services/profile.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 
@@ -21,8 +22,9 @@ export class ProfileComponent implements OnInit {
   showForum: boolean = false;
   users: Object[];
   errorMessage: any;
+  YTDS:number;
 
-  constructor(private authService:AuthService, private router:Router, private flashMessage:FlashMessagesService) { }
+  constructor(private authService:AuthService, private router:Router, private flashMessage:FlashMessagesService, private profileService:ProfileService) { }
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
@@ -37,9 +39,15 @@ export class ProfileComponent implements OnInit {
 
     },
     err => {
-      console.log(this.role);
+      
       return false;
     });
+    this.profileService.getYearToDateSales().subscribe(ytds =>{
+      this.YTDS = ytds.YTDS;
+      console.log(this.YTDS);
+    })
+
+
   }
 
   changePassword(currentPass, newPass, confirmNewPass){

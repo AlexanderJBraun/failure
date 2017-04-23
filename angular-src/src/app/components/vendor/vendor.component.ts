@@ -41,10 +41,13 @@ export class VendorComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+
     this.getOrderNumber();
-        this.authService.getProduct().subscribe(products => {
+
+    this.authService.getProduct().subscribe(products => {
       this.products = products;
     });
+
     this.getProducts();
 
 
@@ -267,8 +270,8 @@ getProducts() {
         order.push(product);
       }
 
-      console.log(this.order);
-    
+
+    console.log(this.order.vendorOrderNumber)
     
     this.vendorService.saveOrder(order,this.user,this.order.vendorOrderNumber,this.totalSum).subscribe(data =>{
       if (data.success == true)
@@ -286,9 +289,10 @@ getProducts() {
     this.vendorService.getOrderNumber().subscribe(vendorOrderNumber=>{
       this.order = vendorOrderNumber;
       
-      
+       
     })
-    console.log( this.order);
+    console.log( this.order); 
+   
   }
 
 
