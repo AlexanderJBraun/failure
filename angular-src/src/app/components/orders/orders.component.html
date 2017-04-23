@@ -1,5 +1,6 @@
  <h2 class="page-header">Invoice Management</h2>
- 
+ <p-tabView>
+     <p-tabPanel header = "Customer Invoice">
  <p-dataTable #orderDT [value]="orders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm"> 
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Invoice List</p-header>
     <p-column field="date" header="ORDER_DATE" [sortable]="true">
@@ -68,6 +69,90 @@
         </div>
     </p-footer>
 </p-dialog>
+     </p-tabPanel>
+     <p-tabPanel header="Liquid Nitro Invoice">
+         
+
+
+
+
+
+  <p-dataTable #orderDT [value]="vorders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm"> 
+    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Invoice List</p-header>
+    <p-column field="date" header="ORDER_DATE" [sortable]="true">
+        <ng-template let-col let-order="rowData" pTemplate="body">
+            <span>{{vorder[col.field] | date: 'MM/dd/yyyy HH:mm'}}</span>
+        </ng-template>
+    </p-column>
+    <p-column field="orderNumber" header="ORDER_NUM" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="customerbName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="Total" header="ORDER_TOTAL" [sortable]="true">
+        <ng-template let-col let-order="rowData" pTemplate="body">
+            <span>{{vorder[col.field] | currency:'USD':true:'1.2-2'}}</span>
+        </ng-template>
+    </p-column>
+    <p-column header="isDelivered" [style]="{'text-align':'center'}">
+        <ng-template let-col let-order="rowData" pTemplate="body">
+            <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox>
+        </ng-template>
+    </p-column>
+    <p-column header="isPaid" [style]="{'text-align':'center'}">
+        <ng-template let-col let-order="rowData" pTemplate="body">
+            <p-checkbox  binary="true" (click)="incrementVal(vorder._id)"></p-checkbox>
+        </ng-template>
+    </p-column>
+    <p-footer></p-footer>
+ </p-dataTable>
+    <p-contextMenu #cm [model]="items"></p-contextMenu>
+    <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500">
+        <span *ngFor="let product of vselectProdName ;  let i = index">
+
+            <div class="ui-g">{{vselectProdName[i]}}</div>
+         </span>
+    </p-dialog>
+<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button>
+<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="vorderDT.exportCSV()"></button>
+
+<p-dialog header="Invoice Details" [(visible)]="vdisplayDialog" [responsive]="true" [modal]="true" [width]="500">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="vorder">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><label for="date">Order date: </label></div>
+            <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="vorder.date" [disabled]="disabled"/></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><label for="vorderNumber">Order number: </label></div>
+            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.orderNumber" [disabled]="disabled"/></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><label for="customerbName">Business name: </label></div>
+            <div class="ui-grid-col-4"><input pInputText   size="20" [(ngModel)]="vorder.customerbName" [disabled]="disabled"/></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><label for="Customer">Customer name: </label></div>
+            <div class="ui-grid-col-4"><input pInputText size="20" [(ngModel)]="vorder.Customer" [disabled]="disabled"/></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-3"><label for="Total">Order total: </label></div>
+            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.Total"[disabled]="disabled"/></div>
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+            <button type="button" class="btn btn-danger" (click)="deleteOrder()"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" id="saveOrder" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+
+         
+     </p-tabPanel>
+ </p-tabView>
+
+
  <!--<div *ngFor="let order of orders | slice: 1;  let i = index">
    <p>{{order.Customer}},
      {{order.orderNumber}},

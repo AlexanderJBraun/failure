@@ -113,7 +113,7 @@ headers.append('Content-Type','application/json');
 return this.http.post('http://localhost:3000/vendor/invoice',body,{headers:headers})
 }
   
-
+ 
   addInventory(add,pID)
   {
     console.log("in update Inv");

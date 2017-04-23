@@ -288,7 +288,7 @@ getProducts() {
       
       
     })
-    console.log("inside of ordernumver" + this.order);
+    console.log( this.order);
   }
 
 

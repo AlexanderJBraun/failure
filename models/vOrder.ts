@@ -1,4 +1,4 @@
-export interface OrderClass{
+export interface vOrderClass{
     orderNumber:Number,
     date: Date,
     customer:String,
