@@ -19,25 +19,42 @@
         <ng-template let-col let-order="rowData" pTemplate="body">
             
          <input *ngIf="order.isDel == false" type="checkbox"   binary="true" (click)="isDel(order._id)"/>
-         <input *ngIf="order.isDel == true" type="checkbox" [disabled] = "true" checked binary="true" />
+         <input *ngIf="order.isDel == true" type="checkbox" disabled = "true" checked binary="true" />
             
         </ng-template>
     </p-column>
     <p-column header="isPaid" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
             <input *ngIf="order.isPaid == false" type="checkbox"   binary="true" (click)="isPaid(order._id)"/>
-             <input *ngIf="order.isPaid == true" type="checkbox" [disabled] = "true" checked binary="true" (click)="isPaid(order._id)"/>
+             <input *ngIf="order.isPaid == true" type="checkbox" disabled = "true" checked binary="true" (click)="isPaid(order._id)"/>
         </ng-template>
     
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>
     <p-contextMenu #cm [model]="items"></p-contextMenu>
-    <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500">
-        <span *ngFor="let product of selectProdName ;  let i = index">
-
-            <div class="ui-g">{{selectProdName[i]}}</div>
-         </span>
+    <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500" [height]="450" [resizable]="true" [responsive]="true">
+           <div class="container" style="overflow-y: scroll; width: 450px; height: 350px;">   
+                <span *ngFor="let product of selectProdName; let i = index;">
+                    <div class="ui-g">
+                        <div class="ui-g-4">Product name: </div>
+                        <div class="ui-g-6">{{selectProdName[i]}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Product price: </div>
+                        <div class="ui-g-6">{{selectProdPrice[i] | currency:'USD':true:'1.2-2'}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Quantity: </div>
+                        <div class="ui-g-6">{{selectProdQuant[i]}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Sub Total: </div>
+                        <div class="ui-g-6">{{selectProdSub[i] | currency:'USD':true:'1.2-2'}}</div>
+                    </div>
+                    <hr>
+                 </span>   
+            </div>
     </p-dialog>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="orderDT.exportCSV()"></button>
@@ -77,19 +94,14 @@
      </p-tabPanel>
      <p-tabPanel header="Liquid Nitro Invoice">
          
-
-
-
-
-
-  <p-dataTable #orderDT [value]="vorders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm"> 
+  <p-dataTable #orderDT [value]="vorders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices"> 
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Invoice List</p-header>
     <p-column field="date" header="ORDER_DATE" [sortable]="true">
         <ng-template let-col let-order="rowData" pTemplate="body">
             <span>{{vorder[col.field] | date: 'MM/dd/yyyy HH:mm'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="orderNumber" header="ORDER_NUM" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="vendorOrderNumber" header="ORDER_NUM" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="customerbName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="Total" header="ORDER_TOTAL" [sortable]="true">
         <ng-template let-col let-order="rowData" pTemplate="body">
@@ -108,13 +120,7 @@
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>
-    <p-contextMenu #cm [model]="items"></p-contextMenu>
-    <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500">
-        <span *ngFor="let product of vselectProdName ;  let i = index">
 
-            <div class="ui-g">{{vselectProdName[i]}}</div>
-         </span>
-    </p-dialog>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="vorderDT.exportCSV()"></button>
 
@@ -125,7 +131,7 @@
             <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="vorder.date" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="vorderNumber">Order number: </label></div>
+            <div class="ui-grid-col-3"><label for="vendorOrderNumber">Order number: </label></div>
             <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.orderNumber" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">

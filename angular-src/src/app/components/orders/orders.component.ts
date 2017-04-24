@@ -22,9 +22,9 @@ export class OrdersComponent implements OnInit {
   type: string;
   detailDialog: boolean;
   selectProdName: any=[{}];
-  selectProdPrice: string[];
-  selectProdQuant: string[];
-  selectProdSub: string[];
+  selectProdPrice: any=[];
+  selectProdQuant: any=[{}];
+  selectProdSub: any=[];
   items: MenuItem[];
   value:true;
 
@@ -36,6 +36,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() 
   {
+        this.detailDialog=false;
     this.orderService.getOrders().subscribe(orders =>{
         this.orders = orders;
 
@@ -48,7 +49,7 @@ export class OrdersComponent implements OnInit {
      
     ];
     
-    this.detailDialog=false;
+
   }
 
   showDialogToAdd(){
@@ -104,13 +105,19 @@ export class OrdersComponent implements OnInit {
   
   viewProd(order: OrderClass){
     this.selectProdName.splice(0,this.selectProdName.length);
+    this.selectProdPrice.splice(0, this.selectProdPrice.length);
+    this.selectProdQuant.splice(0, this.selectProdQuant.length);
+    this.selectProdSub.splice(0, this.selectProdSub.length);
     console.log(order.products);
-      var data:any = [{}];
+      // var data:any = [{}];
     if(!this.detailDialog){
       this.detailDialog=true;
       for(var index in order.products)
       {
        this.selectProdName.push(order.products[index].name);
+       this.selectProdPrice.push(order.products[index].price); 
+       this.selectProdQuant.push(order.products[index].quantity);
+       this.selectProdSub.push(order.products[index].subTotal);
       }
       
       console.log(this.selectProdName);
