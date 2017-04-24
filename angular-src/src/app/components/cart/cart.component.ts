@@ -11,7 +11,7 @@ import {UserClass} from '../../../../../models/user';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {CouponClass} from '../../../../../models/coupon';
 import {ProfileService} from '../../services/profile.service';
-
+import {SelectItem} from 'primeng/primeng';
 
 @Component({
   selector: 'app-cart',
@@ -26,11 +26,15 @@ export class CartComponent implements OnInit {
   subTotalSum: number;
   totalSum: number;
   user:Object;
+  role: String;
   email:String;
   order:any;
   coupons: CouponClass[];
   couponDiscount: number = 0;
   couponAmount: string;
+  users: UserClass[];
+  userDropbox: SelectItem[] = [];
+  selectedUser: Object;
 
   public cart=JSON.parse(localStorage.getItem('my-app.cartItem'));
   
@@ -118,19 +122,33 @@ export class CartComponent implements OnInit {
     this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
       this.email= profile.user.email;
+      this.role = profile.user.role;
     });
       this.getOrderNumber();
 
       this.authService.getCoupon().subscribe(coupons => {
         this.coupons = coupons;
       });
+          this.authService.getUser().subscribe(users => {
+        this.users = users;
+        console.log(this.users + " 1"); 
+
+      var temp;
+      console.log(this.users);
+      for(var i = 0; i < this.users.length; i++){
+          temp = {label: this.users[i].username, value:this.users[i]};
+          this.userDropbox.push(temp);
+      }
+      });
   }
 
 
   sendInvoice()
   {
-
-   
+    if(this.selectedUser != undefined)
+    {
+      this.user = this.selectedUser;
+    }
   // this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
       this.profileService.updateSales(this.totalSum).subscribe();
       this.updateInventory();  

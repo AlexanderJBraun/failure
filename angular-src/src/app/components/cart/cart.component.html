@@ -37,7 +37,12 @@
                 <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">SubTotal: </div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6">${{subTotalSum | number : '1.2-2'}} </div>                
                
-                <div class="ui-lg-8"><input pInputText id="coupon" [(ngModel)]="coupon" size="20" />
+                <div class="ui-lg-8">
+                <div *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' ">
+                <p-dropdown [options]="userDropbox" [(ngModel)]="selectedUser" [style]="{'width':'150px'}" placeholder="Select Username"></p-dropdown>
+                <p>Place Order For: {{selectedUser ? selectedUser.fName + " " + selectedUser.lName : 'none'}}</p>
+               </div>
+                <input pInputText id="coupon" [(ngModel)]="coupon" size="20" />
                 <button pButton type="button" class="btn btn-primary" label="ENTER COUPON" (click)="useCoupon(coupon)"></button> </div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Discount: </div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6">${{couponAmount}}</div>
