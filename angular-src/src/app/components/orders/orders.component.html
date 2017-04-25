@@ -1,7 +1,8 @@
  <h2 class="page-header">Invoice Management</h2>
- <p-tabView>
+ <p-tabView> <!--TabView starts-->
+     <!--Vendor Invoice starts here-->
      <p-tabPanel header = "Customer Invoice">
- <p-dataTable #orderDT [value]="orders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm"> 
+ <p-dataTable #orderDT [value]="orders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm1"> 
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Invoice List</p-header>
     <p-column field="date" header="ORDER_DATE" [sortable]="true">
         <ng-template let-col let-order="rowData" pTemplate="body">
@@ -32,7 +33,7 @@
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>
-    <p-contextMenu #cm [model]="items"></p-contextMenu>
+    <p-contextMenu #cm1 [model]="items"></p-contextMenu>
     <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500" [height]="450" [resizable]="true" [responsive]="true">
            <div class="container" style="overflow-y: scroll; width: 450px; height: 350px;">   
                 <span *ngFor="let product of selectProdName; let i = index;">
@@ -56,45 +57,46 @@
                  </span>   
             </div>
     </p-dialog>
-<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button>
+<!--<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button> Add invoices is integrated in Cart-->
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="orderDT.exportCSV()"></button>
 
-<p-dialog header="Invoice Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [width]="500">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="order">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="date">Order date: </label></div>
-            <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="order.date" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="orderNumber">Order number: </label></div>
-            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="order.orderNumber" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="customerbName">Business name: </label></div>
-            <div class="ui-grid-col-4"><input pInputText   size="20" [(ngModel)]="order.customerbName" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="Customer">Customer name: </label></div>
-            <div class="ui-grid-col-4"><input pInputText size="20" [(ngModel)]="order.Customer" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="Total">Order total: </label></div>
-            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="order.Total"[disabled]="disabled"/></div>
-        </div>
+        <p-dialog header="Invoice Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [width]="500">
+            <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="order">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="date">Order date: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="order.date" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="orderNumber">Order number: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="order.orderNumber" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="customerbName">Business name: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText   size="20" [(ngModel)]="order.customerbName" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="Customer">Customer name: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText size="20" [(ngModel)]="order.Customer" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="Total">Order total: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="order.Total"[disabled]="disabled"/></div>
+                </div>
 
-    </div>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-            <button type="button" class="btn btn-danger" (click)="deleteOrder()"><span class="fa fa-close"></span> Delete</button>
-            <button type="button" id="saveOrder" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
-        </div>
-    </p-footer>
-</p-dialog>
-     </p-tabPanel>
-     <p-tabPanel header="Liquid Nitro Invoice">
-         
-  <p-dataTable [value]="vorders | slice:1" selectionMode="single" [(selection)]=selectedvOrder (onRowSelect)="onRowvSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="vinvoices"> 
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+                    <button type="button" class="btn btn-danger" (click)="deleteOrder()"><span class="fa fa-close"></span> Delete</button>
+                    <button type="button" id="saveOrder" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> OK</button>
+                </div>
+            </p-footer>
+        </p-dialog>
+     </p-tabPanel><!--End Customer Invoice-->
+
+<!--Vendor Invoice starts here-->
+     <p-tabPanel header="Liquid Nitro Invoice">      
+  <p-dataTable [value]="vorders | slice:1" selectionMode="single" [(selection)]=selectedvOrder (onRowSelect)="onRowvSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="vinvoices" [contextMenu]="cm2"> 
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Vendor Invoice List</p-header>
     <p-column field="vDate" header="ORDER_DATE" [sortable]="true">
         <ng-template let-col let-vorder="rowData" pTemplate="body">
@@ -114,49 +116,58 @@
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>
+    <p-contextMenu #cm2 [model]="items2"></p-contextMenu>
+    <p-dialog [(visible)]="detailvDialog" header="Vendor order details" [width]="500" [height]="450" [resizable]="true" [responsive]="true">
+           <div class="container" style="overflow-y: scroll; width: 450px; height: 350px;">   
+                <span *ngFor="let product of selectvProdName; let i = index;">
+                    <div class="ui-g">
+                        <div class="ui-g-4">Product name: </div>
+                        <div class="ui-g-6">{{selectvProdName[i]}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Product price: </div>
+                        <div class="ui-g-6">{{selectvProdPrice[i] | currency:'USD':true:'1.2-2'}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Quantity: </div>
+                        <div class="ui-g-6">{{selectvProdQuant[i]}}</div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-4">Sub Total: </div>
+                        <div class="ui-g-6">{{selectvProdSub[i] | currency:'USD':true:'1.2-2'}}</div>
+                    </div>
+                    <hr>
+                 </span>   
+            </div>
+    </p-dialog>
 
-<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new invoice"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="vorderDT.exportCSV()"></button>
 
-<p-dialog header="Invoice Details" [(visible)]="displayvDialog" [responsive]="true" [modal]="true" [width]="500">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="vorder">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="date">Order date: </label></div>
-            <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="vorder.date" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="vendorOrderNumber">Order number: </label></div>
-            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.orderNumber" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="customerbName">Business name: </label></div>
-            <div class="ui-grid-col-4"><input pInputText   size="20" [(ngModel)]="vorder.customerbName" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="Customer">Customer name: </label></div>
-            <div class="ui-grid-col-4"><input pInputText size="20" [(ngModel)]="vorder.Customer" [disabled]="disabled"/></div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-3"><label for="Total">Order total: </label></div>
-            <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.Total"[disabled]="disabled"/></div>
-        </div>
-
-    </div>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-            <button type="button" class="btn btn-danger" (click)="deleteOrder()"><span class="fa fa-close"></span> Delete</button>
-            <button type="button" id="saveOrder" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
-        </div>
-    </p-footer>
-</p-dialog>
-
-
-
-
-         
-     </p-tabPanel>
- </p-tabView>
+        <p-dialog header="Vendor Invoice Details" [(visible)]="displayvDialog" [responsive]="true" [modal]="true" [width]="500" dismissableMask="true">
+            <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="vorder">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="date">Order date: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText [type]="type" [(ngModel)]="vorder.vDate" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="vendorOrderNumber">Order number: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.vendorOrderNumber" [disabled]="disabled"/></div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label for="Total">Order total: </label></div>
+                    <div class="ui-grid-col-4"><input pInputText  size="20" [(ngModel)]="vorder.vTotal"[disabled]="disabled"/></div>
+                </div>
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+                    <button type="button" class="btn btn-danger" (click)="deletevOrder()"><span class="fa fa-close"></span> Delete</button>
+                    <button type="button" id="saveOrder" class="btn btn-success" (click)="saveV()"><span class="fa fa-check"></span> OK</button>
+                </div>
+            </p-footer>
+        </p-dialog>
+     </p-tabPanel> <!--End Vendor Invoice-->
+ </p-tabView> <!--TabView ends-->
 
 <!--<div *ngFor="let vorder of vorders | slice: 1; let i = index">
     {{vorder.vendorOrderNumber}}

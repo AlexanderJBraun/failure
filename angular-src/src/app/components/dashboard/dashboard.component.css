@@ -1,12 +1,12 @@
 .btn-primary{
     background-color: lightblue !important;
-    color: grey;
+    color: darkslategrey;
     transition: .5s ease;
     border: 1px solid lightblue;
 }
 .btn-primary:hover{
     background-color: dodgerblue !important;
-    color: black !important;
+    color: white !important;
     border: 1px solid dodgerblue;
 }
 
@@ -25,28 +25,27 @@
 
 .btn-success{
     background-color: lightblue !important;
-    color: grey;
+    color: darkslategrey;
     transition: .5s ease;
     border: 1px solid lightblue;
 }
 
 .btn-success:hover{
     background-color: limegreen !important;
-    color: black;
+    color: white;
     border: 1px solid limegreen;
 }
 
 .btn-danger{
-    background-color: lightblue !important;
-    color: grey;
+    background-color: orangered;
     transition: .5s ease;
-    border: 1px solid lightblue;
+    bottom: 6px;
 }
 
 .btn-danger:hover{
-background-color: red !important;
-color: gainsboro!important;
-border: 1px solid red !important;
+background-color: #ededed !important;
+color: #3c3c3c !important;
+border: 1px solid #fff !important;
 
 }
 button{

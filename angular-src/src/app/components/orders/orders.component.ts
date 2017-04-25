@@ -21,11 +21,17 @@ export class OrdersComponent implements OnInit {
   disabled: boolean = true;
   type: string;
   detailDialog: boolean;
+  detailvDialog: boolean;
   selectProdName: any=[{}];
   selectProdPrice: any=[];
   selectProdQuant: any=[{}];
   selectProdSub: any=[];
+  selectvProdName: any=[{}];
+  selectvProdPrice: any=[];
+  selectvProdQuant: any=[{}];
+  selectvProdSub: any=[];
   items: MenuItem[];
+  items2: MenuItem[];
   value:true;
   vorders: vOrderClass[];
   displayvDialog: boolean;
@@ -54,6 +60,9 @@ export class OrdersComponent implements OnInit {
      
     ];
     
+    this.items2=[
+      {label: 'View details', command: (event) => this.viewvProd(this.selectedvOrder)}
+    ];
 
   }
 
@@ -94,8 +103,8 @@ export class OrdersComponent implements OnInit {
     this.disabled = true;
     this.type="text";
     this.plusOrder = false;  
-    this.order = this.cloneOrder(event.data);
-    this.displayDialog = true;
+    this.vorder = this.clonevOrder(event.data);
+    this.displayvDialog = true;
   }
 
   cloneOrder(o: OrderClass): OrderClass{
@@ -146,6 +155,26 @@ export class OrdersComponent implements OnInit {
       
     }else {
       this.detailDialog = false;
+    }
+  }
+
+  viewvProd(vorder: vOrderClass){
+    this.selectvProdName.splice(0, this.selectvProdName.length);
+    this.selectvProdPrice.splice(0, this.selectvProdPrice.length);
+    this.selectvProdQuant.splice(0, this.selectvProdQuant.length);
+    this.selectvProdSub.splice(0, this.selectvProdSub.length);
+
+    if(!this.detailvDialog){
+      this.detailvDialog = true;
+
+      for(var index in vorder.vProducts){
+        this.selectvProdName.push(vorder.vProducts[index].name);
+        this.selectvProdPrice.push(vorder.vProducts[index].price);
+        this.selectvProdQuant.push(vorder.vProducts[index].quantity);
+        this.selectvProdSub.push(vorder.vProducts[index].subTotal);
+      }
+    }else{
+      this.detailvDialog=false;
     }
   }
   

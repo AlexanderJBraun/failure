@@ -9,25 +9,25 @@
 
 .btn-primary{
     background-color: lightblue !important;
-    color: grey;
+    color: darkslategrey;
     transition: .5s ease;
     border: 1px solid lightblue;
 }
 .btn-primary:hover{
     background-color: dodgerblue !important;
-    color: black !important;
+    color: white !important;
     border: 1px solid dodgerblue;
 }
 
 .btn-success{
-    background-color: #9ea8a0 !important;
-    color: white;
+    background-color: lightblue !important;
+    color: darkslategrey;
     transition: .5s ease;
-    border: 1px solid #9ea8a0;
+    border: 1px solid lightblue;
 }
 
 .btn-success:hover{
     background-color: limegreen !important;
-    color: black;
+    color: white;
     border: 1px solid limegreen;
 }
