@@ -34,7 +34,9 @@ export class LandingComponent implements OnInit {
     this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/5.png', alt:'Description for Image 5', title:'Title 5'});
     this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/6.png', alt:'Description for Image 6', title:'Title 6'});
     this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/7.png', alt:'Description for Image 7', title:'Title 7'});
-
+    this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/8.png', alt:'Description for Image 8', title:'Title 8'});
+    this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/9.png', alt:'Description for Image 9', title:'Title 9'});
+    this.images.push({source:'https://s3.amazonaws.com/ctres2428.com/images/img/10.png', alt:'Description for Image 10', title:'Title 10'});
    
   }
 

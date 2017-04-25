@@ -293,9 +293,9 @@ export class UsersComponent implements OnInit {
         this.selectUserEmail = user.email; 
         this.selectUserRole = user.role;
         if(user.address == undefined
-        && user.city == undefined
-        && user.state == undefined
-        && user.zip == undefined){
+        || user.city == undefined
+        || user.state == undefined
+        || user.zip == undefined){
             this.detailDialog = false;
             this.selectUserAddr == null;
             this.selectUserCity == null;
@@ -310,6 +310,8 @@ export class UsersComponent implements OnInit {
       }else {
         this.detailDialog=false;
       }
+
+      console.log(this.selectUserAddr);
     }
     
     editUser(user){
@@ -345,6 +347,8 @@ export class UsersComponent implements OnInit {
             this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Duplicate Username'});
         }
     }
+
+
 
 }
 

@@ -1,8 +1,8 @@
-<h2 class="page-header">Customer Management</h2>
+<h2 class="page-header">User Management</h2>
 
 <p-growl [value]="msgs" [style]="{'position':'fixed', 'top':'24%', 'left':'52%'}"></p-growl>
 <p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users" [contextMenu]="cm">
-    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Customers List</p-header>
+    <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Users List</p-header>
     <p-column field="fName" header="FIRST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="lName" header="LAST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="username" header="USERNAME" [filter]="true" filterPlaceholder="Search"></p-column>
@@ -37,7 +37,7 @@
                     <div class="ui-g-6">{{selectUserRole}}</div>
                 </div>
         </p-dialog>
-<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new customer"></button>
+<button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new user"></button>
 <button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="userDT.exportCSV()"></button>
 
 <p-dialog header="Customer Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" [width]="700">
@@ -62,9 +62,9 @@
         <hr class="hr-text" data-content="Personal Information">
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="fName">First Name</label></div>
-            <div class="ui-grid-col-3"><input pInputText id="fName" size="20" [(ngModel)]="user.fName" [disabled]="disabled"/></div>
+            <div class="ui-grid-col-3"><input pInputText type="text" id="fName" size="20" [(ngModel)]="user.fName" [disabled]="disabled" /></div>
             <div class="ui-grid-col-2"><label for="lName">Last Name</label></div>
-            <div class="ui-grid-col-3"><input pInputText id="lName" size="20" [(ngModel)]="user.lName" [disabled]="disabled"/></div>
+            <div class="ui-grid-col-3"><input pInputText type="text" id="lName" size="20" [(ngModel)]="user.lName" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="bName">Business Name</label></div>
@@ -76,7 +76,7 @@
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="city">City</label></div>
-            <div class="ui-grid-col-4"><input pInputText id="city" size="20" [(ngModel)]="user.city" [disabled]="disabled"/></div>
+            <div class="ui-grid-col-4"><input pInputText type="text" id="city" size="20" [(ngModel)]="user.city" [disabled]="disabled"/></div>
         </div>
         <div class="ui-grid-row">
             <div class="ui-grid-col-2"><label for="state">State</label></div>

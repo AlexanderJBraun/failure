@@ -19,11 +19,11 @@
                         <span (click)=changeQuantity(cartEntity.product._id,-1) class="fa fa-minus" style="cursor:pointer"></span>&nbsp; &nbsp;<span id="number">{{cartEntity.quantity}}</span>&nbsp; &nbsp;<span (click)=changeQuantity(cartEntity.product._id,1) class="fa fa-plus pointer" style="cursor:pointer"></span>
                     </div>
                     <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
-                        <span id="number">${{cartEntity.product.price}}</span>
+                        <span id="number">{{cartEntity.product.price | currency:'USD':true:'1.2-2'}}</span>
                     </div>
                     <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
 
-                        <span id="number" decimals=".01"> ${{cartEntity.subTotal}}</span>
+                        <span id="number" decimals=".01"> {{cartEntity.subTotal | currency:'USD':true:'1.2-2'}}</span>
 
                     </div>
                     <div class="ui-lg-2 ui-md-2 ui-sm-2" style="text-align: center">
@@ -35,21 +35,21 @@
             <div class="ui-g" id="cartSum">
                 <div class="ui-lg-8"></div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">SubTotal: </div>
-                <div class="ui-lg-2 ui-md-6 ui-sm-6">${{subTotalSum | number : '1.2-2'}} </div>                
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">{{subTotalSum | currency:'USD':true:'1.2-2'}} </div>                
                
                 <div class="ui-lg-8">
                 <div *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' ">
-                <p-dropdown [options]="userDropbox" [(ngModel)]="selectedUser" [style]="{'width':'150px'}" placeholder="Select Username"></p-dropdown>
+                <p-dropdown [options]="userDropbox" [(ngModel)]="selectedUser" [style]="{'width':'150px'}" placeholder="Select Username" [filter]="true"></p-dropdown>
                 <p>Place Order For: {{selectedUser ? selectedUser.fName + " " + selectedUser.lName : 'none'}}</p>
                </div>
                 <input pInputText id="coupon" [(ngModel)]="coupon" size="20" />
                 <button pButton type="button" class="btn btn-primary" label="ENTER COUPON" (click)="useCoupon(coupon)"></button> </div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Discount: </div>
-                <div class="ui-lg-2 ui-md-6 ui-sm-6">${{couponAmount}}</div>
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">{{couponAmount | currency:'USD':true:'1.2-2'}}</div>
 
                 <div class="ui-lg-8"></div>
                 <div class="ui-lg-2 ui-md-6 ui-sm-6" style="font-weight: bold;">Total: </div>
-                <div class="ui-lg-2 ui-md-6 ui-sm-6">${{totalSum |  number : '1.2-2' }} </div>   
+                <div class="ui-lg-2 ui-md-6 ui-sm-6">{{totalSum | currency:'USD':true:'1.2-2'}} </div>   
             </div>
             <hr>
             <div class="ui-g">

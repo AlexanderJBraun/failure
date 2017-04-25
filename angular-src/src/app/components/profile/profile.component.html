@@ -4,7 +4,7 @@
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
-    <li *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' " class="list-group-item">Sales YTD : $ {{YTDS}}</li>
+    <li *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' " class="list-group-item">Sales YTD : {{YTDS | currency:'USD':true:'1.2-2'}}</li>
    
   </ul>
   </div>
@@ -15,7 +15,7 @@
         <div class="panel-body">
        <div class="ui-g">
             <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/dashboard']"><button type="button" pButton class="btn btn-primary" label="Product Management"></button></a></li></div>
-            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']"><button type="button" pButton class="btn btn-primary" label="Customer Management"></button></a></li></div>
+            <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/users']"><button type="button" pButton class="btn btn-primary" label="User Management"></button></a></li></div>
         </div>
         <div class="ui-g">
             <div class="ui-lg-6 ui-md-6 ui-sm-12"><li  [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}"><a [routerLink]="['/vendor']"><button type="button" pButton class="btn btn-primary" label="Vendor Management"></button></a></li></div>
@@ -45,15 +45,19 @@
      <div *ngIf="showForum">
        <div class="panel panel-default">
       <div class="panel-heading"> Change Password</div>
-     <span> Current Password </span>
-     <input pInputText id="password1" size="30" [(ngModel)]="currentPass" />
-     <br>
-     <span> New Password </span>
-     <input pInputText id="password2" size="30" [(ngModel)]="newPass" />
-     <br>
-     <span> Confirm New Password </span>
-     <input pInputText id="password3" size="30" [(ngModel)]="confirmNewPass" />
-       <br>
-     <button type="button" pButton class="btn btn-primary" label="Submit" (click)="changePassword(currentPass, newPass, confirmNewPass)"></button>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label>Current Password: </label></div>
+          <div class="ui-grid-col-4"><input pInputText id="password1" type="password" size="30" [(ngModel)]="currentPass" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label>New Password: </label></div>
+          <div class="ui-grid-col-4"><input pInputText id="password2" type="password" size="30" [(ngModel)]="newPass" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label>Confirm New Password: </label></div>
+          <div class="ui-grid-col-4"><input pInputText id="password3" type="password" size="30" [(ngModel)]="confirmNewPass" /></div>
+        </div>
+        <button type="button" pButton class="btn btn-success" label="Submit" (click)="changePassword(currentPass, newPass, confirmNewPass)"></button>
+        
      </div>
     </div>

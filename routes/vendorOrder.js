@@ -13,12 +13,13 @@ router.post('/saveorder', function(req, res, next)
 
    
     db.vendorOrder.insert({
-        "orderNumber":req.body.orderNumber,
-        "date": new Date(),
-        "Customer": req.body.userID.fName + req.body.userID.lName,
-        "userId":req.body.userID._id,
-        "products": req.body.order,
-        "Total" : req.body.totalSum
+        "vendorOrderNumber":req.body.orderNumber,
+        "vDate": new Date(),
+        // "Customer": req.body.userID.fName + req.body.userID.lName,
+        // "userId":req.body.userID._id,
+        "vProducts": req.body.order,
+        "vTotal" : req.body.totalSum,
+        "isReceived": false
                    
     })
 
@@ -30,14 +31,14 @@ router.post('/saveorder', function(req, res, next)
  router.get('/updateOrderNumber', function(req,res,next)
  {
     console.log('update order number');
-      db.vendorOrder.update({_id:mongojs.ObjectId('58f7e374d64390203c48f18b')}, {$inc:{vendorOrderNumber:1}});
+      db.vendorOrder.update({_id:mongojs.ObjectId('58ffb349ecfa4c161cb3b4a7')}, {$inc:{vendorOrderNumber:1}});
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
-    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f7e374d64390203c48f18b')},function(err,vendorOrderNumber){
+    db.vendorOrder.findOne({_id:mongojs.ObjectId('58ffb349ecfa4c161cb3b4a7')},function(err,vendorOrderNumber){
         if(err){
             res.send(err)
         }

@@ -23,11 +23,11 @@
                         </div>
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-2">Price: </div>
-                            <div class="ui-grid-col-10">${{product.vendorPrice}}</div>
+                            <div class="ui-grid-col-10">{{product.vendorPrice | currency:'USD':true:'1.2-2'}}</div>
                         </div>
                         <div class="ui-grid-row">
                             <p-spinner size="10" [(ngModel)]="quant[i]" [min]="1"  style="width: 100px;" name="quant" ></p-spinner>
-                            <button type="button" style="width: 100px; left: 10px;" pButton icon="fa-plus" (click)="addCart(product, quant[i])" class="btn btn-success" label="Add"></button>
+                            <button type="button" style="width: 100px; left: 10px;" pButton icon="fa-plus" (click)="addCart(product, quant[i])" class="btn btn-primary" label="Add"></button>
                         </div>                
                     </div>
                 </div>
@@ -36,27 +36,27 @@
     </ng-template>
 </p-dataList>
 
-<button (click)="show= !show">{{show? 'Hide Add Product':'Show Add Product'}}</button>
-<button (click)="showProduct= !showProduct">{{showProduct? 'Hide Send Vender Invoice':'Show Send Vendor Invoice'}}</button>
+<button class="btn btn-primary" (click)="show= !show">{{show? 'Hide Add Product':'Show Add Product'}}</button>
+<button class="btn btn-primary" (click)="showProduct= !showProduct">{{showProduct? 'Hide Send Vender Invoice':'Show Send Vendor Invoice'}}</button>
 
 <div *ngIf="show">
 
-<p-dataTable #prodDT [value]="products" [paginator]="true" rows="15" [responsive]="true" exportFilename="products" [editable]="true" expandableRows="true">
+<p-dataTable [value]="products" [paginator]="true" rows="15" [responsive]="true" expandableRows="true">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
     </p-header>
     <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search" [editable]="true"></p-column>
-    <p-column field="description" header="DESCRIPTION" [editable]="true"></p-column>
-    <p-column field="price" header="PRICE" [editable]="true" >
+    <p-column field="description" header="DESCRIPTION" ></p-column>
+    <p-column field="price" header="PRICE"  >
         <ng-template let-col let-product="rowData" pTemplate="body">
-            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+            <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-        <p-column field="vendorPrice" header="VENDOR_PRICE" [editable]="true" >
+        <p-column field="vendorPrice" header="VENDOR_PRICE"  >
         <ng-template let-col let-product="rowData" pTemplate="body">
-            <span>{{product[col.field] | currency:'USD':true:'.00'}}</span>
+            <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true" [editable]="true">
+    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true">
     </p-column>
     <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
         <ng-template let-product pTemplate="rowexpansion">
@@ -69,7 +69,6 @@
     <p-footer></p-footer>
 </p-dataTable>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new product"></button>
-<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="prodDT.exportCSV()"></button>
 
 <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" showEffect="fade"  [width]="400">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
@@ -115,7 +114,7 @@
 </div>
 
 <div *ngIf="showProduct">
-
+        <br><br><br>
         <p class="bg-info" *ngIf="cartEntities && cartEntities.length == 0">... is empty</p>
 
 
@@ -160,3 +159,4 @@
                 <div class="ui-lg-3 ui-md-6 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="btn btn-success" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
             </div>
     </div>
+<br><br><br><br>

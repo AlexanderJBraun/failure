@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from '../../services/order.service';
-import { VendorService} from '../../services/vendor.service';
+import {VendorService} from '../../services/vendor.service';
 import {OrderClass} from '../../../../../models/order';
 import {MenuItem} from 'primeng/primeng';  
 import {vOrderClass} from '../../../../../models/vOrder';
@@ -27,6 +27,12 @@ export class OrdersComponent implements OnInit {
   selectProdSub: any=[];
   items: MenuItem[];
   value:true;
+  vorders: vOrderClass[];
+  displayvDialog: boolean;
+  vorder: vOrderClass = new PrimevOrder();
+  plusvOrder: boolean;
+  selectedvOrder: vOrderClass;
+
 
 
   
@@ -39,11 +45,10 @@ export class OrdersComponent implements OnInit {
         this.detailDialog=false;
     this.orderService.getOrders().subscribe(orders =>{
         this.orders = orders;
-
-  
-        
     });
-
+    this.vendorService.getOrders().subscribe(orders =>{
+        this.vorders = orders;
+    });
     this.items=[ 
       {label: 'View details', command: (event) => this.viewProd(this.selectedOrder)}
      
@@ -85,6 +90,14 @@ export class OrdersComponent implements OnInit {
     this.displayDialog = true;
   }
 
+    onRowvSelect(event){
+    this.disabled = true;
+    this.type="text";
+    this.plusOrder = false;  
+    this.order = this.cloneOrder(event.data);
+    this.displayDialog = true;
+  }
+
   cloneOrder(o: OrderClass): OrderClass{
     let order = new PrimeOrder();
     for(let prop in o){
@@ -93,13 +106,22 @@ export class OrdersComponent implements OnInit {
     return order;
   }
 
+  clonevOrder(v: vOrderClass): vOrderClass{
+    let vorder = new PrimevOrder();
+    for(let prop in v){
+      vorder[prop]=v[prop];
+    }
+    return vorder;
+  }
+
  
 
 
   findSelectedOrderIndex(): number{
     return this.orders.indexOf(this.selectedOrder);
-
-     
+  }
+   findSelectedvOrderIndex(): number{
+    return this.vorders.indexOf(this.selectedvOrder);
   }
  
   
@@ -157,3 +179,12 @@ class PrimeOrder implements OrderClass {
 
 }
 
+class PrimevOrder implements vOrderClass {
+  vendorOrderNumber: Number;
+  vDate: Date;
+  vProducts: { name: string; price: number; quantity: number; subTotal: string; };
+  vTotal: String;
+  isReceived: Boolean;
+
+
+}
