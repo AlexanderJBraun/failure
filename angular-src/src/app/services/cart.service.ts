@@ -122,22 +122,23 @@ return this.http.post('http://localhost:3000/carts/invoice',body,{headers:header
 
   updateInventory(deduct,pID)
   {
-    console.log("in update Inv");
+ 
     let data = {pID,deduct}
     return this.http.put('http://localhost:3000/products/updateinventory',data);
   }
 
   addInventory(add,pID)
   {
-    console.log("in add Inv");
+
     let data = {pID,add}
     return this.http.put('http://localhost:3000/products/addinventory',data);
   }
 
 editProduct(data)
   {
-    console.log("Inside of edit prodcut");
-    return this.http.post('http://localhost:3000/products/editproduct',data);
+     let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/products/editproduct',data,{headers:headers}).map(res => res.json());
      
   }
 

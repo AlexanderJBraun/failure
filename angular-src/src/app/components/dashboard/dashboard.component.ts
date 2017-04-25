@@ -100,12 +100,13 @@ export class DashboardComponent implements OnInit {
       
       if(this.plusProduct)
       {
+        console.log("in new product");
         this.authService.addProduct(this.product)
             .subscribe(data => {
 
               if(data.success){
                 this.flashMessage.show('Product added ', {cssClass: 'alert-success', timeout: 3000});
-                this.router.navigate(['/products']);
+               
               } else {
                 this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 3000});
               }
@@ -113,11 +114,13 @@ export class DashboardComponent implements OnInit {
           });  
       }
       else {
-      
+         
         this.editProduct(product);
-       // this.ngOnInit();
+   
+
       }
-        
+      
+   
       this.product=null;
       this.displayDialog=false;
      
@@ -183,11 +186,23 @@ export class DashboardComponent implements OnInit {
 
     editProduct(product)
     {
-      console.log(product);
-      this.cartService.editProduct(product).subscribe();
-      //window.location.reload();
-      //this.ngOnInit();
-    }
+   
+      this.cartService.editProduct(product).subscribe(data =>{
+        if (data.success == true)
+         {
+      this.flashMessage.show('Product Saved', {
+          cssClass: 'alert-success',
+          timeout: 5000});
+      } 
+              this.authService.getProduct().subscribe(products => {
+      this.products = products;
+    });
+
+      });
+ 
+     // this.ngOnInit();
+      
+  }
 
 
 
