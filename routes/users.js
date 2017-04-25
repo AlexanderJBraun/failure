@@ -113,8 +113,6 @@ router.delete('/user/:id', function(req, res, next){
 });
 
 router.post('/editpassword', function(req, res, next){
-  console.log("PLEASE WORK");
-console.log(req.body);
 
 
     User.comparePassword(req.body.password, req.body.user.password, (err, isMatch) => {
@@ -127,7 +125,7 @@ console.log(req.body);
     } else {
       res.json({success: true, msg:'password hashed'});     
        db.users.update({_id: mongojs.ObjectId(req.body.user._id)}, {username:req.body.user.username,
-                                                                    fname:req.body.user.fname,
+                                                                    fName:req.body.user.fName,
                                                                     lName: req.body.user.lName,
                                                                     bName: req.body.user.bName,
                                                                     pNum: req.body.user.pNum,
@@ -148,9 +146,69 @@ console.log(req.body);
         return res.json({success: false, msg: 'Wrong password'});
       }
     });
-
-
 });
+
+
+router.post('/edituser', function(req, res, next){
+          
+    var userPassword;
+     
+    db.users.findOne({_id:mongojs.ObjectId(req.body._id)},function(err,user){
+      console.log(user.password);
+      if (user.password != req.body.password){
+        console.log("breaks here");
+        User.hashPassword(req.body.password, (err, newpassword) => {
+        if(err){
+          console.log(err);
+          res.json({success: false, msg:'Failed to hash password'});
+        } 
+        else {
+          res.json({success: true, msg:'password hashed'}); 
+              userPassword = newpassword;
+              db.users.update({_id: mongojs.ObjectId(req.body._id)}, {username:req.body.username,
+                                                                    fName:req.body.fName,
+                                                                    lName: req.body.lName,
+                                                                    bName: req.body.bName,
+                                                                    pNum: req.body.pNum,
+                                                                    mNum: req.body.mNum,
+                                                                    fNum: req.body.fNum,
+                                                                    region: req.body.region,
+                                                                    city: req.body.city,
+                                                                    state: req.body.state,
+                                                                    zip: req.body.zip,
+                                                                    password: userPassword,
+                                                                    email:req.body.email,
+                                                                    role: req.body.role
+                                                                    });      
+             }
+          });
+        }
+
+      else if(user.password == req.body.password)
+      {
+       userPassword = req.body.password;
+       db.users.update({_id: mongojs.ObjectId(req.body._id)}, {username:req.body.username,
+                                                                    fName:req.body.fName,
+                                                                    lName: req.body.lName,
+                                                                    bName: req.body.bName,
+                                                                    pNum: req.body.pNum,
+                                                                    mNum: req.body.mNum,
+                                                                    fNum: req.body.fNum,
+                                                                    region: req.body.region,
+                                                                    city: req.body.city,
+                                                                    state: req.body.state,
+                                                                    zip: req.body.zip,
+                                                                    password: userPassword,
+                                                                    email:req.body.email,
+                                                                    role: req.body.role
+                                                                    });
+      }
+        });   
+
+
+    
+    });
+
 
 module.exports = router;
 

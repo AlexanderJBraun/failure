@@ -58,9 +58,13 @@ export class ProfileComponent implements OnInit {
         this.flashMessage.show('Password Successfully Changed', {
           cssClass: 'alert-success',
           timeout: 5000});
- (<HTMLInputElement>document.getElementById("password1")).value = "";
- (<HTMLInputElement>document.getElementById("password2")).value = "";
- (<HTMLInputElement>document.getElementById("password3")).value = "";
+          (<HTMLInputElement>document.getElementById("password1")).value = "";
+          (<HTMLInputElement>document.getElementById("password2")).value = "";
+          (<HTMLInputElement>document.getElementById("password3")).value = "";
+          
+          this.authService.getProfile().subscribe(profile => {
+          this.user = profile.user;
+          });
 
       } else {
         this.flashMessage.show(data.msg, {
