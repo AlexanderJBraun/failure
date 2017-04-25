@@ -142,6 +142,13 @@ editProduct(data)
      
   }
 
+editUser(data)
+  {
+     let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/users/edituser',data,{headers:headers}).map(res => res.json());
+     
+  }
 
 
 

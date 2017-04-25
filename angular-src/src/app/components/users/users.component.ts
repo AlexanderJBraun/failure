@@ -7,6 +7,7 @@ import {UserClass} from '../../../../../models/User';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
 import {MenuItem} from 'primeng/primeng';            //api
 import {DataTableModule,SharedModule, SelectItem, Message} from 'primeng/primeng';
+import {CartService} from '../../services/cart.service';
 
 var roles = require('../profile/role');
 
@@ -55,6 +56,7 @@ export class UsersComponent implements OnInit {
     private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
+    private cartService:CartService,
     private router: Router) {
         this.roles=[
           {label: 'User', value:'User'},
@@ -196,7 +198,7 @@ export class UsersComponent implements OnInit {
           
       }
       else{
-        this.authService.save(this.user);
+        this.editUser(this.user);
       }
         
    
@@ -310,7 +312,39 @@ export class UsersComponent implements OnInit {
       }
     }
     
-    
+    editUser(user){
+      
+    var emailChecker=this.checkEmail(user.email);
+    var usernameChecker = true;
+
+    if (user.username != this.user.username){
+      usernameChecker=this.checkUsername(user.username);
+    }
+
+      if(emailChecker === true && usernameChecker === true){
+
+            this.cartService.editUser(user).subscribe(data =>{
+              if (data.success == true)
+              {
+                this.flashMessage.show('User Saved', {
+                cssClass: 'alert-success',
+                timeout: 5000});
+              } 
+              this.authService.getUser().subscribe(users => {
+            this.users = users;
+            });
+          });
+                this.user=null;
+                this.displayDialog=false;
+        }
+          else if(emailChecker === false){
+            this.msgs = [];
+            this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Invalid email'});
+        } else if(usernameChecker === false){
+            this.msgs = [];
+            this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Duplicate Username'});
+        }
+    }
 
 }
 

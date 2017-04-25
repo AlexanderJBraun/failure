@@ -149,7 +149,7 @@ export class CartComponent implements OnInit {
     {
       this.user = this.selectedUser;
     }
-  // this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
+   this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
       this.profileService.updateSales(this.totalSum).subscribe();
       this.updateInventory();  
       this.storeOrder();  
