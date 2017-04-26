@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const mongojs = require('mongojs');
-const db = mongojs('mongodb://mlangi:123456789@ds163940.mlab.com:63940/liquidnitro');
+const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 
 router.post('/saveorder', function(req, res, next)
