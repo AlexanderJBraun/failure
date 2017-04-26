@@ -12,7 +12,7 @@ const bcrypt = require('bcryptjs');
 router.post('/register', (req, res, next) => {
 
   console.log("in Register USER");
-  let newUser = new User(req.body);
+  var newUser = new User(req.body);
   
   User.addUser(newUser, (err, user) => {
     if(err){
@@ -28,7 +28,7 @@ router.post('/register', (req, res, next) => {
 
 //add customer
 router.post('/newUser', function(req, res, next){
-  let newUser = new User(req.body);
+  var newUser = new User(req.body);
 
   User.addUser(newUser, (err, user) => {
     if(err){
