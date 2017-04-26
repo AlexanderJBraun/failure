@@ -25,6 +25,8 @@ router.post('/saverorder', function(req, res, next)
         "Customer": req.body.userID.fName + " " + req.body.userID.lName,
         "userId":req.body.userID._id,
         "products": req.body.order,
+        "subTotalSum":req.body.subTotalSum,
+        "discount": req.body.couponAmount,
         "Total" : req.body.totalSum,
         "isPaid": false,
         "isDel": false
@@ -41,14 +43,14 @@ router.post('/saverorder', function(req, res, next)
  router.get('/updateOrderNumber', function(req,res,next)
  {
     console.log('update order number');
-      db.order.update({_id:mongojs.ObjectId('58fa243c94df1725d4b1d0fb')}, {$inc:{orderNumber:1}});
+      db.order.update({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')}, {$inc:{orderNumber:1}});
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
-    db.order.findOne({_id:mongojs.ObjectId('58fa243c94df1725d4b1d0fb')},function(err,orderNumber){
+    db.order.findOne({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')},function(err,orderNumber){
         if(err){
             res.send(err)
         }

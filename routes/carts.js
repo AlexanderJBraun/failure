@@ -118,10 +118,12 @@ var name = String;
     for (var index in req.body.product)
      {
          console.log(index);
+         console.log(req.body.product[index].product.itemCode);
          
             // htmlBody += '<h4>' + req.body.product[index].product.itemCode + " " + req.body.product[index].product.description + " " + req.body.product[index].product.price + " " 
             // +  req.body.product[index].quantity + ": $" + (req.body.product[index].subTotal) + '</h4>';
             htmlBody += '<tr class="item"'
+            + '</td>'
             + '<td style="padding: 5px;vertical-align: top;border-bottom: 1px solid #eee;">'
             + req.body.product[index].product.itemCode
             + '</td>'
@@ -149,7 +151,9 @@ var name = String;
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
             + '<td style="padding: 5px;vertical-align: top;border-top: 2px solid #eee;font-weight: bold;">'
-            + "Total: " + "$" + req.body.totalSum
+            + "Subtotal Sum: " + "$" + req.body.subTotalSum + '<br>'
+            + 'Discount: ' + "$" + req.body.couponAmount + '<br>'
+            + 'Total: ' + "$" + req.body.totalSum
             + '</td>'
             + '</tr>'
             + '</table>'

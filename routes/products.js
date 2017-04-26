@@ -79,7 +79,8 @@ db.products.update({_id: mongojs.ObjectId(req.body._id)},{itemCode:req.body.item
                                                           price:req.body.price,
                                                           description:req.body.description,
                                                           vendorPrice:req.body.vendorPrice,
-                                                          inStock:req.body.inStock
+                                                          inStock:req.body.inStock,
+                                                          image:req.body.image
                                                         })
     res.json({
       success:true
