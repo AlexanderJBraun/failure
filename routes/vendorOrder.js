@@ -36,14 +36,22 @@ router.post('/saveorder', function(req, res, next)
  router.get('/updateOrderNumber', function(req,res,next)
  {
     console.log('update order number');
+<<<<<<< HEAD
       db.vendorOrder.update({_id:mongojs.ObjectId('58f6af4e8b96c325440054cb')}, {$inc:{vendorOrderNumber:1}});
+=======
+      db.vendorOrder.update({_id:mongojs.ObjectId('58f6f082734d1d33b3276501')}, {$inc:{vendorOrderNumber:1}});
+>>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
+<<<<<<< HEAD
     db.vendorOrder.findOne({_id:mongojs.ObjectId('58f6af4e8b96c325440054cb')},function(err,vendorOrderNumber){
+=======
+    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f6f082734d1d33b3276501')},function(err,vendorOrderNumber){
+>>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
         if(err){
             res.send(err)
         }
