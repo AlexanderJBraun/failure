@@ -21,7 +21,7 @@ router.get('/products', function(req, res, next){
 
 // add product
 router.post('/newProduct', (req, res, next) => {
-  let newProduct = new Product(req.body);
+  var newProduct = new Product(req.body);
   
   Product.addProduct(newProduct, (err, product) => {
     if(err){

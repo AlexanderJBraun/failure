@@ -21,7 +21,7 @@ router.get('/coupons', function(req, res, next){
 
 // add product
 router.post('/newCoupon', (req, res, next) => {
-  let newCoupon = new Coupon(req.body);
+  var newCoupon = new Coupon(req.body);
   
   Coupon.addCoupon(newCoupon, (err, product) => {
     if(err){
