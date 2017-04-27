@@ -1,59 +1,6 @@
 <h2 class="page-header">Product Management</h2>
-<!--<div class="panel">
-<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#addNewProduct"><span class="glyphicon glyphicon-plus"></span>Add new products</button>
-<div id="addNewProduct" class="collapse">
-<form class="well" (submit)="addProduct()">
-  <div class="form-group">
-    <label>Product Name</label>
-    <input type="text" [(ngModel)]="name" name="name" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Product Description</label>
-    <input type="text" [(ngModel)]="itemDescription" name="itemDescription" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Product Price</label>
-    <input type="number" [(ngModel)]="price" name="price" class="form-control" min=".01" step="0.01" >
-  </div>
-  <div class="form-group">
-    <label>In Inventory</label>
-    <input type="number" [(ngModel)]="inStock" name="inStock" class="form-control" min="0">
-  </div>
-  <input type="submit" class="btn btn-primary" value="Add Product">
-</form>
-</div>
-</div>
 
-
-<div class="product-list">
-    <table class="table" >
-        <thead>
-          <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Inventory</th>
-          
-          </tr>
-        </thead>
-    <tbody>
-   
-    <tr *ngFor="let product of products">
-        
-            <td>{{product.name}}</td>
-            <td>{{product.description}}</td>
-            <td>${{product.price}}</td>
-            <td>{{product.inStock}} </td>
-            <td><input type="button"  (click)="deleteProduct(product._id)" value="Delete" class="btn btn-danger btn-xs"></td>   
-      </tr>
-    
-         </tbody>
-  </table>
-    
-</div>-->
-
-
-<p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="15" [responsive]="true" exportFilename="products" expandableRows="true">
+<p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFilename="products_{{this.productDate}}" expandableRows="true">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
     </p-header>
     <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search"></p-column>
@@ -112,7 +59,7 @@
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="image">IMAGE</label></div>
-            <div class="ui-grid-col-8"><input type="file" id="file" accept="image/*" (change)="onChange($event)" /></div>
+            <div class="ui-grid-col-4"><input type="file" id="file" accept="image/*" (change)="onChange($event)"/></div>           
         </div>
     </div>
     <p-footer>

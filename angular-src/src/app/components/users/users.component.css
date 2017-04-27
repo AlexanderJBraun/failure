@@ -49,6 +49,12 @@ border: 1px solid #fff !important;
 
 }
 
+.btn-danger:disabled{
+    background-color: #ededed !important;
+    color: #3c3c3c !important;
+    border: 1px solid #fff !important;
+}
+
 /*button{
     background-color: dimgrey !important;
     border: whitesmoke !important;

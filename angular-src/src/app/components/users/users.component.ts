@@ -17,20 +17,6 @@ var roles = require('../profile/role');
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {    
-    username: String;
-    firstName: String;
-    lastName: String;
-    businessName: String;
-    phoneNum: Number;
-    mobileNum: Number;
-    faxNum: Number;
-    region: String;
-    address: String;
-    city: String;
-    state: String;
-    zip: Number;
-    password: String;
-    email: String;
     displayDialog: boolean;
     detailDialog: boolean;
     user: UserClass = new PrimeUser();
@@ -50,8 +36,7 @@ export class UsersComponent implements OnInit {
     selectUserRole: string;
     role :string;
     disabled: boolean=true;
-    text: string;
-    currentUserID: string;
+    userDate: Date;
 
   constructor(    
     private validateService: ValidateService,
@@ -123,15 +108,13 @@ export class UsersComponent implements OnInit {
         this.regions.push({label: 'All regions', value: null});
         this.regions.push({label: 'South-East', value:'SE'});
         this.regions.push({label: 'Mid-West', value:'MW'});
+
+        this.userDate = new Date();
      }
 
   ngOnInit() {
         this.authService.getUser().subscribe(users => {
       this.users = users;
-    });
-
-    this.authService.getProfile().subscribe(profile => {
-        this.currentUserID = profile.user._id;
     });
 
     this.items=[
@@ -142,6 +125,11 @@ export class UsersComponent implements OnInit {
 
      this.disabled = !this.disabled;
      this.detailDialog=false;
+     if(this.role=="Admin" || this.role=="admin"){
+        document.getElementById("delUser").removeAttribute("disabled");
+     }else{
+        document.getElementById("delUser").setAttribute("disabled","disabled");
+     }
     
  }
 
@@ -214,10 +202,6 @@ export class UsersComponent implements OnInit {
       {
         window.alert("Permission Denied")
       }
-      else if(id == this.currentUserID)
-      {
-        window.alert("Permission Denied")
-      }
       else{
       var users = this.users;
 
@@ -237,21 +221,29 @@ export class UsersComponent implements OnInit {
 
     onRowSelect(event){
 
+      
       this.disabled = false;
+      
       if (this.role==="agent" || this.role==="Agent")
       {
         this.disabled= this.disabled;
       }else{
         this.disabled= !this.disabled;
       }
-
+      
 
       this.plusUser = false;
       this.user = this.cloneUser(event.data);
       this.displayDialog=true;
+
+      if(this.role != this.user.role && (this.role == "Admin" || this.role == "admin")){
+        document.getElementById("delUser").removeAttribute("disabled");
+      }else if(this.role == this.user.role || (this.role == "agent" || this.role == "Agent")){
+        document.getElementById("delUser").setAttribute("disabled","disabled");
+      }
+
       this.disabled = !this.disabled;
       document.getElementById("saveUser").removeAttribute("disabled");
-      
     }
 
     cloneUser(u: UserClass): UserClass{

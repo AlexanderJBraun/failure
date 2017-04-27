@@ -25,8 +25,10 @@ export class DashboardComponent implements OnInit {
     plusProduct: boolean;
     products: ProductClass[];
     uploadField = document.getElementById("file");
-     role :string;
-     text:string;
+    role :string;
+    text:string;
+    productDate: Date;
+    uploadedFiles: any[]=[];
 
   constructor(    
     private validateService: ValidateService,
@@ -41,18 +43,21 @@ export class DashboardComponent implements OnInit {
     });
 
       this.role = roles.role1;
+      this.productDate = new Date();
   }
 
-
+  
      onChange($event) : void{
     if($event.target.files[0].size < 1048576){
       this.readThis($event.target);
+      this.uploadedFiles.push($event.file);
     };
 
        if($event.target.files[0].size > 1048576){
        alert("File is too big!");
        $event.target.files[0] = null;
     };
+
      }
       
       readThis(inputValue: any): void {
