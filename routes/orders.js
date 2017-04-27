@@ -42,23 +42,18 @@ router.post('/saverorder', function(req, res, next)
 //Chau's lab computer orderNumberID: 58fa243c94df1725d4b1d0fb
  router.get('/updateOrderNumber', function(req,res,next)
  {
-    console.log('update order number');
-<<<<<<< HEAD
-      db.order.update({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')}, {$inc:{orderNumber:1}});
-=======
+  
+
       db.order.update({_id:mongojs.ObjectId('58f5428e16d1bd21c808a708')}, {$inc:{orderNumber:1}});
->>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
+
 
  });
 
  
 router.get('/orderNumber', function(req,res,next)
 {
-<<<<<<< HEAD
-    db.order.findOne({_id:mongojs.ObjectId('58f6b0998b96c325440054ce')},function(err,orderNumber){
-=======
+
     db.order.findOne({_id:mongojs.ObjectId('58f5428e16d1bd21c808a708')},function(err,orderNumber){
->>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
         if(err){
             res.send(err)
         }

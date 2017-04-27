@@ -6,11 +6,9 @@ const config = require('../config/database');
 const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
-var Mailgun = require('mailgun').Mailgun;
+var nodeMailer = require('nodemailer');
 
 
-var originalFile = '../kirkwoodsite/angular-src/src/app/components/cart/cart.component.html';
-var baseDir='../kirkwoodsite/';
 var recipient = '';
 
 
@@ -26,10 +24,9 @@ router.post('/invoice', function(req, res, next){
     var y = n.getFullYear();
     var m = n.getMonth() + 1;
     var d = n.getDate();
-    // document.getElementById("date").innerHTML=m + "/" + d + "/" + y;
 
-    
-    
+
+
 
 
     var htmlBody= 
@@ -105,15 +102,7 @@ router.post('/invoice', function(req, res, next){
 
     for (var index in req.body.product)
      {
-<<<<<<< HEAD
-         console.log(index);
-         console.log(req.body.product[index].product.itemCode);
-=======
-        
->>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
-         
-            // htmlBody += '<h4>' + req.body.product[index].product.itemCode + " " + req.body.product[index].product.description + " " + req.body.product[index].product.price + " " 
-            // +  req.body.product[index].quantity + ": $" + (req.body.product[index].subTotal) + '</h4>';
+
             htmlBody += '<tr class="item"'
             + '</td>'
             + '<td style="padding: 5px;vertical-align: top;border-bottom: 1px solid #eee;">'
@@ -150,74 +139,38 @@ router.post('/invoice', function(req, res, next){
             + '</div>'
             ;
 
+   sendMail();
 
-var mg = new Mailgun('key-71d7245b9b1badfd650197cd868db8ae');
-mg.sendRaw('kirkwoodsite21@gmail.com',
-        [recipient],
-        'From: kirkwoodsite21@gmail.com' +
-          '\nTo: ' +''+
-          '\nContent-Type: text/html; charset=utf-8' +
-          '\nSubject: LiquidNitro Order Summary' +
-          '\n\n <h3> Thank You  for your purchase! </h3>' 
-        + '<h3>  Your order will be delivered in the next few days </h3>'
-        + '<h3> Following is your invoice:  </h3>'+ htmlBody,
-        function(err) { err && console.log(err) });
+function sendMail() {
+    var transporter = nodeMailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'kirkwoodsite21@gmail.com',
+            pass: '123456789test'
+        }
+    });
+
+    var mailOptions = {
+        from: 'kirkwoodsite21@gmail.com',
+        to: recipient,
+        subject: 'Testing - ',
+        html: htmlBody
+
+      
+    };
+    
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log('Message sent: ' + info.response);
+        console.log("email sent to " + mailOptions.to  + "..." + new Date());
+
+    });
+}
 
 
 
 });
-
-
-
-
-// function sendMail(source) {
-//     var transporter = nodeMailer.createTransport({
-//         service: 'Gmail',
-//         auth: {
-//             user: 'kirkwoodsite21@gmail.com',
-//             pass: '123456789test'
-//         }
-//     });
-
-//     var mailOptions = {
-//         from: 'kirkwoodsite21@gmail.com',
-//         to: recipient,
-//         subject: 'Testing - ' + subjectTime,
-//         html: source
-
-      
-//     };
-    
-//     transporter.sendMail(mailOptions, function (err, info) {
-//         if(err) {
-//             return console.log(err);
-//         }
-//         console.log('Message sent: ' + info.response);
-//         console.log("email sent to " + mailOptions.to  + "..." + new Date());
-
-//     });
-// }
-
-// var fs=require('fs')
-
-// fs.readFile(originalFile, 'utf8', function(err,data){
-//     if(err) {
-//         return console.log(err);
-//     }
-
-//     styliner.processHTML(data).then(function(source)
-//     {
-//         sendMail(source);
-
-//         fs.writeFile("newIndex.html", source, function(err){
-//             if(err){
-//                 return console.log(err);
-//             }
-
-//             console.log("the file was saved");
-//         })
-//     })
-// })
-
 
 module.exports = router;

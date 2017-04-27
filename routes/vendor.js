@@ -7,25 +7,20 @@ const mongojs = require('mongojs');
 const db = mongojs('mongodb://localhost:27017/liquidNitro');
 
 var nodeMailer = require('nodemailer');
-var Styliner = require('styliner');
-var os = require("os");
-var hostname = os.hostname();
 
-var originalFile = '../kirkwoodsite/angular-src/src/app/components/cart/cart.component.html';
-var baseDir='../kirkwoodsite/';
+
 var recipient = 'wowjohn93@yahoo.com'; //vendor email goes here!
 
-var options = {noCSS: true};
-var styliner = new Styliner(baseDir, options);
 
 
 router.post('/invoice', function(req, res, next){
 
+    var subjectTime = new Date();
     var n = new Date();
     var y = n.getFullYear();
     var m = n.getMonth() + 1;
     var d = n.getDate();
-    // document.getElementById("date").innerHTML=m + "/" + d + "/" + y;
+
 
     
     
@@ -72,19 +67,12 @@ router.post('/invoice', function(req, res, next){
         + '</tr>'
         ;
 
-    console.log(req.body)
 
-var name = String;
 
-    // htmlBody +=
-    
-    console.log(req.body.product[0].product.name); 
+
     for (var index in req.body.product)
      {
-         console.log(index);
-         
-            // htmlBody += '<h4>' + req.body.product[index].product.itemCode + " " + req.body.product[index].product.description + " " + req.body.product[index].product.price + " " 
-            // +  req.body.product[index].quantity + ": $" + (req.body.product[index].subTotal) + '</h4>';
+           
             htmlBody += '<tr class="item"'
             + '<td style="padding: 5px;vertical-align: top;border-bottom: 1px solid #eee;">'
             + req.body.product[index].product.itemCode
@@ -106,7 +94,6 @@ var name = String;
            
            
      }
-    //  htmlBody += '<h4>'+ "" + '</h4>' + '<h2>' + "Your total payment is: $" + req.body.totalSum + '</h2>';
     htmlBody += '<tr class="total">'
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
@@ -120,45 +107,10 @@ var name = String;
             + '</div>'
             ;
 
-    var fs=require('fs')
-
-fs.readFile(originalFile, 'utf8', function(err,data){
-    if(err) {
-        return console.log(err);
-    }
-
-   styliner.processHTML(data).then(function(source)
-    {
-        sendMail(source);
-
-    //    fs.writeFile("newIndex.html", source, function(err){
-    //         if(err){
-    //             return console.log(err);
-    //         }
-
-    //        console.log("the file was saved");
-    //     })
-    })
-})
 
 
-// console.log(req.body);
-//      for (var product in req.body)
-//      {
-           
-//      }
+ 
 
-   var subjectTime = new Date();
-
-   // var mailOptions = {
-    //     from: 'kirkwoodsite21@gmail.com',
-    //     to: 'ctch5@mail.umsl.edu',
-    //     subject: 'Testing Shit - ' + subjectTime,
-    //     html: "<!DOCTYPE html><table><th>test</th><html><head>"
-      
-    // };
-
-//sendMail(mailOptions);
 function sendMail(source) {
     var transporter = nodeMailer.createTransport({
         service: 'Gmail',
