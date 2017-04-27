@@ -105,11 +105,17 @@ router.post('/invoice', function(req, res, next){
 
     for (var index in req.body.product)
      {
+<<<<<<< HEAD
+         console.log(index);
+         console.log(req.body.product[index].product.itemCode);
+=======
         
+>>>>>>> fbeec9a81e2cd11a8112659b6cb188aaa2c38ec8
          
             // htmlBody += '<h4>' + req.body.product[index].product.itemCode + " " + req.body.product[index].product.description + " " + req.body.product[index].product.price + " " 
             // +  req.body.product[index].quantity + ": $" + (req.body.product[index].subTotal) + '</h4>';
             htmlBody += '<tr class="item"'
+            + '</td>'
             + '<td style="padding: 5px;vertical-align: top;border-bottom: 1px solid #eee;">'
             + req.body.product[index].product.itemCode
             + '</td>'
@@ -135,7 +141,9 @@ router.post('/invoice', function(req, res, next){
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
             + '<td style="padding: 5px;vertical-align: top;">' + '</td>'
             + '<td style="padding: 5px;vertical-align: top;border-top: 2px solid #eee;font-weight: bold;">'
-            + "Total: " + "$" + req.body.totalSum
+            + "Subtotal Sum: " + "$" + req.body.subTotalSum + '<br>'
+            + 'Discount: ' + "$" + req.body.couponAmount + '<br>'
+            + 'Total: ' + "$" + req.body.totalSum
             + '</td>'
             + '</tr>'
             + '</table>'

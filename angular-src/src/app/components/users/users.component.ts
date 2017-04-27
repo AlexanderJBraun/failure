@@ -51,6 +51,7 @@ export class UsersComponent implements OnInit {
     role :string;
     disabled: boolean=true;
     text: string;
+    currentUserID: string;
 
   constructor(    
     private validateService: ValidateService,
@@ -127,6 +128,10 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
         this.authService.getUser().subscribe(users => {
       this.users = users;
+    });
+
+    this.authService.getProfile().subscribe(profile => {
+        this.currentUserID = profile.user._id;
     });
 
     this.items=[
@@ -206,6 +211,10 @@ export class UsersComponent implements OnInit {
 
     deleteUser(id){
           if (this.role=="agent" || this.role=="Agent")
+      {
+        window.alert("Permission Denied")
+      }
+      else if(id == this.currentUserID)
       {
         window.alert("Permission Denied")
       }

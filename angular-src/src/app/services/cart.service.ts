@@ -109,10 +109,10 @@ private getCart() {
 
   }
 
-sendInvoice(product, user, totalSum, orderNumber)
+sendInvoice(product, user, totalSum, orderNumber, subTotalSum, couponAmount)
 {
 
-let data= {product, user, totalSum, orderNumber};
+let data= {product, user, totalSum, orderNumber, subTotalSum, couponAmount};
 let body = JSON.stringify(data);
 let headers = new Headers();
 headers.append('Content-Type','application/json');
