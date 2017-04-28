@@ -3,19 +3,19 @@
 <p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFilename="products_{{this.productDate}}" expandableRows="true">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
     </p-header>
-    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="itemCode" header="ITEM CODE" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="description" header="DESCRIPTION"></p-column>
     <p-column field="price" header="PRICE" >
         <ng-template let-col let-product="rowData" pTemplate="body">
             <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-        <p-column field="vendorPrice" header="VENDOR_PRICE" >
+        <p-column field="vendorPrice" header="VENDOR PRICE" >
         <ng-template let-col let-product="rowData" pTemplate="body">
             <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true">
+    <p-column field="inStock" header="QTY ON HAND" [sortable]="true">
     </p-column>
     <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
         <ng-template let-product pTemplate="rowexpansion">
@@ -44,17 +44,17 @@
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText type="number" [min]="0" id="price" size="30" [(ngModel)]="product.price" [disabled]="text"/></div>
+            <div class="ui-grid-col-8"><p-spinner inputID="product.price" [min]="0.01" id="price" size="30" [(ngModel)]="product.price" step=".01"[disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="vendorPrice">VENDDOR PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText type="number" [min]="0" id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice"[disabled]="text" /></div>
+            <div class="ui-grid-col-4"><label for="vendorPrice">VENDOR PRICE</label></div>
+            <div class="ui-grid-col-8"><p-spinner [min]="0.01" id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" step=".01"[disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
-            <div class="ui-grid-col-8"><input pInputText type="number" id="inStock" size="30" [(ngModel)]="product.inStock"[disabled]="text" /></div>
+            <div class="ui-grid-col-8"><p-spinner id="inStock" size="30" [(ngModel)]="product.inStock" step="1" [disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">

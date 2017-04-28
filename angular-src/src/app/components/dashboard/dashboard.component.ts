@@ -26,9 +26,9 @@ export class DashboardComponent implements OnInit {
     products: ProductClass[];
     uploadField = document.getElementById("file");
     role :string;
-    text:string;
+    text:boolean;
     productDate: Date;
-    uploadedFiles: any[]=[];
+    uploadedFiles: any;
 
   constructor(    
     private validateService: ValidateService,
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit {
     
 
     showDialogToAdd(){
-      this.text="false";
+      this.text=false;
 
       this.plusProduct = true;
       this.product = new PrimeProduct();
@@ -162,7 +162,7 @@ export class DashboardComponent implements OnInit {
 
        if (this.role=="agent" || this.role=="Agent")
       {
-        this.text="true";
+        this.text=true;
         document.getElementById('itemCode').setAttribute("disabled","true");
         document.getElementById('description').setAttribute("disabled","true");
         document.getElementById('vendorPrice').setAttribute("disabled","true");
@@ -204,8 +204,6 @@ export class DashboardComponent implements OnInit {
     });
 
       });
- 
-     // this.ngOnInit();
       
   }
 

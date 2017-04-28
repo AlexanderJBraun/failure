@@ -189,7 +189,7 @@ updateInventory()
 
           console.log(newValue,cartEntry.product.inStock);
         // just verify that the user wont do a action that is not permited. ie reduce to 0 or over max
-        if(newValue > 0 && newValue <= cartEntry.product.inStock) {
+        if(newValue > 0) {
           // set the new value
           cartEntry.quantity = newValue;
           // calculate a new max value
