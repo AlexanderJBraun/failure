@@ -42,24 +42,22 @@ export class HomeComponent implements OnInit {
   }
 
   addCart(product, quant)
-  {
+  {    
+    
+    if(!this.authService.loggedIn())
+    {
+      this.router.navigate(['login']);
+    }
+    else{
     this.cartservice.getCartEntryByProductId(product._id).then(function(cartEntity: CartEntity){
         
         this.cartservice.addProductToCart(product, quant);
           this.flashMessage.show(product.itemCode + ' '+'added to your cart', {
           cssClass: 'alert-success',
           timeout: 2000});
-         //this.router.navigate(['cart']);
-
+         
     }.bind(this));
-    
-    //this.recentItem=name;
-    //var iQ= name + " " + this.quant[num];
-    //this.cart.push(name);
-    //this.cart.push(this.quant[num]);
-    //this.localStorageService.set('cartItem',this.cart);
-    
-    
+    }
     
   }
 

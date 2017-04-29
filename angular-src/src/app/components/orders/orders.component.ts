@@ -38,7 +38,7 @@ export class OrdersComponent implements OnInit {
   vorder: vOrderClass = new PrimevOrder();
   plusvOrder: boolean;
   selectedvOrder: vOrderClass;
-
+  invoiceDate: Date;
 
 
   
@@ -63,6 +63,8 @@ export class OrdersComponent implements OnInit {
     this.items2=[
       {label: 'View details', command: (event) => this.viewvProd(this.selectedvOrder)}
     ];
+
+    this.invoiceDate = new Date();
 
   }
 

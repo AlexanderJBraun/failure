@@ -56,12 +56,14 @@ router.delete('/coupon/:id', function(req, res, next){
 });
 
 
-router.put('/editcoupon',function(req, res, next)
+router.post('/editcoupon',function(req, res, next)
 {
-  console.log("in the back end");
 console.log(req.body);
-var name= req.body.name;
-db.coupons.update({_id: mongojs.ObjectId(req.body.pID)},{$set:{couponCode:req.body.updatedItem}});
+db.coupons.update({_id: mongojs.ObjectId(req.body._id)},{couponCode:req.body.couponCode,
+                                                          discount:req.body.discount,
+                                                          description:req.body.description,
+                                                          isActive:req.body.isActive
+                                                        })
 
 });
 

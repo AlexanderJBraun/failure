@@ -138,8 +138,7 @@ editProduct(data)
   {
      let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/products/editproduct',data,{headers:headers}).map(res => res.json());
-     
+    return this.http.post('http://localhost:3000/products/editproduct',data,{headers:headers}).map(res => res.json());  
   }
 
 editUser(data)
@@ -147,10 +146,15 @@ editUser(data)
      let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/users/edituser',data,{headers:headers}).map(res => res.json());
-     
   }
 
-
+editCoupon(data)
+  {
+    console.log(data);
+     let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:3000/coupons/editcoupon',data,{headers:headers}).map(res => res.json());
+  }
 
 
 

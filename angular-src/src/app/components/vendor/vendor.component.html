@@ -1,6 +1,6 @@
 <h2 class="page-header">Vendor Management</h2>
 
-<p-dataList [value]="products" [paginator]="true" [rows]="5">
+<p-dataList [value]="products" [paginator]="true" [rows]="2">
     <p-header>
         <h2>List of Vendor Items</h2>
     </p-header>
@@ -41,22 +41,22 @@
 
 <div *ngIf="show">
 
-<p-dataTable [value]="products" [paginator]="true" rows="15" [responsive]="true" expandableRows="true">
+<p-dataTable #prodDT [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFilename="products_{{this.productDate}}" expandableRows="true">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Products List
     </p-header>
-    <p-column field="itemCode" header="ITEM_CODE" [filter]="true" filterPlaceholder="Search" [editable]="true"></p-column>
-    <p-column field="description" header="DESCRIPTION" ></p-column>
-    <p-column field="price" header="PRICE"  >
+    <p-column field="itemCode" header="ITEM CODE" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="description" header="DESCRIPTION"></p-column>
+    <p-column field="price" header="PRICE" >
         <ng-template let-col let-product="rowData" pTemplate="body">
             <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-        <p-column field="vendorPrice" header="VENDOR_PRICE"  >
+        <p-column field="vendorPrice" header="VENDOR PRICE" >
         <ng-template let-col let-product="rowData" pTemplate="body">
             <span>{{product[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="inStock" header="QTY_ON_HAND" [sortable]="true">
+    <p-column field="inStock" header="QTY ON HAND" [sortable]="true">
     </p-column>
     <p-column header="IMAGE" expander="true" styleClass="col-icon" ></p-column>
         <ng-template let-product pTemplate="rowexpansion">
@@ -69,47 +69,49 @@
     <p-footer></p-footer>
 </p-dataTable>
 <button type="button" pButton class="btn btn-primary" icon="fa-plus" style="float:left; top: 10px;" (click)="showDialogToAdd()" label="Add new product"></button>
+<button type="button" pButton class="btn btn-success" icon="fa-file-o" iconPos="left" style="float:right; top: 10px;"  label="Export to CSV" (click)="prodDT.exportCSV()"></button>
 
 <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" [modal]="true" showEffect="fade"  [width]="400">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="itemCode">ITEM CODE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="itemCode" size="30" [(ngModel)]="product.itemCode" [disabled]="text" /></div>
         </div>
         <br>   
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" /></div>
+            <div class="ui-grid-col-8"><input pInputText id="description" size="30" [(ngModel)]="product.description" [disabled]="text"/></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="price" size="30" [(ngModel)]="product.price" /></div>
+            <div class="ui-grid-col-8"><p-spinner [min]="0.01" id="price" size="30" [(ngModel)]="product.price" step=".01"[disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="vendorPrice">VENDDOR PRICE</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" /></div>
+            <div class="ui-grid-col-4"><label for="vendorPrice">VENDOR PRICE</label></div>
+            <div class="ui-grid-col-8"><p-spinner [min]="0.01" id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" step=".01"[disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="inStock" size="30" [(ngModel)]="product.inStock" /></div>
+            <div class="ui-grid-col-8"><p-spinner id="inStock" size="30" [(ngModel)]="product.inStock" step="1" [disabled]="text"></p-spinner></div>
         </div>
         <br>
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="image">IMAGE</label></div>
-            <div class="ui-grid-col-8"><input type="file" id="file" accept="image/*" (change)="onChange($event)" /></div>
+            <div class="ui-grid-col-4"><input type="file" id="file" accept="image/*" (change)="onChange($event)"/></div>           
         </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
             <button type="button" class="btn btn-danger" (click)="delete(product._id)"><span class="fa fa-close"></span> Delete</button>
-            <button type="button" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> Save</button>
+            <button type="button" class="btn btn-success" (click)="save(product)"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
 </p-dialog>
+
 
 </div>
 
@@ -155,7 +157,7 @@
             </div>
             <hr>
             <div class="ui-g">
-                <div class="ui-lg-6"><br></div>
+                <div class="ui-lg-8"><br></div>
                 <div class="ui-lg-3 ui-md-6 ui-sm-6"><button pButton type="button" (click)="sendInvoice()"class="btn btn-success" icon="fa-play" iconPos="right" label="SEND INVOICE"></button></div>
             </div>
     </div>

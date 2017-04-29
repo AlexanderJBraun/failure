@@ -2,34 +2,32 @@
  <p-tabView> <!--TabView starts-->
      <!--Vendor Invoice starts here-->
      <p-tabPanel header = "Customer Invoice">
- <p-dataTable #orderDT [value]="orders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFileName="invoices" [contextMenu]="cm1"> 
+ <p-dataTable #orderDT [value]="orders | slice:1" selectionMode="single" [(selection)]=selectedOrder (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true" exportFilename="customer_Invoices_{{this.invoiceDate}}" [contextMenu]="cm1"> 
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Invoice List</p-header>
-    <p-column field="date" header="ORDER_DATE" [sortable]="true">
+    <p-column field="date" header="ORDER_DATE" [filter]="true" filterPlaceholder="Month: eg 1, 3, 11...">
         <ng-template let-col let-order="rowData" pTemplate="body">
             <span>{{order[col.field] | date: 'MM/dd/yyyy HH:mm'}}</span>
         </ng-template>
     </p-column>
-    <p-column field="orderNumber" header="ORDER_NUM" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
-    <p-column field="customerbName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search"></p-column>
+    <p-column field="orderNumber" header="ORDER_NUM" [filter]="true" filterPlaceholder="Search..."></p-column>
+    <p-column field="customerbName" header="BUSINESS_NAME" [filter]="true" filterPlaceholder="Search..."></p-column>
     <p-column field="Total" header="ORDER_TOTAL" >
         <ng-template let-col let-order="rowData" pTemplate="body">
             <span>{{order[col.field] | currency:'USD':true:'1.2-2'}}</span>
         </ng-template>
     </p-column>
-    <p-column header="isDelivered" [style]="{'text-align':'center'}">
+    <p-column field="isDelivered" header="isDelivered" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
-            
          <input *ngIf="order.isDel == false" type="checkbox"   binary="true" (click)="isDel(order._id)"/>
          <input *ngIf="order.isDel == true" type="checkbox" disabled = "true" checked binary="true" />
             
         </ng-template>
     </p-column>
-    <p-column header="isPaid" [style]="{'text-align':'center'}">
+    <p-column field="isPaid" header="isPaid" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
             <input *ngIf="order.isPaid == false" type="checkbox"   binary="true" (click)="isPaid(order._id)"/>
              <input *ngIf="order.isPaid == true" type="checkbox" disabled = "true" checked binary="true" (click)="isPaid(order._id)"/>
         </ng-template>
-    
     </p-column>
     <p-footer></p-footer>
  </p-dataTable>
@@ -37,6 +35,9 @@
     <p-dialog [(visible)]="detailDialog" header="Order details" [width]="500" [height]="450" [resizable]="true" [responsive]="true">
            <div class="container" style="overflow-y: scroll; width: 450px; height: 350px;">   
                 <span *ngFor="let product of selectProdName; let i = index;">
+                    <div class="ui-g">
+                        <div class="ui-g-4" style="font-weight: bold;">{{i+1}}.</div>
+                    </div>
                     <div class="ui-g">
                         <div class="ui-g-4">Product name: </div>
                         <div class="ui-g-6">{{selectProdName[i]}}</div>

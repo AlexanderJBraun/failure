@@ -1,13 +1,13 @@
 import { Component, OnInit,Input} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {ValidateService} from '../../services/validate.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {CouponClass} from '../../../../../models/coupon';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
 import {MenuItem} from 'primeng/primeng';            //api
 import {DataTableModule,SharedModule, SelectItem, Message} from 'primeng/primeng';
 import {SpinnerModule} from 'primeng/components/spinner/spinner';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-coupon',
@@ -26,10 +26,10 @@ export class CouponComponent implements OnInit {
     coupons: CouponClass[];
 
   constructor( 
-    private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
-    private router: Router) { }
+    private router: Router,
+    private cartService: CartService) { }
 
   ngOnInit() {
            this.authService.getCoupon().subscribe(coupons => {
@@ -46,7 +46,7 @@ export class CouponComponent implements OnInit {
       
     }
 
-    save(pID){
+    save(coupon){
       if(this.plusCoupon)
       {
         this.authService.addCoupon(this.coupon)
@@ -62,7 +62,7 @@ export class CouponComponent implements OnInit {
           });  
       }
       else {
-        //this.editProduct(pID);
+        this.editCoupon(coupon);
       }
         
       this.coupon=null;
@@ -97,6 +97,25 @@ export class CouponComponent implements OnInit {
       }
       return coupon;
     }
+
+    editCoupon(coupon)
+    {
+      console.log("in edit coupon.ts")
+      this.cartService.editCoupon(this.coupon).subscribe(data =>{
+        if (data.success == true)
+         {
+      this.flashMessage.show('Product Saved', {
+          cssClass: 'alert-success',
+          timeout: 5000});
+      } 
+      this.authService.getCoupon().subscribe(coupons => {
+      this.coupons = coupons;
+    });
+
+      });
+      
+  }
+
 
 
 

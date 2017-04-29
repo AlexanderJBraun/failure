@@ -25,8 +25,10 @@ export class DashboardComponent implements OnInit {
     plusProduct: boolean;
     products: ProductClass[];
     uploadField = document.getElementById("file");
-     role :string;
-     text:string;
+    role :string;
+    text:boolean;
+    productDate: Date;
+    uploadedFiles: any;
 
   constructor(    
     private validateService: ValidateService,
@@ -41,18 +43,21 @@ export class DashboardComponent implements OnInit {
     });
 
       this.role = roles.role1;
+      this.productDate = new Date();
   }
 
-
+  
      onChange($event) : void{
     if($event.target.files[0].size < 1048576){
       this.readThis($event.target);
+      this.uploadedFiles.push($event.file);
     };
 
        if($event.target.files[0].size > 1048576){
        alert("File is too big!");
        $event.target.files[0] = null;
     };
+
      }
       
       readThis(inputValue: any): void {
@@ -88,7 +93,7 @@ export class DashboardComponent implements OnInit {
     
 
     showDialogToAdd(){
-      this.text="false";
+      this.text=false;
 
       this.plusProduct = true;
       this.product = new PrimeProduct();
@@ -157,7 +162,7 @@ export class DashboardComponent implements OnInit {
 
        if (this.role=="agent" || this.role=="Agent")
       {
-        this.text="true";
+        this.text=true;
         document.getElementById('itemCode').setAttribute("disabled","true");
         document.getElementById('description').setAttribute("disabled","true");
         document.getElementById('vendorPrice').setAttribute("disabled","true");
@@ -199,8 +204,6 @@ export class DashboardComponent implements OnInit {
     });
 
       });
- 
-     // this.ngOnInit();
       
   }
 

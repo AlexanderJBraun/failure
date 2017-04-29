@@ -1,7 +1,7 @@
 <h2 class="page-header">User Management</h2>
 
 <p-growl [value]="msgs" [style]="{'position':'fixed', 'top':'24%', 'left':'52%'}"></p-growl>
-<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users" [contextMenu]="cm">
+<p-dataTable #userDT [value]="users" selectionMode="single" [(selection)]="selectedUser" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="10" [responsive]="true" exportFilename="users_{{this.userDate}}" [contextMenu]="cm">
     <p-header style="text-transform: uppercase; font-family: 'PT Sans Narrow', Arial, sans-serif; font-size: 12px;">Users List</p-header>
     <p-column field="fName" header="FIRST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
     <p-column field="lName" header="LAST_NAME" [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
@@ -110,7 +110,7 @@
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-            <button type="button" class="btn btn-danger" (click)="deleteUser(user._id)"><span class="fa fa-close"></span> Delete</button>
+            <button type="button" id="delUser" class="btn btn-danger" (click)="deleteUser(user._id)" disabled="disabled" ><span class="fa fa-close"></span> Delete</button>
             <button type="button" id="saveUser" class="btn btn-success" (click)="save()" disabled="disabled"><span class="fa fa-check"></span> Save</button>
         </div>
     </p-footer>
