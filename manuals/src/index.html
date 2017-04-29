@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery Bootstrap Toc Plugin Demo</title>
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="bootstrap-toc.css" rel="stylesheet" type="text/css">
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<style>
+body { font-family:'Raleway'; font-size:16px; background-color:#ECF0F1;}
+.container { margin:150px auto; max-width:768px;}
+nav[data-toggle='toc'] {
+  margin-top: 30px;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+  /* override the Affix plugin so that the navigation isn't sticky */
+  nav.affix[data-toggle='toc'] {
+    position: static;
+  }
+
+  /* PICK ONE */
+  /* don't expand nested items, which pushes down the rest of the page when navigating */
+  nav[data-toggle='toc'] .nav .active .nav {
+    display: none;
+  }
+  /* alternatively, if you *do* want the second-level navigation to be shown (as seen on this page on mobile), use this */
+  nav[data-toggle='toc'] .nav .nav {
+    display: block;
+  }
+}
+</style>
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="http://www.jqueryscript.net/menu/Sidebar-Table-Of-Contents-Generator-with-jQuery-and-Bootstrap-Bootstrap-Toc.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+      <!-- sidebar, which will move to the top on a small screen -->
+      <div class="col-sm-2">
+        <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+      </div>
+      <!-- main content area -->
+      <div class="col-sm-10">
+      <h1>jQuery Bootstrap Toc Plugin Demo</h1>
+      <h2>Section 1</h2>
+      <h3>Section 1.1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra purus eget sem dictum, sit amet ultricies velit iaculis. Duis et nunc dolor. Sed id neque egestas, congue turpis a, sollicitudin mi. Quisque viverra vehicula turpis, et dapibus metus lobortis ut. Vivamus consectetur nulla dolor, ut euismod odio blandit non. Fusce aliquet, mauris quis lobortis ullamcorper, est lectus cursus libero, sed rhoncus elit orci vel urna. Nunc efficitur, enim quis scelerisque posuere, velit est efficitur felis, nec vulputate ligula ante id purus. Morbi nec congue ipsum, a blandit risus. Aliquam maximus pharetra est feugiat pharetra. Proin et enim et mauris tempus ultrices non at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus orci eros, tempus quis fermentum ac, consequat ut elit.</p>
+        <p>Nam eget metus ligula. Aliquam erat volutpat. Sed interdum tellus ligula, at volutpat diam pellentesque pretium. Fusce a ligula vestibulum purus posuere rutrum eget id eros. Sed condimentum nunc vel pretium venenatis. Praesent ut semper ante, non lobortis ligula. Morbi efficitur lacus in libero dictum, non pellentesque neque pulvinar. Etiam tempus nisi vitae tristique efficitur. Sed rhoncus leo erat, eget imperdiet quam interdum sed. Donec eu ante non mauris aliquet condimentum. Aenean vitae arcu sit amet quam bibendum maximus at quis turpis. Integer pharetra nulla vitae elit consectetur, quis iaculis nisl viverra.</p>
+        <p>Etiam ultrices egestas neque. Cras tempus malesuada metus, quis placerat dolor viverra a. Integer ornare tincidunt massa sit amet dapibus. Ut orci diam, auctor sed commodo et, finibus vitae lorem. Phasellus molestie nunc id nulla tincidunt, scelerisque sagittis lorem rhoncus. Vestibulum tincidunt massa ac quam consectetur, vitae vestibulum dui eleifend. Maecenas a lacus justo. Cras vitae egestas velit. Pellentesque lorem elit, varius luctus dignissim quis, auctor ut magna. In commodo, eros ac consequat ultrices, odio lorem tincidunt quam, a ullamcorper odio ipsum dictum libero. Proin nibh dolor, egestas nec vestibulum eget, elementum nec dui. Proin a blandit lacus, ac iaculis risus. Morbi ac arcu placerat nulla auctor tempus sit amet et risus. Etiam justo arcu, suscipit sit amet nunc in, fermentum pulvinar velit. Nunc justo metus, condimentum a libero ut, pulvinar porttitor diam.</p>
+        <p>Quisque viverra, metus a rutrum eleifend, magna elit cursus augue, nec feugiat sem ante eget tellus. Sed sed lacinia risus. Phasellus nisi nunc, commodo ut lorem in, ultricies fringilla leo. Suspendisse est leo, lacinia sed nisi vitae, maximus posuere dui. Curabitur sit amet massa elit. Vestibulum eget ligula mi. Mauris facilisis, lacus ac blandit rutrum, mi neque lacinia eros, ut congue orci ex nec enim. Mauris quis aliquam lorem. Pellentesque sollicitudin mi in sapien maximus vehicula. Fusce sit amet mollis lectus. Morbi sem dui, ultricies et lorem ut, luctus sagittis ligula. Nullam nec sapien erat. Praesent bibendum lacinia efficitur.</p>
+        <p>Donec vel nibh ante. Cras pharetra massa nibh, eu mollis orci rutrum sed. Morbi in ullamcorper diam. Pellentesque massa risus, congue sit amet ornare ut, hendrerit id leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla blandit, quam ut congue scelerisque, nulla justo finibus massa, ac varius mi mauris quis arcu. Vivamus id justo risus. Nulla at viverra justo. Phasellus porttitor, lectus nec luctus imperdiet, nisl lacus ullamcorper diam, faucibus semper ipsum nibh eu purus.</p>
+        <h3>Section 1.2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra purus eget sem dictum, sit amet ultricies velit iaculis. Duis et nunc dolor. Sed id neque egestas, congue turpis a, sollicitudin mi. Quisque viverra vehicula turpis, et dapibus metus lobortis ut. Vivamus consectetur nulla dolor, ut euismod odio blandit non. Fusce aliquet, mauris quis lobortis ullamcorper, est lectus cursus libero, sed rhoncus elit orci vel urna. Nunc efficitur, enim quis scelerisque posuere, velit est efficitur felis, nec vulputate ligula ante id purus. Morbi nec congue ipsum, a blandit risus. Aliquam maximus pharetra est feugiat pharetra. Proin et enim et mauris tempus ultrices non at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus orci eros, tempus quis fermentum ac, consequat ut elit.</p>
+        <p>Nam eget metus ligula. Aliquam erat volutpat. Sed interdum tellus ligula, at volutpat diam pellentesque pretium. Fusce a ligula vestibulum purus posuere rutrum eget id eros. Sed condimentum nunc vel pretium venenatis. Praesent ut semper ante, non lobortis ligula. Morbi efficitur lacus in libero dictum, non pellentesque neque pulvinar. Etiam tempus nisi vitae tristique efficitur. Sed rhoncus leo erat, eget imperdiet quam interdum sed. Donec eu ante non mauris aliquet condimentum. Aenean vitae arcu sit amet quam bibendum maximus at quis turpis. Integer pharetra nulla vitae elit consectetur, quis iaculis nisl viverra.</p>
+        <p>Etiam ultrices egestas neque. Cras tempus malesuada metus, quis placerat dolor viverra a. Integer ornare tincidunt massa sit amet dapibus. Ut orci diam, auctor sed commodo et, finibus vitae lorem. Phasellus molestie nunc id nulla tincidunt, scelerisque sagittis lorem rhoncus. Vestibulum tincidunt massa ac quam consectetur, vitae vestibulum dui eleifend. Maecenas a lacus justo. Cras vitae egestas velit. Pellentesque lorem elit, varius luctus dignissim quis, auctor ut magna. In commodo, eros ac consequat ultrices, odio lorem tincidunt quam, a ullamcorper odio ipsum dictum libero. Proin nibh dolor, egestas nec vestibulum eget, elementum nec dui. Proin a blandit lacus, ac iaculis risus. Morbi ac arcu placerat nulla auctor tempus sit amet et risus. Etiam justo arcu, suscipit sit amet nunc in, fermentum pulvinar velit. Nunc justo metus, condimentum a libero ut, pulvinar porttitor diam.</p>
+        <p>Quisque viverra, metus a rutrum eleifend, magna elit cursus augue, nec feugiat sem ante eget tellus. Sed sed lacinia risus. Phasellus nisi nunc, commodo ut lorem in, ultricies fringilla leo. Suspendisse est leo, lacinia sed nisi vitae, maximus posuere dui. Curabitur sit amet massa elit. Vestibulum eget ligula mi. Mauris facilisis, lacus ac blandit rutrum, mi neque lacinia eros, ut congue orci ex nec enim. Mauris quis aliquam lorem. Pellentesque sollicitudin mi in sapien maximus vehicula. Fusce sit amet mollis lectus. Morbi sem dui, ultricies et lorem ut, luctus sagittis ligula. Nullam nec sapien erat. Praesent bibendum lacinia efficitur.</p>
+        <p>Donec vel nibh ante. Cras pharetra massa nibh, eu mollis orci rutrum sed. Morbi in ullamcorper diam. Pellentesque massa risus, congue sit amet ornare ut, hendrerit id leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla blandit, quam ut congue scelerisque, nulla justo finibus massa, ac varius mi mauris quis arcu. Vivamus id justo risus. Nulla at viverra justo. Phasellus porttitor, lectus nec luctus imperdiet, nisl lacus ullamcorper diam, faucibus semper ipsum nibh eu purus.</p>
+        <h2>Section 2</h2>
+        <h3>Section 2.1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra purus eget sem dictum, sit amet ultricies velit iaculis. Duis et nunc dolor. Sed id neque egestas, congue turpis a, sollicitudin mi. Quisque viverra vehicula turpis, et dapibus metus lobortis ut. Vivamus consectetur nulla dolor, ut euismod odio blandit non. Fusce aliquet, mauris quis lobortis ullamcorper, est lectus cursus libero, sed rhoncus elit orci vel urna. Nunc efficitur, enim quis scelerisque posuere, velit est efficitur felis, nec vulputate ligula ante id purus. Morbi nec congue ipsum, a blandit risus. Aliquam maximus pharetra est feugiat pharetra. Proin et enim et mauris tempus ultrices non at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus orci eros, tempus quis fermentum ac, consequat ut elit.</p>
+        <p>Nam eget metus ligula. Aliquam erat volutpat. Sed interdum tellus ligula, at volutpat diam pellentesque pretium. Fusce a ligula vestibulum purus posuere rutrum eget id eros. Sed condimentum nunc vel pretium venenatis. Praesent ut semper ante, non lobortis ligula. Morbi efficitur lacus in libero dictum, non pellentesque neque pulvinar. Etiam tempus nisi vitae tristique efficitur. Sed rhoncus leo erat, eget imperdiet quam interdum sed. Donec eu ante non mauris aliquet condimentum. Aenean vitae arcu sit amet quam bibendum maximus at quis turpis. Integer pharetra nulla vitae elit consectetur, quis iaculis nisl viverra.</p>
+        <p>Etiam ultrices egestas neque. Cras tempus malesuada metus, quis placerat dolor viverra a. Integer ornare tincidunt massa sit amet dapibus. Ut orci diam, auctor sed commodo et, finibus vitae lorem. Phasellus molestie nunc id nulla tincidunt, scelerisque sagittis lorem rhoncus. Vestibulum tincidunt massa ac quam consectetur, vitae vestibulum dui eleifend. Maecenas a lacus justo. Cras vitae egestas velit. Pellentesque lorem elit, varius luctus dignissim quis, auctor ut magna. In commodo, eros ac consequat ultrices, odio lorem tincidunt quam, a ullamcorper odio ipsum dictum libero. Proin nibh dolor, egestas nec vestibulum eget, elementum nec dui. Proin a blandit lacus, ac iaculis risus. Morbi ac arcu placerat nulla auctor tempus sit amet et risus. Etiam justo arcu, suscipit sit amet nunc in, fermentum pulvinar velit. Nunc justo metus, condimentum a libero ut, pulvinar porttitor diam.</p>
+        <p>Quisque viverra, metus a rutrum eleifend, magna elit cursus augue, nec feugiat sem ante eget tellus. Sed sed lacinia risus. Phasellus nisi nunc, commodo ut lorem in, ultricies fringilla leo. Suspendisse est leo, lacinia sed nisi vitae, maximus posuere dui. Curabitur sit amet massa elit. Vestibulum eget ligula mi. Mauris facilisis, lacus ac blandit rutrum, mi neque lacinia eros, ut congue orci ex nec enim. Mauris quis aliquam lorem. Pellentesque sollicitudin mi in sapien maximus vehicula. Fusce sit amet mollis lectus. Morbi sem dui, ultricies et lorem ut, luctus sagittis ligula. Nullam nec sapien erat. Praesent bibendum lacinia efficitur.</p>
+        <p>Donec vel nibh ante. Cras pharetra massa nibh, eu mollis orci rutrum sed. Morbi in ullamcorper diam. Pellentesque massa risus, congue sit amet ornare ut, hendrerit id leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla blandit, quam ut congue scelerisque, nulla justo finibus massa, ac varius mi mauris quis arcu. Vivamus id justo risus. Nulla at viverra justo. Phasellus porttitor, lectus nec luctus imperdiet, nisl lacus ullamcorper diam, faucibus semper ipsum nibh eu purus.</p>
+        <h3>Section 2.2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pharetra purus eget sem dictum, sit amet ultricies velit iaculis. Duis et nunc dolor. Sed id neque egestas, congue turpis a, sollicitudin mi. Quisque viverra vehicula turpis, et dapibus metus lobortis ut. Vivamus consectetur nulla dolor, ut euismod odio blandit non. Fusce aliquet, mauris quis lobortis ullamcorper, est lectus cursus libero, sed rhoncus elit orci vel urna. Nunc efficitur, enim quis scelerisque posuere, velit est efficitur felis, nec vulputate ligula ante id purus. Morbi nec congue ipsum, a blandit risus. Aliquam maximus pharetra est feugiat pharetra. Proin et enim et mauris tempus ultrices non at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus orci eros, tempus quis fermentum ac, consequat ut elit.</p>
+        <p>Nam eget metus ligula. Aliquam erat volutpat. Sed interdum tellus ligula, at volutpat diam pellentesque pretium. Fusce a ligula vestibulum purus posuere rutrum eget id eros. Sed condimentum nunc vel pretium venenatis. Praesent ut semper ante, non lobortis ligula. Morbi efficitur lacus in libero dictum, non pellentesque neque pulvinar. Etiam tempus nisi vitae tristique efficitur. Sed rhoncus leo erat, eget imperdiet quam interdum sed. Donec eu ante non mauris aliquet condimentum. Aenean vitae arcu sit amet quam bibendum maximus at quis turpis. Integer pharetra nulla vitae elit consectetur, quis iaculis nisl viverra.</p>
+        <p>Etiam ultrices egestas neque. Cras tempus malesuada metus, quis placerat dolor viverra a. Integer ornare tincidunt massa sit amet dapibus. Ut orci diam, auctor sed commodo et, finibus vitae lorem. Phasellus molestie nunc id nulla tincidunt, scelerisque sagittis lorem rhoncus. Vestibulum tincidunt massa ac quam consectetur, vitae vestibulum dui eleifend. Maecenas a lacus justo. Cras vitae egestas velit. Pellentesque lorem elit, varius luctus dignissim quis, auctor ut magna. In commodo, eros ac consequat ultrices, odio lorem tincidunt quam, a ullamcorper odio ipsum dictum libero. Proin nibh dolor, egestas nec vestibulum eget, elementum nec dui. Proin a blandit lacus, ac iaculis risus. Morbi ac arcu placerat nulla auctor tempus sit amet et risus. Etiam justo arcu, suscipit sit amet nunc in, fermentum pulvinar velit. Nunc justo metus, condimentum a libero ut, pulvinar porttitor diam.</p>
+        <p>Quisque viverra, metus a rutrum eleifend, magna elit cursus augue, nec feugiat sem ante eget tellus. Sed sed lacinia risus. Phasellus nisi nunc, commodo ut lorem in, ultricies fringilla leo. Suspendisse est leo, lacinia sed nisi vitae, maximus posuere dui. Curabitur sit amet massa elit. Vestibulum eget ligula mi. Mauris facilisis, lacus ac blandit rutrum, mi neque lacinia eros, ut congue orci ex nec enim. Mauris quis aliquam lorem. Pellentesque sollicitudin mi in sapien maximus vehicula. Fusce sit amet mollis lectus. Morbi sem dui, ultricies et lorem ut, luctus sagittis ligula. Nullam nec sapien erat. Praesent bibendum lacinia efficitur.</p>
+        <p>Donec vel nibh ante. Cras pharetra massa nibh, eu mollis orci rutrum sed. Morbi in ullamcorper diam. Pellentesque massa risus, congue sit amet ornare ut, hendrerit id leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla blandit, quam ut congue scelerisque, nulla justo finibus massa, ac varius mi mauris quis arcu. Vivamus id justo risus. Nulla at viverra justo. Phasellus porttitor, lectus nec luctus imperdiet, nisl lacus ullamcorper diam, faucibus semper ipsum nibh eu purus.</p>
+      </div>
+    </div>
+  </div>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="bootstrap-toc.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

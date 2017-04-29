@@ -23,8 +23,8 @@ export class CartComponent implements OnInit {
 
 
   cartEntities : CartEntity[];
-  subTotalSum: string;
-  totalSum: string;
+  subTotalSum: number;
+  totalSum: number;
   user:Object;
   role: String;
   email:String;
@@ -111,9 +111,9 @@ export class CartComponent implements OnInit {
       });
 
 
-      this.subTotalSum = subTotalSum.toFixed(2);
+      this.subTotalSum = subTotalSum
       this.couponAmount = ((this.couponDiscount) * subTotalSum).toFixed(2);
-      this.totalSum = (subTotalSum - parseFloat(this.couponAmount)).toFixed(2);;
+      this.totalSum = (subTotalSum - parseFloat(this.couponAmount));
     }
 
 
@@ -149,8 +149,8 @@ export class CartComponent implements OnInit {
     {
       this.user = this.selectedUser;
     }
-   this.cartService.sendInvoice(this.cartEntities, this.user, this.totalSum, this.order.orderNumber, this.subTotalSum, this.couponAmount).subscribe();
-      this.profileService.updateSales(parseFloat(this.totalSum)).subscribe();
+   this.cartService.sendInvoice(this.cartEntities, this.user, this.subTotalSum, this.order.orderNumber).subscribe();
+      this.profileService.updateSales(this.totalSum).subscribe();
       this.updateInventory();  
       this.storeOrder();  
      this.orderService.updateOrderNumber().subscribe();
@@ -194,7 +194,7 @@ export class CartComponent implements OnInit {
       console.log(this.order);
     
     
-    this.orderService.saveOrder(order,this.user,this.order.orderNumber,this.totalSum, this.subTotalSum, this.couponAmount).subscribe(data =>{
+    this.orderService.saveOrder(order,this.user,this.order.orderNumber,this.subTotalSum).subscribe(data =>{
       if (data.success == true)
       {
       this.flashMessage.show('ORDER STORED', {

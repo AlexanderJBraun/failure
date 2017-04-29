@@ -1,0 +1,381 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Manual</title>
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="src/dist/bootstrap-toc.css" rel="stylesheet" type="text/css">
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="userManual.css" type="text/css">
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+ 
+<div class="container">
+    <div class="row">
+      <!-- sidebar, which will move to the top on a small screen -->
+      <div class="col-sm-2">
+        <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+      </div>
+      <!-- main content area -->
+      <div class="col-sm-10">
+        <center><img src="Logo.jpg" alt="logoImg" align="middle"></center>
+      <h1 style="text-align: center;">User Manual</h1>
+      <h2>Table of Contents</h2>      
+        <h3><a href="#theBasic">The Basics</a></h3>
+                <ol>
+                    <li>Navigation Bar</li>
+                    <li>Help Button</li>
+                    <li>Landing Page</li>
+                    <li>Export to CSV Button</li>
+                    <li>What to do if you do not have an account</li>
+                </ol>
+        <h3><a href="#adminPort">Admin Portal</a></h3>
+                <ol>
+                    <li>Login</li>
+                    <li>Profile Page</li>
+                    <li>Product Management</li>
+                    <li>User Management</li>
+                    <li>Vendor Management</li>
+                    <li>Invoice Management</li>
+                    <li>Coupon Management</li>
+                    <li>Change Password</li>
+                </ol>
+        <h3><a href="#userPort">User Portal</a></h3>
+                <ol>
+                    <li>Login</li>
+                    <li>Profile Page</li>
+                    <li>Products Page</li>
+                    <li>Cart Page</li>
+                    <li>Order History</li>
+                    <li>Change Password</li>
+                </ol>
+      <hr>
+      <hr>
+      <h2 id="theBasic">1. The Basics</h2>
+        <h3>1.1 Navigation Bar</h3>
+            <center><img src="" alt="navBar"></center>
+        <hr>
+        <hr>
+        <h3>1.2 Help Button</h3>
+            <center><img src="" alt="helpButton"></center>
+            <p>Throughout the system, there are HELP buttons to give the user advices and explain how things
+                work. Should an user be confused about what to do on a page, or what a form requires, they can
+                click on the HELP button and will be walked through the current task.
+            </p>
+        <hr>    
+        <hr>
+        <h3>1.3 Landing Page</h3>
+            <center><img src="" alt="landingPage"></center>
+        <hr>
+        <hr>
+        <h3>1.4 Export to CSV Button</h3>
+            <center><img src="" alt="exportButton"></center>
+            <p>Throughout the system, there are buttons that say "Export to CSV". THese buttons appears on 
+                the lower-right corner of the tables in the Management view of the system. They allow the 
+                management team to export the entire table into a .CSV extension file which will allow them 
+                to open it in Microsoft Excel for further analysis of the data. 
+            </p>
+        <hr>
+        <hr>   
+        <h3>1.5 Request an Account</h3>
+            <center><img src="" alt="landingPageContact"></center>
+            <p>All accounts are created by Chris Donovan (Site Administrator) with Kirkwood Holdings (KH). 
+                To obtain an account, visit the landing page and click on the link that says "Request an account". 
+                The system administrator's e-mail address and telephone number is listed here. Make your request 
+                using these contact information.'
+            </p>
+        <hr>
+        <hr>  
+      <h2 id="adminPort">2. Admin/Agent Portal</h2>
+        <h3>2.1 Login</h3>
+            <center><img src="" alt="loginIMG"></center>
+            <p>This is the screen that agents will see when attempting to login to the website.</p>
+            <ol>
+                <li>Click on "Username" field and enter the username given to you by MTLB Consulting.</li>
+                <li>Click on "Password" field and enter the password that is associated with the username
+                    given to you by MTLB Consulting.
+                </li>
+                <li>Click <img src="" alt="loginImg"></li>
+                <span style="font-style: italic;">Note: These fields are case sensitive.</span>
+                
+            </ol>
+            <span style="font-style: italic;">Note: Should you forget your USERNAME or PASSWORD, 
+                    contact one of MTLB's representatives at 'contact info goes here'.
+            </span>
+        <hr>
+        <hr>    
+        <h3>2.2 Profile Page</h3>
+            <center><img src="" alt="adminProfile"></center>
+            <p>This is the page that all KH admnistrators and agents will see upon logging into 
+                the system. There is basic information of the user who is currently logged into 
+                the system including their username, email address, and role. There are also the 
+                management tools box, including buttons for Product, Vendor, User, Coupon, and 
+                Invoice Management pages. The user needs to click on one of these buttons to be 
+                taken to the proper page.
+            </p>
+        <hr>
+        <hr>
+        <h3>2.3 Product Management</h3>
+            <center><img src="" alt="adminProfileWithPointerAtProdMgmt"></center>
+            <p>On Profile Page, click <img src="" alt="prodMgmtButton"> to access Product Management view.</p>
+            <p>This is the page that agents use to view current products, and inventory levels as well as 
+                add any new products KH would like to begin selling.
+            </p>
+            <center><img src="" alt="prodTable"></center>
+            <p>The table contains a list of all producst including their ITEM CODE, DESCRIPTION, PRICE, VENDOR PRICE, 
+                QTY ON HAND, and an IMAGE associated with it. On the ITEM CODE header, there is a search bar that 
+                allows the user to search through items by the item code.
+            </p>
+            <hr>
+            <hr>
+            <ul>
+                <li id="prodDialog1"><h4>How to add a new product</h4></li>
+                <p>On Product Management view, click on <img src="" alt="addNewProd" > to display a dialog to add a new product.</p>
+                <center><img src="" alt="addProdDialog"></center>
+                <ol>
+                    <li>Please input all the information the form requests then click <img src="" alt="saveButton"> 
+                    to save the new product into your inventory. As you add this product into your inventory, it 
+                    will automatically appear on User Portal's Products Page.
+                        <ul>
+                            <li>ITEM CODE: Enter the item code for the product.</li>
+                            <li>DESCRIPTION: Enter the description for the product.</li>
+                            <li>PRICE: Enter the selling price for the product. <span style="font-style: italic;">*Positive number only.</span></li>
+                            <li>VENDOR PRICE: Enter the vendor price for the product. <span style="font-style: italic;">*Positive number only.</span></li>
+                            <li>QUANTITY: Enter the quantity on hand for the product. <span style="font-style: italic;">*Number only.</span></li>
+                            <li>IMAGE: Upload an image for the product.<span style="font-style: italic;">*Image file size limited to 10Mb.</span></li>
+                            <span style="font-style: italic;">Note: Advised to use width x height for properly display on Products Page. </span>
+                        </ul>
+                    </li>
+                    <li>If you want to cancel the current task of adding a new product, simply click the "x" at 
+                        the top-right corner of the dialog to dismiss the dialog.</li>
+                    <li>If you are stuck on completing the task of adding a new product, click 
+                        <img src="" alt="helpButton"> to seek instructions.
+                    </li>
+                </ol>
+                <hr>
+                <hr>
+                <li id="prodDialog2"><h4>How to edit a current product</h4></li>
+                <hr>
+                <hr>
+                <li id="prodDialog3"><h4>How to delete a current product</h4></li>
+                <hr>
+                <hr>
+                <li id="prodDialog4"><h4>How to export Product table to Microsoft Excel</h4></li>
+                <p>On the Product Management view, click on <img src="" alt="exportButton"> to export the table data 
+                 to a CSV file format. Management team can open CSV file using Microsoft Excel to execute further 
+                 analysis as needed.</p>
+            </ul>  
+            <hr>
+            <hr>
+        <h3>2.4 User Management</h3>
+            <center><img src="" alt="adminProfileWithPointerAtUserMgmt"></center>
+            <p>On Profile Page, click <img src="" alt="userMgmtButton"> to access User Management view.</p>
+            <p>This is the page that agents use to view and manage current users of the whole system including 
+                data for Admin as well as Agents.
+            </p>
+            <center><img src="" alt="userTable"></center>
+            <p>The table contains a list of all Users of the system along with the Users' detail information including 
+                FIRST NAME, LAST NAME, USERNAME, BUSINESS NAME, REGION, and PHONE NUMBER. To view further details, there 
+                are two means of doing so: 
+                <ol>
+                    <li>Management team can right click on a certain User then click <img src="" alt="viewDetail">. 
+                    This will pop up MORE DETAILS dialog showing  more detail information including: ADDRESS Detail, EMAIL, and ROLE.</li>
+                    <li>Management team can left click on a certain User to view all the User information.</li>     
+                </ol>   
+                <span style="font-style: italic;">Note: For a quick view of further details, use the first method.</span>            
+            </p>
+            <p>Management team can filter the table by FIRST NAME, LAST NAME, USERNAME, BUSINESS NAME, and REGION 
+                using the Search box or Dropdown box under appropriate headers.
+            </p>
+            <hr>
+            <hr>
+            <ul>
+                <li id="userDialog1"><h4>How to add a new User</h4></li>
+                <p>On User Management view, click on <img src="" alt="addNewUser" > to display a dialog to add a new user. 
+                This is to be used as Register a New User.</p>
+                    <center><img src="" alt="addUserDialog"></center>
+                <ol>
+                    <li>Please input all the information the form requests then click <img src="" alt="saveButton"> 
+                    to save the new user into your database.
+                        <ul>
+                            <li>EMAIL: Enter email address for the user. <span style="font-style: italic;">*Email format required.</span></li>
+                            <li>USERNAME: Enter username for the user.</li>
+                            <li>PASSWORD: Enter password for the user.</li>
+                            <li>ROLE: Assign roles for the user.</li>
+                            <span style="font-style: italic;">Note: Admin can assign Agent and User roles. Agent can only assign User role.</span>
+                            <li>FIRST NAME: Enter the user's first name.</li>
+                            <li>LAST NAME: Enter the user's last name.</li>
+                            <li>ADDRESS: Enter Street number and Street name of the user.</li>
+                            <li>CITY: Enter the user's city.</li>
+                            <li>STATE: Pick the user's state from the dropdown list.</li>
+                            <li>ZIP: Enter the user's zipcode. <span style="font-style: italic;">*Number only.</span></li>
+                            <li>REGION: Pick the user's region from the dropdown list.</li>
+                            <span style="font-style: italic;">Note: If there is no region specified, pick All regions.</span>
+                            <li>PHONE NUMBER: Enter the user's phone number. <span style="font-style: italic;">*Number only.</span></li>
+                        </ul>
+                        <span style="font-style: italic;">Note: EMAIL, USERNAME, PASSWORD, and ROLE are the only required fields. 
+                            However, please be advised that all user's information should be entered.
+                        </span>
+                    </li>
+                    <li>If you want to cancel the current task of adding a new user, simply click the "x" at 
+                        the top-right corner of the dialog to dismiss the dialog.</li>
+                    <li>If you are stuck on completing the task of adding a new user, click 
+                        <img src="" alt="helpButton"> to seek instructions.
+                    </li>
+                </ol>
+                <hr>
+                <hr>
+                <li id="userDialog2"><h4>How to edit a current User</h4></li>
+                <hr>
+                <hr>
+                <li id="userDialog3"><h4>How to delete a current User</h4></li>
+                <hr>
+                <hr>
+                <li id="userDialog4"><h4>How to export User table to Microsoft Excel</h4></li>
+                <p>On the User Management view, click on <img src="" alt="exportButton"> to export the table data 
+                 to a CSV file format. Management team can open CSV file using Microsoft Excel to execute further 
+                 analysis as needed.</p>
+            </ul>
+            <hr>
+            <hr>
+        <h3>2.5 Vendor Management</h3>
+            <center><img src="" alt="adminProfileWithPointerAtVendMgmt"></center>
+            <p>On Profile Page, click <img src="" alt="vendMgmtButton"> to access Vendor Management view.</p>
+            <p>This is the page that agents use to place a replensishment order from the Vendor. The page contains 3 
+                sections: 
+                <center><img src="" alt="vendorPage"></center>
+                <ul>
+                    <li>(1): Section where KH Agents actually add needed products to an order to be sent to the Vendor.</li>
+                    <li>(2): Section where KH Agents can view the current products, and current inventory levels as well as 
+                        add new products to this table to populate the new products in Section (1). This section functions 
+                        like the Product Management view. 
+                    </li> 
+                    <span style="font-style: italic;">Refer to <a href="#2-3-product-management">2.2.3 Product Management</a></span>
+                    <li>(3): Section where KH Agents can review the order before sending an invoice to the Vendor.</li>
+                    <span style="font-style: italic;">Note: (2) & (3) can be hidden.</span>
+                </ul>
+            </p>
+            <hr>
+            <hr>
+            <ul>
+                <li id="vendDialog1"><h4>How to place an order from the Vendor</h4></li>
+                <p>In section (1), pick a product that you want to replenish, specify the quantity, and 
+                    click the <img src="" alt="addButton">. Added products will be displayed under section (3). 
+                    This allows verifying the products and the quantity before sending an invoice to the Vendor.
+                </p>
+                <p>After reviewing, an invoice will be sent as an email to the Vendor upon clicking the <img src="" alt="sendInvButton"></p>
+                <hr>
+                <hr>
+                <li id="vendDialog2"><h4>How to add new Vendor's product line to the Vendor Management interface</h4></li>
+                <p>Click <img src="" alt="showAddProdButton"> to display section (2), if not already visible. This section 
+                functions like Product Management view.</p>
+                <span style="font-style: italic;">Refer to <a href="#prodDialog1">How to add a new product</a></span>
+                <hr>
+                <hr>
+            </ul>
+            <p>If you want to cancel any task in Vendor Management view, simply click <img src="" alt="profileNav"> to go back to Profile Page.</p>
+        <hr>
+        <hr>
+        <h3>2.6 Invoice Management</h3>
+        <hr>
+        <hr>
+        <h3>2.7 Coupon Management</h3>
+        <hr>
+        <hr>
+        <h3>2.8 Change Password</h3>
+        <hr>
+        <hr>
+      <h2 id="userPort">3. User Portal</h2>
+        <h3>3.1 Login</h3>
+        <center><img src="" alt="loginIMG"></center>
+            <p>This is the screen that users will see when attempting to login to the website.</p>
+            <ol>
+                <li>Click on "Username" field and enter the username given to you by KH Management team.</li>
+                <li>Click on "Password" field and enter the password that is associated with the username
+                    given to you by KH Management team.
+                </li>
+                <li>Click <img src="" alt="loginImg"></li>
+                <span style="font-style: italic;">Note: These fields are case sensitive.</span>
+                
+            </ol>
+            <span style="font-style: italic;">Note: Should you forget your USERNAME or PASSWORD, 
+                    contact one of KH Management team members at 'contact info goes here'.
+            </span>
+        <hr>
+        <hr>    
+        <h3>3.2 Profile Page</h3>
+            <center><img src="" alt="userProfile"></center>
+            <p>This is the page that all KH users will see upon logging into 
+                the system. There is basic information of the user who is currently logged into 
+                the system including their username, email address, and YTD Sales. There are also the 
+                customer tools box, including buttons for Order History and Change Password. 
+                The user needs to click on one of these buttons to be taken to the proper section.
+            </p>  
+        <hr>
+        <hr>
+        <h3>3.3 Products Page</h3>
+            <center><img src="" alt="productsNav"></center>
+            <p>Upon logging in, the users will be able to see the PRODUCTS tab on the Navigation bar. Clicking on 
+                the PRODUCTS tab will bring the users to the PRODUCTS page to begin placing an order from KH.
+            </p>
+            <center><img src="" alt="producstPage"></center>
+            <p>This page shows the current products that the user can buy from KH.</p>
+            <ul>
+                <li id="howToOrder"><h4>How to add products to cart</h4></li>
+                <ol>
+                    <li>Pick a product.</li>
+                    <li>Click arrow up and down <img src="" alt="quantSpinner"> to specify the quantity you would like to order.</li>
+                    <span style="font-style: italic;">Note: Quantity cannot be negative.</span>
+                    <li>Click <img src="" alt="addButton"> to put the products to cart.</li>
+                    <li>Review your order in Cart Page by clicking <img src="" alt="cartNav"></li>
+                </ol>
+                <span style="font-style: italic;">Click <img src="" alt="helpButton"> to seek instructions.</span>
+            </ul>     
+        <hr>
+        <hr>
+        <h3>3.4 Cart Page</h3>
+            <center><img src="" alt="cartNav"></center>
+            <p>After placing an order, the users will be able to review the order by clicking on <img src="" alt="cartNav">
+            before sending an invoice to KH.</p>
+            <center><img src="" alt="cartPage"></center>
+            <p>This page shows the initial order for you to review before placing it with KH.</p>
+            <ul>
+                <li id="howToVerify"><h4>Edit order in Cart</h4></li>
+                <ol>
+                    <li>You can make changes in quantity of a certain product by clicking <img src="" alt="editCartButton"> plus 
+                    or minus sign.</li>
+                    <li>You can also delete a certain product from the Cart by clicking <img src="" alt="deleteButton">.</li>
+                    <span style="font-style: italic;">Note: Please pay attention to the Product's Status. You can place an order with 
+                    greater quantity than what KH current holds in stock but such order will be on "Backorder".
+                    </span>
+                    <li>If you have a COUPON code from KH, you can also add the COUPON code in <img src="" alt="couponField"> 
+                    to get a discount from KH.</li>
+                </ol>
+                <li id="sendInvoice"><h4>Send Invoice</h4></li>
+                <ol>
+                    <li>Click <img src="" alt="sendInvoiceButton"> to send invoice to KH on current order.</li>
+                    <li>Click <img src="" alt="continueShopping"> to be brought back to the Products page to continue shopping.</li>
+                </ol>
+                <p>Invoice will be sent to KH Management team as well as you as an email.</p>             
+            </ul>
+        <hr>
+        <hr>
+        <h3>3.5 Order History</h3>
+        <hr>
+        <hr>
+        <h3>3.6 Change Password</h3>
+        <hr>
+        <hr>   
+      </div>
+    </div>
+  </div>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="src/dist/bootstrap-toc.js"></script>
+</body>
+</html>

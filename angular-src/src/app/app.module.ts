@@ -5,10 +5,10 @@ import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router';
 import {LocalStorageModule} from 'angular-2-local-storage';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DataTableModule,GrowlModule, GalleriaModule, 
+import {DataTableModule,GrowlModule, GalleriaModule, CalendarModule, 
        InputTextModule, DropdownModule, DataGridModule ,DataListModule, InputMaskModule, 
        SharedModule, DialogModule, ButtonModule, PanelModule, SliderModule, SpinnerModule, 
-       ContextMenuModule, MenuItem, CheckboxModule,
+       ContextMenuModule, MenuItem, CheckboxModule, FileUploadModule,
        TabViewModule} from "../../node_modules/primeng/primeng";
 
 import { AppComponent } from './app.component';
@@ -103,7 +103,9 @@ const appRoutes: Routes =  [
     GalleriaModule,
     GrowlModule,
     DataGridModule,
+    FileUploadModule,
     BrowserAnimationsModule,
+    CalendarModule,
     CheckboxModule,
     TabViewModule
   ],

@@ -153,10 +153,10 @@ export class UsersComponent implements OnInit {
     showDialogToAdd(){
       this.disabled= false;
       document.getElementById("saveUser").setAttribute("disabled", "disabled");
+      document.getElementById("delUser").setAttribute("disabled","disabled");
       this.plusUser = true;
       this.user = new PrimeUser();
       this.displayDialog = true;
-      console.log(this.disabled);
     }
 
 
@@ -268,6 +268,16 @@ export class UsersComponent implements OnInit {
       if(this.user.email && this.user.username && this.user.password && this.user.role){
         document.getElementById("saveUser").removeAttribute("disabled"); 
       }
+
+      if(this.role == "Agent" || this.role == "agent" ){
+        if(this.user.role == "Admin" || this.user.role == "Agent"){
+          document.getElementById("saveUser").setAttribute("disabled","disabled");
+        }else if(this.user.role == "User"){
+          document.getElementById("saveUser").removeAttribute("disabled");
+        }
+      }
+
+      console.log(this.user.role);
       // console.log(this.user.email);
       //   console.log(this.user.username);
       //   console.log(this.user.password);

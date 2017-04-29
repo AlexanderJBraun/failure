@@ -9,10 +9,10 @@ export class OrderService {
 
   constructor(private http:Http) { }
 
-  saveOrder(order,userID,orderNumber,totalSum, subTotalSum, couponAmount)
+  saveOrder(order,userID,orderNumber,totalSum)
 {
 console.log("in order service");
-  let data = {order,userID,orderNumber,totalSum, subTotalSum, couponAmount};
+  let data = {order,userID,orderNumber,totalSum};
 console.log(data);
 
 return this.http.post('http://localhost:3000/orders/saverorder',data).map(res => res.json());
