@@ -147,6 +147,21 @@ updateOrderNumber(){
   return this.http.get('http://localhost:3000/vendorOrder/updateOrderNumber').map(res => res.json());
 }
 
+incrInventory(name,quantity)
+{
+  console.log(name);
+  let data = {name, quantity}
+   return this.http.post('http://localhost:3000/products/incrinventory',data);
+
+}
+
+isReceived(id)
+{
+  let data = {id};
+  return this.http.post('http://localhost:3000/vendorOrder/isReceived',data).map(res => res.json());
+}
+
+
 
 
 

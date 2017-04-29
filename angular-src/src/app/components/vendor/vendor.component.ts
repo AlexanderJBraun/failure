@@ -150,18 +150,6 @@ export class VendorComponent implements OnInit {
       return this.products.indexOf(this.selectedProduct);
     }
     
-updateInventory()
-  {
-    for(var index in this.cartEntities)
-    {
-      var pID = this.cartEntities[index].product._id;
-      var temp = this.cartEntities[index].product.inStock;
-      var add = temp + this.cartEntities[index].quantity;
-      console.log(add)
-    this.vendorService.addInventory(add,pID).subscribe();
-    //console.log(deduct)
-    }
-  } 
 
 
   addCart(product, quant)
@@ -220,7 +208,7 @@ updateInventory()
   {
 
     //this.vendorService.sendVendorInvoice(this.user, this.cartEntities, this.totalSum, this.order.orderNumber).subscribe();
-    this.updateInventory();    
+   // this.updateInventory();    
     this.storeOrder(); 
     this.vendorService.updateOrderNumber().subscribe();
      this.router.navigate(['profile']);
@@ -255,7 +243,7 @@ getProducts() {
 
   storeOrder()
   {
-    console.log(this.cartEntities);
+    
     var order=[];
      
       for(var index in this.cartEntities)
@@ -271,7 +259,6 @@ getProducts() {
       }
 
 
-    console.log(this.order.vendorOrderNumber)
     
     this.vendorService.saveOrder(order,this.user,this.order.vendorOrderNumber,this.totalSum).subscribe(data =>{
       if (data.success == true)

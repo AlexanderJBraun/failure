@@ -18,15 +18,15 @@
     </p-column>
     <p-column field="isDelivered" header="isDelivered" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
-         <input *ngIf="order.isDel == false" type="checkbox"   binary="true" (click)="isDel(order._id)"/>
+         <input *ngIf="order.isDel == false" type="checkbox"   binary="true" (click)="isDel(order._id,order.orderNumber)"/>
          <input *ngIf="order.isDel == true" type="checkbox" disabled = "true" checked binary="true" />
             
         </ng-template>
     </p-column>
     <p-column field="isPaid" header="isPaid" [style]="{'text-align':'center'}">
         <ng-template let-col let-order="rowData" pTemplate="body">
-            <input *ngIf="order.isPaid == false" type="checkbox"   binary="true" (click)="isPaid(order._id)"/>
-             <input *ngIf="order.isPaid == true" type="checkbox" disabled = "true" checked binary="true" (click)="isPaid(order._id)"/>
+            <input *ngIf="order.isPaid == false" type="checkbox"   binary="true" (click)="isPaid(order._id,order.orderNumber)"/>
+             <input *ngIf="order.isPaid == true" type="checkbox" disabled = "true" checked binary="true" />
         </ng-template>
     </p-column>
     <p-footer></p-footer>
@@ -86,11 +86,7 @@
 
             </div>
             <p-footer>
-                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-                    <button type="button" class="btn btn-danger" (click)="deleteOrder()"><span class="fa fa-close"></span> Delete</button>
-                    <button type="button" id="saveOrder" class="btn btn-success" (click)="save()"><span class="fa fa-check"></span> OK</button>
-                </div>
+                
             </p-footer>
         </p-dialog>
      </p-tabPanel><!--End Customer Invoice-->
@@ -112,7 +108,8 @@
     </p-column>
     <p-column header="isReceived" [style]="{'text-align':'center'}">
         <ng-template let-col let-vorder="rowData" pTemplate="body">
-            <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox>
+             <input *ngIf="vorder.isReceived == false" type="checkbox"   binary="true" (click)="isRec(vorder._id,vorder.vendorOrderNumber,vorder.vProducts)"/>
+             <input *ngIf="vorder.isReceived == true" type="checkbox" disabled = "true" checked binary="true" />
         </ng-template>
     </p-column>
     <p-footer></p-footer>
@@ -160,11 +157,7 @@
                 </div>
             </div>
             <p-footer>
-                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
-                    <button type="button" class="btn btn-danger" (click)="deletevOrder()"><span class="fa fa-close"></span> Delete</button>
-                    <button type="button" id="saveOrder" class="btn btn-success" (click)="saveV()"><span class="fa fa-check"></span> OK</button>
-                </div>
+               
             </p-footer>
         </p-dialog>
      </p-tabPanel> <!--End Vendor Invoice-->
