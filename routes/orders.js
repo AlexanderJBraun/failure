@@ -40,11 +40,12 @@ router.post('/saverorder', function(req, res, next)
 
 //master's branch orderNumberID: 58f5428e16d1bd21c808a708
 //Chau's lab computer orderNumberID: 58fa243c94df1725d4b1d0fb
+//Chau's laptop orderNumberID: 58f2db16a0cbd717fce63677
  router.get('/updateOrderNumber', function(req,res,next)
  {
   
 
-      db.order.update({_id:mongojs.ObjectId('58f26c8ef705943bcc243e5c')}, {$inc:{orderNumber:1}});
+      db.order.update({_id:mongojs.ObjectId('58f2db16a0cbd717fce63677')}, {$inc:{orderNumber:1}});
 
 
  });
@@ -53,7 +54,7 @@ router.post('/saverorder', function(req, res, next)
 router.get('/orderNumber', function(req,res,next)
 {
 
-    db.order.findOne({_id:mongojs.ObjectId('58f26c8ef705943bcc243e5c')},function(err,orderNumber){
+    db.order.findOne({_id:mongojs.ObjectId('58f2db16a0cbd717fce63677')},function(err,orderNumber){
         if(err){
             res.send(err)
         }

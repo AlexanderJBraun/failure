@@ -55,7 +55,7 @@ const appRoutes: Routes =  [
   {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
-  {path: 'orderHistory', component: OrderHistoryComponent, canActivate:[AuthGuard]}
+  {path: 'order-history', component: OrderHistoryComponent, canActivate:[AuthGuard, AdminGuard]}
 
   
 ]

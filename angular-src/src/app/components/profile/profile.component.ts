@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
       
       return false;
     });
+    
     this.profileService.getYearToDateSales().subscribe(ytds =>{
       this.YTDS = ytds.YTDS;
       console.log(this.YTDS);
