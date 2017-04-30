@@ -93,11 +93,7 @@
             <div class="ui-grid-col-8"><p-spinner [min]="0.01" id="vendorPrice" size="30" [(ngModel)]="product.vendorPrice" step=".01"[disabled]="text"></p-spinner></div>
         </div>
         <br>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
-            <div class="ui-grid-col-8"><p-spinner id="inStock" size="30" [(ngModel)]="product.inStock" step="1" [disabled]="text"></p-spinner></div>
-        </div>
-        <br>
+       
         <div class="ui-grid-row">
             <div class="ui-grid-col-4"><label for="image">IMAGE</label></div>
             <div class="ui-grid-col-4"><input type="file" id="file" accept="image/*" (change)="onChange($event)"/></div>           

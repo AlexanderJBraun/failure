@@ -44,7 +44,7 @@ router.post('/saverorder', function(req, res, next)
  {
   
 
-      db.order.update({_id:mongojs.ObjectId('58f5428e16d1bd21c808a708')}, {$inc:{orderNumber:1}});
+      db.order.update({_id:mongojs.ObjectId('58f26c8ef705943bcc243e5c')}, {$inc:{orderNumber:1}});
 
 
  });
@@ -53,7 +53,7 @@ router.post('/saverorder', function(req, res, next)
 router.get('/orderNumber', function(req,res,next)
 {
 
-    db.order.findOne({_id:mongojs.ObjectId('58f5428e16d1bd21c808a708')},function(err,orderNumber){
+    db.order.findOne({_id:mongojs.ObjectId('58f26c8ef705943bcc243e5c')},function(err,orderNumber){
         if(err){
             res.send(err)
         }
@@ -73,7 +73,7 @@ router.get('/orders',function(req,res,next)
     }
     res.json(orders); 
   });
-})
+});
 
 router.post('/isPaid',function(req,res,next)
 {
@@ -81,14 +81,29 @@ router.post('/isPaid',function(req,res,next)
     console.log(req.body.id);
  db.order.update({_id:mongojs.ObjectId(req.body.id)}, {$set:{isPaid:true}});
 
-})
+});
 
 router.post('/isDelivered',function(req,res,next)
 {
 
-    console.log(req.body.id);
+    console.log(req.body);
  db.order.update({_id:mongojs.ObjectId(req.body.id)}, {$set:{isDel:true}});
 
-})
+});
+
+router.post('/ordersbyuser',function(req,res,next)
+{
+    console.log(req.body);
+    db.order.find({"userId": req.body.id}, function(err,userOrder)
+    {
+        if(err)
+        {
+            res.send(err)
+        }
+        res.send(userOrder)
+    })
+
+});
+
 
 module.exports = router;

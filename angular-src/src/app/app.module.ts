@@ -24,6 +24,7 @@ import { VendorComponent} from './components/vendor/vendor.component';
 import { OrdersComponent} from './components/orders/orders.component';
 import { CouponComponent } from "./components/coupon/coupon.component";
 import { LandingComponent} from './components/landing/landing.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 
 import {ValidateService} from './services/validate.service';
@@ -40,6 +41,7 @@ import { SumPipe } from './components/cart/sum.pipe';
 
 
 
+
 const appRoutes: Routes =  [
   
   {path:'home', component: HomeComponent},
@@ -52,7 +54,8 @@ const appRoutes: Routes =  [
   {path: 'vendor', component: VendorComponent,canActivate:[AuthGuard,AdminGuard]},
   {path: 'orders', component: OrdersComponent,canActivate:[AuthGuard,AdminGuard]},
   {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]},
-  {path: 'cart', component: CartComponent, canActivate:[AuthGuard]}
+  {path: 'cart', component: CartComponent, canActivate:[AuthGuard]},
+  {path: 'orderHistory', component: OrderHistoryComponent, canActivate:[AuthGuard]}
 
   
 ]
@@ -72,7 +75,8 @@ const appRoutes: Routes =  [
     SumPipe,
     VendorComponent,
     OrdersComponent,
-    CouponComponent
+    CouponComponent,
+    OrderHistoryComponent
     
 
   ],

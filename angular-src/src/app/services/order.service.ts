@@ -29,6 +29,15 @@ getOrders()
 
 }
 
+getOrdersByUser(id)
+{
+  let data ={id};
+  
+ console.log(id);
+
+ return this.http.post('http://localhost:3000/orders/ordersbyuser',data).map(res => res.json());
+}
+
 updateOrderNumber()
 {
   console.log("in update order number services")

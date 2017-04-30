@@ -37,7 +37,7 @@ router.post('/saveorder', function(req, res, next)
  {
     console.log('update order number');
 
-      db.vendorOrder.update({_id:mongojs.ObjectId('58f7e374d64390203c48f18b')}, {$inc:{vendorOrderNumber:1}});
+      db.vendorOrder.update({_id:mongojs.ObjectId('58f6c4456809f639d0e6b3fb')}, {$inc:{vendorOrderNumber:1}});
 
  });
 
@@ -45,7 +45,7 @@ router.post('/saveorder', function(req, res, next)
 router.get('/orderNumber', function(req,res,next)
 {
 
-    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f7e374d64390203c48f18b')},function(err,vendorOrderNumber){
+    db.vendorOrder.findOne({_id:mongojs.ObjectId('58f6c4456809f639d0e6b3fb')},function(err,vendorOrderNumber){
 
         if(err){
             res.send(err)
@@ -66,6 +66,14 @@ router.get('/orders',function(req,res,next)
     }
     res.json(orders); 
   });
+});
+
+router.post('/isReceived',function(req,res,next)
+{
+
+    console.log(req.body.id);
+ db.vendorOrder.update({_id:mongojs.ObjectId(req.body.id)}, {$set:{isReceived:true}});
+
 })
 
 module.exports = router;

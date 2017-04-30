@@ -2,6 +2,7 @@
 
 export var role1:String;
 export var email1:String;
+export var userId:String;
 export var roleType= function(role)
 {
     role1 = role;
@@ -22,5 +23,10 @@ export var showNav= function()
         return false;
     }
 }
-//this.module.exports;
+
+export var setId = function(id)
+{
+    userId = id;
+}
+//this.module.exports; 
 

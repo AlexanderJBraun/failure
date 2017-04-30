@@ -34,8 +34,8 @@ export class ProfileComponent implements OnInit {
       this.email= profile.user.email;
       roles.roleType(this.role);
       roles.setEmail(this.email);
-      console.log(roles.role1);
-      console.log(roles.email1);
+      roles.setId(this._id);
+     
 
     },
     err => {

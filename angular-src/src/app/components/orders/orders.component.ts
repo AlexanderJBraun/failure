@@ -6,6 +6,7 @@ import {MenuItem} from 'primeng/primeng';
 import {vOrderClass} from '../../../../../models/vOrder';
 
 
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -33,12 +34,15 @@ export class OrdersComponent implements OnInit {
   items: MenuItem[];
   items2: MenuItem[];
   value:true;
+
   vorders: vOrderClass[];
   displayvDialog: boolean;
   vorder: vOrderClass = new PrimevOrder();
   plusvOrder: boolean;
   selectedvOrder: vOrderClass;
   invoiceDate: Date;
+
+
 
 
   
@@ -153,7 +157,7 @@ export class OrdersComponent implements OnInit {
        this.selectProdSub.push(order.products[index].subTotal);
       }
       
-      console.log(this.selectProdName);
+
       
     }else {
       this.detailDialog = false;
@@ -182,19 +186,53 @@ export class OrdersComponent implements OnInit {
   
 
 
-  isPaid(id)
+  isPaid(id,orderNum)
   {
-    console.log(id);
+    if (confirm("Please confirm that order Number: " + orderNum + " is Paid. "  + "( You will not be able to deselect it)"))
+  {
     this.orderService.isPaid(id).subscribe();
+
+     window.location.reload();
+  }
   }
 
-isDel(id)
+isDel(id,orderNum)
 {
+  if (confirm("Please confirm that order Number: " + orderNum + " is Delivered. "  + "( You will not be able to deselect it)"))
+  {
   this.orderService.isDelivered(id).subscribe();
 
-}
+   window.location.reload();
+  }
 
 }
+
+isRec(id,orderNum,products)
+{
+
+  if (confirm("Please confirm that order Number: " + orderNum + " is received. "  + "( You will not be able to deselect it later)"))
+  {
+    this.vendorService.isReceived(id).subscribe();
+
+  for ( var i in products)
+  {
+    console.log(products[i].name)
+    this.vendorService.incrInventory(products[i].name,products[i].quantity).subscribe();
+  }
+
+  window.location.reload();
+ 
+
+}
+ 
+
+}
+
+
+}
+
+
+
  
 
 class PrimeOrder implements OrderClass {
