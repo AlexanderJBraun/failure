@@ -101,6 +101,7 @@ export class OrderHistoryComponent implements OnInit {
 } 
  
 class PrimeUserOrder implements OrderClass {
+  id:string;
   orderNumber: Number;
   date: Date;
   customer: String;

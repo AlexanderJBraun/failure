@@ -56,6 +56,13 @@ isDelivered(id)
   return this.http.post('http://localhost:3000/orders/isDelivered',data).map(res => res.json());
 }
 
+deleteUser(id){
+  console.log(id);
+    return this.http.delete('http://localhost:3000/orders/delete/'+id)
+      .map(res => res.json());
+  }
+
+
 
 }
  

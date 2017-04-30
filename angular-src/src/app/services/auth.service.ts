@@ -93,7 +93,7 @@ export class AuthService {
     return this.http.delete('http://localhost:3000/users/user/'+id)
       .map(res => res.json());
   }
-
+ 
 
   deleteProduct(id){
     return this.http.delete('http://localhost:3000/products/product/'+id)

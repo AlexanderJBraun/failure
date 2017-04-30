@@ -4,8 +4,8 @@ import {AuthService} from '../../services/auth.service'
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {UserClass} from '../../../../../models/User';
-import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
-import {MenuItem} from 'primeng/primeng';            //api
+import {AccordionModule} from 'primeng/primeng';     
+import {MenuItem} from 'primeng/primeng';            
 import {DataTableModule,SharedModule, SelectItem, Message} from 'primeng/primeng';
 import {CartService} from '../../services/cart.service';
 
@@ -49,7 +49,6 @@ export class UsersComponent implements OnInit {
           {label: 'Admin', value:'Admin'},
           {label: 'Agent', value:'Agent'}
         ];
-       
 
         this.states=[];
         this.states.push({label:'Alabama',value:'AL'});
@@ -132,10 +131,6 @@ export class UsersComponent implements OnInit {
      }
     
  }
-
- 
-    
-
     delete(id){
       var users = this.users;
 
@@ -144,7 +139,7 @@ export class UsersComponent implements OnInit {
            for(var i = 0;i < users.length;i++){
             if(users[i]._id == id){
               users.splice(i,1);
-            }
+            } 
           }
         }
       });
@@ -161,7 +156,6 @@ export class UsersComponent implements OnInit {
 
 
     save(){
-      //var users = users;
       if(this.plusUser)
       {
         
@@ -187,14 +181,10 @@ export class UsersComponent implements OnInit {
                   this.msgs = [];
                   this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Duplicate Username'});
               }             
-          
-          
       }
       else{
         this.editUser(this.user);
       }
-        
-   
     }
 
     deleteUser(id){
@@ -277,11 +267,6 @@ export class UsersComponent implements OnInit {
         }
       }
 
-      console.log(this.user.role);
-      // console.log(this.user.email);
-      //   console.log(this.user.username);
-      //   console.log(this.user.password);
-      //   console.log(this.user.role);
     }
 
     checkUsername(username){
@@ -321,46 +306,34 @@ export class UsersComponent implements OnInit {
       }else {
         this.detailDialog=false;
       }
-
-      console.log(this.selectUserAddr);
     }
     
     editUser(user){
-      
     var emailChecker=this.checkEmail(user.email);
     var usernameChecker = true;
 
-    if (user.username != this.user.username){
+    if (user.username != this.user.username)
+    {
       usernameChecker=this.checkUsername(user.username);
     }
 
-      if(emailChecker === true && usernameChecker === true){
-
-            this.cartService.editUser(user).subscribe(data =>{
-              if (data.success == true)
-              {
-                this.flashMessage.show('User Saved', {
-                cssClass: 'alert-success',
-                timeout: 5000});
-              } 
-              this.authService.getUser().subscribe(users => {
-            this.users = users;
-            });
-          });
-                this.user=null;
-                this.displayDialog=false;
-        }
-          else if(emailChecker === false){
+      else if(emailChecker === true && usernameChecker === true)
+      {
+            this.cartService.editUser(user).subscribe();
+      }
+     else if(emailChecker === false)
+          {
             this.msgs = [];
             this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Invalid email'});
-        } else if(usernameChecker === false){
+          } 
+    else if(usernameChecker = false)
+         {
             this.msgs = [];
             this.msgs.push({severity: 'error', summary: 'Registration Error', detail:'Duplicate Username'});
-        }
+         }
+           this.ngOnInit();
+        this.displayDialog = false;
     }
-
-
-
 }
 
 class PrimeUser implements UserClass {  
@@ -380,6 +353,5 @@ class PrimeUser implements UserClass {
   username: string;
   password: string;
   role: string;
-
 
 }

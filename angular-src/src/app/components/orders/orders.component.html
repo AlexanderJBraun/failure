@@ -86,7 +86,10 @@
 
             </div>
             <p-footer>
-                
+                 <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+                    <button type="button" class="btn btn-danger" (click)="cancelOrder(order._id,order.orderNumber,order.products)"><span class="fa fa-close"></span> Cancel Order</button>
+                </div>
             </p-footer>
         </p-dialog>
      </p-tabPanel><!--End Customer Invoice-->
@@ -157,7 +160,10 @@
                 </div>
             </div>
             <p-footer>
-               
+                 <!--<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                    <a href="#"><button type="button" class="btn btn-info"><span class="fa fa-question"></span></button></a>
+                    <button type="button" class="btn btn-danger" (click)="vcancelOrder(vorder._id)"><span class="fa fa-close"></span> Cancel Order</button>
+                </div>-->
             </p-footer>
         </p-dialog>
      </p-tabPanel> <!--End Vendor Invoice-->

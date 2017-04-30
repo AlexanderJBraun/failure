@@ -55,6 +55,7 @@ export class OrdersComponent implements OnInit {
         this.detailDialog=false;
     this.orderService.getOrders().subscribe(orders =>{
         this.orders = orders;
+       
     });
     this.vendorService.getOrders().subscribe(orders =>{
         this.vorders = orders;
@@ -79,23 +80,6 @@ export class OrdersComponent implements OnInit {
     this.order = new PrimeOrder();
     this.displayDialog = true;
   }
-
-  save(){
-    if(this.plusOrder)
-    {
-      
-      
-    }
-    else
-    {
-
-    }
-  }
-
-  deleteOrder(){
-
-  }
-
 
   onRowSelect(event){
     this.disabled = true;
@@ -225,17 +209,75 @@ isRec(id,orderNum,products)
 
 }
  
+}
+cancelOrder(id,orderNumber,products)
+{
+  if(confirm("Click Ok to cancel order "+ orderNumber))
+  {
+    console.log(id);
+     var orders = this.orders;
+    for ( var i in products)
+  {
+    console.log(products[i].name);
+    this.vendorService.incrInventory(products[i].name,products[i].quantity).subscribe();
+  }
+      
+      this.orderService.deleteUser(id).subscribe(data => {
+        if(data.n == 1){
+           for(var i = 0;i < orders.length;i++){
+            if(orders[i].id == id){
+              orders.splice(i,1);
+            } 
+          }
+        }
+        this.ngOnInit();
+      });
+    }
+  this.displayDialog = false;
+  }
+
+
+
+//   vcancelOrder(id,orderNumber,products)
+// {
+//   if(confirm("Click Ok to cancel order "+ orderNumber))
+//   {
+//     console.log(id);
+//      var orders = this.orders;
+//     for ( var i in products)
+//   {
+//     console.log(products[i].name);
+//     this.vendorService.incrInventory(products[i].name,products[i].quantity).subscribe();
+//   }
+      
+//       this.orderService.deleteUser(id).subscribe(data => {
+//         if(data.n == 1){
+//            for(var i = 0;i < orders.length;i++){
+//             if(orders[i].id == id){
+//               orders.splice(i,1);
+//             } 
+//           }
+//         }
+//         this.ngOnInit();
+//       });
+//     }
+//   this.displayDialog = false;
+  
+// }
+
 
 }
 
 
-}
+
+
 
 
 
  
 
 class PrimeOrder implements OrderClass {
+  id: string;
   orderNumber: Number;
   date: Date;
   customer: String;
@@ -249,6 +291,7 @@ class PrimeOrder implements OrderClass {
 }
 
 class PrimevOrder implements vOrderClass {
+   id: string;
   vendorOrderNumber: Number;
   vDate: Date;
   vProducts: { name: string; price: number; quantity: number; subTotal: string; };

@@ -1,4 +1,5 @@
 export interface OrderClass{
+    id: string,
     orderNumber:Number,
     date: Date,
     customer:String,

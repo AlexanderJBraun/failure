@@ -4,8 +4,8 @@
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
-    <li *ngIf="role === 'User' || role === 'user'" class="list-group-item">Sales YTD : {{YTDS | currency:'USD':true:'1.2-2'}}</li>
-    <li *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' " class="list-group-item">Role: {{user.role}}</li>
+    <!--<li *ngIf="role === 'User' || role === 'user'" class="list-group-item"></li>-->
+    <li *ngIf="role === 'Admin' || role === 'admin' || role =='Agent' || role =='agent' " class="list-group-item">Sales YTD : {{YTDS | currency:'USD':true:'1.2-2'}}</li>
    
   </ul>
   </div>
